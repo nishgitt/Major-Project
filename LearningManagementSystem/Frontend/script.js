@@ -121,7 +121,7 @@ function createCourseCard(c) {
     const lowerName = c.course_name.toLowerCase();
     if (lowerName.includes("python") || lowerName.includes("fsd")) {
         bannerStyle = "linear-gradient(135deg, #4f46e5, #06b6d4)";
-        logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><path d="m10 8-2 2 2 2M14 8l2 2-2 2"/></svg>`;
+        logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c-2.45 0-4.32.18-5.36.56C5 3.2 4.63 4.25 4.63 5.8v2.17h7.52v1.07H2.86c-1.42 0-2.4.38-2.6 1.7C.05 12.06 0 13 0 13.97s.05 1.9.26 3.24c.2 1.32 1.18 1.7 2.6 1.7h1.77v-2.5c0-1.85 1.5-3.35 3.35-3.35h6.04c1.6 0 2.92-1.3 2.92-2.92V6.26c0-2.4-1.74-4.26-4.94-4.26zm-1.87 2.1c.42 0 .75.34.75.75s-.33.75-.75.75-.75-.34-.75-.75.33-.75.75-.75z"/><path d="M12 22c2.45 0 4.32-.18 5.36-.56 1.64-.64 2.01-1.69 2.01-3.24V16h-7.52v-1.07h9.29c1.42 0 2.4-.38 2.6-1.7.21-1.32.26-2.27.26-3.23s-.05-1.9-.26-3.24c-.2-1.32-1.18-1.7-2.6-1.7h-1.77v2.5c0 1.85-1.5 3.35-3.35 3.35H10.1c-1.6 0-2.92 1.3-2.92 2.92v3.86c0 2.4 1.74 4.26 4.94 4.26zm1.87-2.1c-.42 0-.75-.34-.75-.75s.33-.75.75-.75c.42 0 .75.34.75.75s-.33.75-.75.75z"/></svg>`;
         imgUrl = "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=400&q=80";
     } else if (lowerName.includes("java")) {
         bannerStyle = "linear-gradient(135deg, #10b981, #059669)";
@@ -135,17 +135,21 @@ function createCourseCard(c) {
         bannerStyle = "linear-gradient(135deg, #f59e0b, #d97706)";
         logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.002 18.003A6 6 0 0 1 5 6h.008a7 7 0 0 1 13.984 0h.008a6 6 0 0 1-.002 12.003h-14z"/></svg>`;
         imgUrl = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80";
+    } else if (lowerName.includes("data") || lowerName.includes("sql") || lowerName.includes("database")) {
+        bannerStyle = "linear-gradient(135deg, #0d9488, #10b981)";
+        logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg>`;
+        imgUrl = "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=400&q=80";
     } else if (lowerName.includes("ai") || lowerName.includes("intelligence") || lowerName.includes("learning")) {
         bannerStyle = "linear-gradient(135deg, #8b5cf6, #ec4899)";
         logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/><circle cx="12" cy="12" r="4"/></svg>`;
         imgUrl = "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=400&q=80";
     } else if (lowerName.includes("devops") || lowerName.includes("kubernetes")) {
         bannerStyle = "linear-gradient(135deg, #6366f1, #14b8a6)";
-        logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12a5 5 0 0 0-5-5H7a5 5 0 0 0 0 10h10a5 5 0 0 0 5-5zM2 12a5 5 0 0 0 5 5h10a5 5 0 0 0 0-10H7a5 5 0 0 0-5 5z"/></svg>`;
+        logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><line x1="12" y1="22" x2="12" y2="12"/><line x1="12" y1="12" x2="22" y2="8.5"/><line x1="12" y1="12" x2="2" y2="8.5"/></svg>`;
         imgUrl = "https://images.unsplash.com/photo-1618401471353-b98aedd07871?auto=format&fit=crop&w=400&q=80";
     } else if (lowerName.includes("design") || lowerName.includes("ux")) {
         bannerStyle = "linear-gradient(135deg, #f43f5e, #fb7185)";
-        logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/><path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"/></svg>`;
+        logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>`;
         imgUrl = "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=400&q=80";
     }
 
