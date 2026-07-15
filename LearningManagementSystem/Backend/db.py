@@ -45,7 +45,8 @@ def init_db():
             category TEXT NOT NULL,
             duration TEXT NOT NULL,
             price REAL NOT NULL,
-            level TEXT NOT NULL
+            level TEXT NOT NULL,
+            lessons INTEGER NOT NULL DEFAULT 20
         )
     ''')
     
@@ -228,8 +229,8 @@ def add_course(data):
         course_id = int(course_id)
         
     cursor.execute('''
-        INSERT INTO courses (course_id, course_name, instructor_name, category, duration, price, level)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO courses (course_id, course_name, instructor_name, category, duration, price, level, lessons)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     ''', (
         course_id,
         data.get('course_name'),
@@ -237,7 +238,8 @@ def add_course(data):
         data.get('category'),
         data.get('duration'),
         float(data.get('price', 0.0)),
-        data.get('level')
+        data.get('level'),
+        int(data.get('lessons', 20))
     ))
     conn.commit()
     conn.close()
@@ -256,7 +258,7 @@ def update_course(course_id, data):
     cursor = conn.cursor()
     cursor.execute('''
         UPDATE courses
-        SET course_name = ?, instructor_name = ?, category = ?, duration = ?, price = ?, level = ?
+        SET course_name = ?, instructor_name = ?, category = ?, duration = ?, price = ?, level = ?, lessons = ?
         WHERE course_id = ?
     ''', (
         data.get('course_name'),
@@ -265,6 +267,7 @@ def update_course(course_id, data):
         data.get('duration'),
         float(data.get('price', 0.0)),
         data.get('level'),
+        int(data.get('lessons', 20)),
         course_id
     ))
     conn.commit()
