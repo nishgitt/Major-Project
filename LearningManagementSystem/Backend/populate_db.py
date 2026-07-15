@@ -113,6 +113,46 @@ def populate():
             "price": 20000,
             "level": "Advanced",
             "lessons": 26
+        },
+        {
+            "course_id": 305,
+            "course_name": "Generative AI & LLM Engineering",
+            "instructor_name": "John Doe",
+            "category": "Development",
+            "duration": "4 Months",
+            "price": 28000,
+            "level": "Advanced",
+            "lessons": 30
+        },
+        {
+            "course_id": 306,
+            "course_name": "Data Science & Machine Learning",
+            "instructor_name": "Neha Gupta",
+            "category": "Programming",
+            "duration": "6 Months",
+            "price": 24000,
+            "level": "Intermediate",
+            "lessons": 35
+        },
+        {
+            "course_id": 307,
+            "course_name": "DevOps & Kubernetes Masterclass",
+            "instructor_name": "Rahul Joshi",
+            "category": "Cloud Computing",
+            "duration": "5 Months",
+            "price": 22000,
+            "level": "Advanced",
+            "lessons": 28
+        },
+        {
+            "course_id": 308,
+            "course_name": "UI/UX Design Fundamentals",
+            "instructor_name": "John Doe",
+            "category": "Development",
+            "duration": "3 Months",
+            "price": 12000,
+            "level": "Beginner",
+            "lessons": 18
         }
     ]
     for c in courses:

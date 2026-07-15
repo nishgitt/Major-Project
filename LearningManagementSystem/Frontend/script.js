@@ -86,8 +86,8 @@ async function loadFeaturedCourses() {
         const res = await fetch(`${API_URL}/courses/`);
         const courses = await res.json();
         
-        // Show up to 3 featured courses
-        const featured = courses.slice(0, 3);
+        // Show up to 8 featured courses
+        const featured = courses.slice(0, 8);
         grid.innerHTML = "";
         
         if (featured.length === 0) {
@@ -130,6 +130,15 @@ function createCourseCard(c) {
     } else if (lowerName.includes("aws") || lowerName.includes("cloud")) {
         bannerStyle = "linear-gradient(135deg, #f59e0b, #d97706)";
         logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.002 18.003A6 6 0 0 1 5 6h.008a7 7 0 0 1 13.984 0h.008a6 6 0 0 1-.002 12.003h-14z"/></svg>`;
+    } else if (lowerName.includes("ai") || lowerName.includes("intelligence") || lowerName.includes("learning")) {
+        bannerStyle = "linear-gradient(135deg, #8b5cf6, #ec4899)";
+        logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/><circle cx="12" cy="12" r="4"/></svg>`;
+    } else if (lowerName.includes("devops") || lowerName.includes("kubernetes")) {
+        bannerStyle = "linear-gradient(135deg, #6366f1, #14b8a6)";
+        logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12a5 5 0 0 0-5-5H7a5 5 0 0 0 0 10h10a5 5 0 0 0 5-5zM2 12a5 5 0 0 0 5 5h10a5 5 0 0 0 0-10H7a5 5 0 0 0-5 5z"/></svg>`;
+    } else if (lowerName.includes("design") || lowerName.includes("ux")) {
+        bannerStyle = "linear-gradient(135deg, #f43f5e, #fb7185)";
+        logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/><path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"/></svg>`;
     }
 
     return `
