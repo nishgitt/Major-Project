@@ -1106,7 +1106,7 @@ function initBackgroundAnimation() {
             this.vx = (Math.random() - 0.5) * 0.4;
             this.vy = (Math.random() - 0.5) * 0.4;
             this.radius = Math.random() * 2 + 1;
-            this.color = Math.random() > 0.5 ? "rgba(0, 210, 255, 0.3)" : "rgba(138, 43, 226, 0.3)";
+            this.color = Math.random() > 0.5 ? "rgba(37, 99, 235, 0.12)" : "rgba(0, 210, 255, 0.12)";
         }
         update() {
             this.x += this.vx;
@@ -1137,7 +1137,7 @@ function initBackgroundAnimation() {
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(255, 255, 255, ${0.04 * (1 - dist / 120)})`;
+                    ctx.strokeStyle = `rgba(37, 99, 235, ${0.04 * (1 - dist / 120)})`;
                     ctx.stroke();
                 }
             }
