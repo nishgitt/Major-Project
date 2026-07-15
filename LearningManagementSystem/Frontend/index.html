@@ -19,107 +19,80 @@
     </div>
 
     <!-- Navigation Header -->
-    <header>
-        <nav class="navbar">
-            <a href="index.html" class="logo">
-                <div class="logo-icon-box">
-                    <svg class="logo-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2.5 3 6 3s6-1 6-3v-5"/></svg>
-                </div>
-                <div class="logo-text">
-                    <span class="logo-main">EduLearn</span>
-                    <span class="logo-sub">LMS</span>
-                </div>
-            </a>
-            <ul class="nav-links">
+    <header class="elearning-header">
+        <nav class="navbar elearning-navbar">
+            <!-- Left: Sign Up / User Session -->
+            <div id="auth-buttons" class="nav-left-actions">
+                <a href="register.html" class="nav-signup-link">
+                    <svg class="nav-signup-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <span>Sign up</span>
+                </a>
+            </div>
+            
+            <!-- Middle: Navigation Links -->
+            <ul class="nav-links elearning-nav-links">
                 <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="courses.html">Courses</a></li>
-                <li><a href="admin.html" class="admin-only">Instructors</a></li>
+                <li class="dropdown-item">
+                    <a href="courses.html">E-books <span class="chevron-down">▼</span></a>
+                </li>
                 <li><a href="#about-section">About Us</a></li>
                 <li><a href="#footer-section">Contact</a></li>
                 <li><a href="dashboard.html" class="student-only">Dashboard</a></li>
             </ul>
-            <div id="auth-buttons" class="nav-actions">
-                <a href="login.html" class="btn-secondary" id="nav-login-btn">Login</a>
-                <a href="register.html" class="btn-primary" id="nav-register-btn">Register</a>
+
+            <!-- Right: Search Bar -->
+            <div class="nav-search-container">
+                <div class="nav-search-box">
+                    <input type="text" id="nav-search-input" placeholder="Search courses..." onkeydown="if(event.key === 'Enter') triggerSearch()">
+                    <button class="nav-search-btn" onclick="triggerSearch()">Search</button>
+                </div>
             </div>
         </nav>
     </header>
 
     <main class="container">
-        <!-- Hero Section -->
-        <section class="hero-section">
-            <div class="hero-left">
-                <span class="hero-tag">LEARN ANYTIME, ANYWHERE</span>
-                <h1 class="hero-title">Build Skills.<br>Advance Your Future.</h1>
-                <p class="hero-desc">Join thousands of learners across the globe and access high-quality courses from expert instructors.</p>
-                
-                <div class="hero-actions">
-                    <a href="courses.html" class="btn-primary" id="explore-courses-btn">
-                        <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                        Explore Courses
-                    </a>
-                    <a href="#about-section" class="btn-secondary" id="how-it-works-btn">
-                        <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                        How It Works
-                    </a>
-                </div>
-
-                <!-- Hero Info List -->
-                <div class="hero-info-row">
-                    <div class="hero-info-item">
-                        <div class="hero-info-icon">📚</div>
-                        <div>
-                            <h4>100+ Courses</h4>
-                            <p>Learn on your time</p>
-                        </div>
-                    </div>
-                    <div class="hero-info-item">
-                        <div class="hero-info-icon">👥</div>
-                        <div>
-                            <h4>Expert Instructors</h4>
-                            <p>Learn from the best</p>
-                        </div>
-                    </div>
-                    <div class="hero-info-item">
-                        <div class="hero-info-icon">🎓</div>
-                        <div>
-                            <h4>Get Certified</h4>
-                            <p>Boost your career</p>
-                        </div>
-                    </div>
-                </div>
+        <!-- Hero Section split-screen diagonal layout -->
+        <section class="elearning-hero">
+            <!-- Left Side: Image with diagonal overlay -->
+            <div class="elearning-hero-left">
+                <img src="elearning_hero_students.png" alt="Students studying" class="elearning-hero-img">
+                <div class="elearning-hero-cyan-overlay"></div>
             </div>
-
-            <!-- Hero Right Section -->
-            <div class="hero-right">
-                <div class="hero-glow-circle"></div>
-                <div class="hero-student-image">
-                    <!-- Standard high quality Unsplash stock portrait of student with headphones -->
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop" alt="Student Portrait" class="student-img" onerror="this.src='https://placehold.co/400x400/1e124a/ffffff?text=Learner'">
-                </div>
-
-                <!-- Floating Cards -->
-                <div class="floating-card fc-1 glass-container">
-                    <div class="fc-icon">⏱️</div>
-                    <div class="fc-text">
-                        <h4>Learn at your pace</h4>
-                        <p>Self-paced courses</p>
+            
+            <!-- Right Side: Content with dark background and slanted border -->
+            <div class="elearning-hero-right">
+                <!-- Dot matrix pattern top -->
+                <div class="dot-matrix dot-matrix-top"></div>
+                
+                <!-- Center E-Learning Mockup Branding -->
+                <div class="elearning-brand-logo-box">
+                    <div class="brand-logo-container">
+                        <svg class="brand-book-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5V4.5z"/></svg>
+                        <span class="brand-title">E-LEARNING</span>
                     </div>
                 </div>
-                <div class="floating-card fc-2 glass-container">
-                    <div class="fc-icon">🏅</div>
-                    <div class="fc-text">
-                        <h4>Certification</h4>
-                        <p>Earn recognized certificates</p>
+                
+                <!-- Social row -->
+                <div class="brand-social-row">
+                    <div class="social-icons">
+                        <span class="social-icon">f</span>
+                        <span class="social-icon">t</span>
+                        <span class="social-icon">ig</span>
+                        <span class="social-icon">in</span>
                     </div>
+                    <span class="social-handle">@elearning</span>
                 </div>
-                <div class="floating-card fc-3 glass-container">
-                    <div class="fc-icon">⭐</div>
-                    <div class="fc-text">
-                        <h4>4.8/5</h4>
-                        <p>From 2k+ Students</p>
-                    </div>
+                
+                <!-- Hero Headlines -->
+                <div class="elearning-hero-text">
+                    <h1 class="elearning-headline-cyan">KNOWLEDGE AT</h1>
+                    <h1 class="elearning-headline-white">YOUR FINGERTIPS</h1>
+                    <p class="elearning-paragraph">Aenean vel lectus et purus feugiat maximus sodales sed ex, duis quis faucibus libero. Aenean mattis purus sed enim sollicitudin laoreet, maecenas ornare velit non fermentum pulvinar.</p>
+                    <span class="elearning-hashtag">#Elearning</span>
                 </div>
+                
+                <!-- Dot matrix pattern bottom -->
+                <div class="dot-matrix dot-matrix-bottom"></div>
             </div>
         </section>
 

@@ -10,28 +10,28 @@
     <div class="bg-glow-1"></div>
     <div class="bg-glow-2"></div>
 
-    <header>
-        <nav class="navbar">
-            <a href="index.html" class="logo">
-                <div class="logo-icon-box">
-                    <svg class="logo-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2.5 3 6 3s6-1 6-3v-5"/></svg>
-                </div>
-                <div class="logo-text">
-                    <span class="logo-main">EduLearn</span>
-                    <span class="logo-sub">LMS</span>
-                </div>
-            </a>
-            <ul class="nav-links">
+    <header class="elearning-header">
+        <nav class="navbar elearning-navbar">
+            <div id="auth-buttons" class="nav-left-actions">
+                <a href="register.html" class="nav-signup-link">
+                    <svg class="nav-signup-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <span>Sign up</span>
+                </a>
+            </div>
+            <ul class="nav-links elearning-nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="courses.html">Courses</a></li>
-                <li><a href="admin.html" class="admin-only">Instructors</a></li>
+                <li class="dropdown-item">
+                    <a href="courses.html">E-books <span class="chevron-down">▼</span></a>
+                </li>
                 <li><a href="index.html#about-section">About Us</a></li>
                 <li><a href="index.html#footer-section">Contact</a></li>
                 <li><a href="dashboard.html" class="student-only">Dashboard</a></li>
             </ul>
-            <div id="auth-buttons" class="nav-actions">
-                <a href="login.html" class="btn-secondary" id="nav-login-btn">Login</a>
-                <a href="register.html" class="btn-primary active" id="nav-register-btn">Register</a>
+            <div class="nav-search-container">
+                <div class="nav-search-box">
+                    <input type="text" id="nav-search-input" placeholder="Search courses..." onkeydown="if(event.key === 'Enter') triggerSearch()">
+                    <button class="nav-search-btn" onclick="triggerSearch()">Search</button>
+                </div>
             </div>
         </nav>
     </header>

@@ -1,5 +1,12 @@
 const API_URL = "http://127.0.0.1:8000";
 
+function triggerSearch() {
+    const input = document.getElementById("nav-search-input");
+    if (!input) return;
+    const query = input.value.trim();
+    window.location.href = `courses.html?q=${encodeURIComponent(query)}`;
+}
+
 // Global Session Status Check
 document.addEventListener("DOMContentLoaded", () => {
     initSession();
@@ -301,6 +308,13 @@ function initCoursesPage() {
     if (search) search.addEventListener("input", filterAndRenderCourses);
     if (levelFilter) levelFilter.addEventListener("change", filterAndRenderCourses);
     if (priceFilter) priceFilter.addEventListener("change", filterAndRenderCourses);
+    
+    // Parse URL parameter and prefill search input if redirected from navbar search
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get("q");
+    if (query && search) {
+        search.value = query;
+    }
     
     loadCatalogCourses();
 }
