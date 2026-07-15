@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration - AetherAcademy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-glow-1"></div>
+    <div class="bg-glow-2"></div>
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">Aether<span>Academy</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="enrollments.html" class="student-only">My Enrollments</a></li>
+                <li><a href="assignments.html" class="student-only">Assignments</a></li>
+                <li><a href="dashboard.html" class="student-only">Dashboard</a></li>
+                <li><a href="admin.html" class="admin-only">Instructor Panel</a></li>
+                <li id="auth-buttons">
+                    <a href="login.html" class="btn-secondary" id="nav-login-btn">Login</a>
+                    <a href="register.html" class="btn-primary active" id="nav-register-btn">Register</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="glass-container form-container" id="register-section">
+            <h2 class="form-title">Student Registration</h2>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="reg-name">Full Name</label>
+                    <input type="text" id="reg-name" class="form-control" placeholder="Rahul Sharma" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-email">Email Address</label>
+                    <input type="email" id="reg-email" class="form-control" placeholder="rahul@gmail.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-phone">Phone Number</label>
+                    <input type="tel" id="reg-phone" class="form-control" placeholder="9876543210" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-qualification">Academic Qualification</label>
+                    <input type="text" id="reg-qualification" class="form-control" placeholder="B.Tech / MCA" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-password">Password</label>
+                    <input type="password" id="reg-password" class="form-control" placeholder="minimum 6 characters" required>
+                </div>
+                <div style="margin-top: 1rem; color: var(--danger); font-size: 0.9rem;" id="reg-error-msg"></div>
+                <button type="submit" class="btn-primary form-submit-btn" id="reg-submit-btn">Register Profile</button>
+            </form>
+            <div class="form-redirect">
+                <p>Already registered? <a href="login.html">Login here</a></p>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

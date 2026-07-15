@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - AetherAcademy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-glow-1"></div>
+    <div class="bg-glow-2"></div>
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">Aether<span>Academy</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="enrollments.html" class="student-only">My Enrollments</a></li>
+                <li><a href="assignments.html" class="student-only">Assignments</a></li>
+                <li><a href="dashboard.html" class="student-only">Dashboard</a></li>
+                <li><a href="admin.html" class="admin-only">Instructor Panel</a></li>
+                <li id="auth-buttons">
+                    <a href="login.html" class="btn-secondary active" id="nav-login-btn">Login</a>
+                    <a href="register.html" class="btn-primary" id="nav-register-btn">Register</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="glass-container form-container" id="login-section">
+            <h2 class="form-title">Account Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="role-select">Portal Role</label>
+                    <select id="role-select" class="form-control" required>
+                        <option value="student">Student Portal</option>
+                        <option value="instructor">Instructor / Admin Portal</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" class="form-control" placeholder="enter email address" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
+                </div>
+                <div style="margin-top: 1rem; color: var(--danger); font-size: 0.9rem;" id="login-error-msg"></div>
+                <button type="submit" class="btn-primary form-submit-btn" id="login-submit-btn">Access Account</button>
+            </form>
+            <div class="form-redirect">
+                <p>New learner? <a href="register.html">Create a profile</a></p>
+            </div>
+            <div class="form-redirect" style="margin-top:1.5rem; font-size:0.85rem; border-top:1px solid var(--border-glass); padding-top:1.5rem;">
+                <p><strong>Demo Credentials:</strong></p>
+                <p style="margin-top: 0.3rem;">Student: <code>rahul@gmail.com</code> | <code>rahul123</code></p>
+                <p>Instructor: <code>trainer@gmail.com</code> | <code>any_password</code></p>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

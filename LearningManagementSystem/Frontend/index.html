@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AetherAcademy - Learning Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-glow-1"></div>
+    <div class="bg-glow-2"></div>
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">Aether<span>Academy</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="enrollments.html" class="student-only">My Enrollments</a></li>
+                <li><a href="assignments.html" class="student-only">Assignments</a></li>
+                <li><a href="dashboard.html" class="student-only">Dashboard</a></li>
+                <li><a href="admin.html" class="admin-only">Instructor Panel</a></li>
+                <li id="auth-buttons">
+                    <a href="login.html" class="btn-secondary" id="nav-login-btn">Login</a>
+                    <a href="register.html" class="btn-primary" id="nav-register-btn">Register</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Elevate Your Skills With <span>AetherAcademy</span></h1>
+                <p>Unlock your potential with expert-led courses in software engineering, full stack development, and modern technologies. Learn at your own pace with practical assignments and trackable certification.</p>
+                <div class="hero-buttons">
+                    <a href="courses.html" class="btn-primary" id="hero-browse-btn">Explore Courses</a>
+                    <a href="register.html" class="btn-secondary" id="hero-register-btn">Get Started</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-circle"></div>
+                <div class="glass-container hero-card-promo">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&auto=format&fit=crop" alt="LMS Learning Hero" onerror="this.src='https://placehold.co/400x250/1e124a/ffffff?text=Modern+E-Learning'">
+                    <h3>Interactive & Flexible</h3>
+                    <p style="font-size:0.9rem; color:var(--text-muted); margin-top:0.5rem;">Access student dashboards, dynamic progress updates, and assignments grading online.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Courses Section -->
+        <section style="margin-top: 5rem;">
+            <h2 class="section-title">Featured Courses</h2>
+            <div class="courses-grid" id="featured-courses-list">
+                <!-- Populated dynamically by script.js -->
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="courses.html" class="btn-secondary" id="view-all-courses-btn">View All Courses</a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section style="margin: 8rem 0 4rem;" class="glass-container" id="about-section">
+            <div style="padding: 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+                <div>
+                    <h2 class="section-title" style="text-align: left; margin-bottom: 1.5rem;">About AetherAcademy</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Our institution is dedicated to bridging the gap between classroom knowledge and professional requirements. We offer a comprehensive Learning Management System designed to streamline communication between learners and educators, monitor development, and evaluate performance.</p>
+                    <p style="color: var(--text-muted);">From Beginner coding fundamentals to Advanced architectural patterns, our courses provide a rigorous, hands-on, and engaging learning path.</p>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div class="glass-card" style="padding: 1.5rem; text-align: center;">
+                        <h4 style="font-size: 2rem; color: var(--secondary);">20+</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Expert APIs</p>
+                    </div>
+                    <div class="glass-card" style="padding: 1.5rem; text-align: center;">
+                        <h4 style="font-size: 2rem; color: var(--primary);">100%</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Responsive</p>
+                    </div>
+                    <div class="glass-card" style="padding: 1.5rem; text-align: center;">
+                        <h4 style="font-size: 2rem; color: var(--success);">SQLite</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Engine Backed</p>
+                    </div>
+                    <div class="glass-card" style="padding: 1.5rem; text-align: center;">
+                        <h4 style="font-size: 2rem; color: var(--warning);">Bonus</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">PDF Certificates</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="text-align: center; padding: 3rem; border-top: 1px solid var(--border-glass); margin-top: 5rem; color: var(--text-muted); font-size: 0.9rem;">
+        <p>&copy; 2026 AetherAcademy LMS. Developed using Python Django & HTML5/CSS3/ES6.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

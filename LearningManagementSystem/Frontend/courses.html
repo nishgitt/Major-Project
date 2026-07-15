@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses Catalog - AetherAcademy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-glow-1"></div>
+    <div class="bg-glow-2"></div>
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">Aether<span>Academy</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="courses.html" class="active">Courses</a></li>
+                <li><a href="enrollments.html" class="student-only">My Enrollments</a></li>
+                <li><a href="assignments.html" class="student-only">Assignments</a></li>
+                <li><a href="dashboard.html" class="student-only">Dashboard</a></li>
+                <li><a href="admin.html" class="admin-only">Instructor Panel</a></li>
+                <li id="auth-buttons">
+                    <a href="login.html" class="btn-secondary" id="nav-login-btn">Login</a>
+                    <a href="register.html" class="btn-primary" id="nav-register-btn">Register</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2 class="section-title">Explore Courses</h2>
+        
+        <!-- Filter Bar -->
+        <div class="glass-container courses-filter-bar" style="padding: 1.5rem;">
+            <input type="text" id="course-search" class="form-control search-input" placeholder="Search by course name or category...">
+            <select id="course-level-filter" class="form-control filter-select">
+                <option value="all">All Difficulty Levels</option>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+            </select>
+            <select id="course-price-filter" class="form-control filter-select">
+                <option value="all">All Prices</option>
+                <option value="free">Free Courses</option>
+                <option value="paid">Paid Courses</option>
+            </select>
+        </div>
+
+        <div class="courses-grid" id="courses-catalog-grid">
+            <!-- Rendered dynamically by script.js -->
+        </div>
+    </main>
+
+    <!-- Enrollment Success Notification Modal -->
+    <div class="modal" id="enrollment-modal">
+        <div class="glass-container modal-content" style="text-align: center;">
+            <button class="modal-close" onclick="closeEnrollmentModal()">&times;</button>
+            <h3 style="font-size: 1.8rem; color: var(--success); margin-bottom: 1rem;">Enrollment Successful!</h3>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;" id="enrollment-modal-text">You have successfully registered for the course.</p>
+            <div style="display:flex; justify-content:center; gap: 1.5rem;">
+                <a href="enrollments.html" class="btn-primary">View My Enrollments</a>
+                <button class="btn-secondary" onclick="closeEnrollmentModal()">Keep Browsing</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

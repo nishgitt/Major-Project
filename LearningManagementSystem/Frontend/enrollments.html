@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Enrollments - AetherAcademy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-glow-1"></div>
+    <div class="bg-glow-2"></div>
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">Aether<span>Academy</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="enrollments.html" class="active student-only">My Enrollments</a></li>
+                <li><a href="assignments.html" class="student-only">Assignments</a></li>
+                <li><a href="dashboard.html" class="student-only">Dashboard</a></li>
+                <li><a href="admin.html" class="admin-only">Instructor Panel</a></li>
+                <li id="auth-buttons">
+                    <a href="login.html" class="btn-secondary" id="nav-login-btn">Login</a>
+                    <a href="register.html" class="btn-primary" id="nav-register-btn">Register</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2 class="section-title">My Enrolled Courses</h2>
+        
+        <div id="enrollments-unauthorized" class="glass-container" style="display:none; padding:3rem; text-align:center; max-width:600px; margin: 4rem auto;">
+            <h3>Authorization Required</h3>
+            <p style="color:var(--text-muted); margin: 1rem 0 2rem;">Please login as a student to view your course enrollments and study details.</p>
+            <a href="login.html" class="btn-primary">Login Now</a>
+        </div>
+
+        <div id="enrollments-list" style="display:none;">
+            <!-- Programmatically rendered by script.js -->
+        </div>
+
+        <div id="no-enrollments-msg" class="glass-container" style="display:none; padding:4rem; text-align:center; max-width:800px; margin: 0 auto;">
+            <h3>No Course Enrollments Found</h3>
+            <p style="color:var(--text-muted); margin: 1rem 0 2rem;">You are not enrolled in any classes yet. Browse our catalog and start your learning journey!</p>
+            <a href="courses.html" class="btn-primary">Browse Courses</a>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
