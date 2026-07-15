@@ -113,38 +113,46 @@ function createCourseCard(c) {
     if (c.level === "Intermediate") levelClass = "badge-intermediate";
     if (c.level === "Advanced") levelClass = "badge-advanced";
     
-    // Dynamic banner backgrounds and logos matching the mockup
+    // Dynamic banner backgrounds, logos, and high-fidelity images matching course names
     let bannerStyle = "linear-gradient(135deg, #8b5cf6, #ec4899)";
     let logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`;
-    
+    let imgUrl = "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=400&q=80";
+
     const lowerName = c.course_name.toLowerCase();
     if (lowerName.includes("python") || lowerName.includes("fsd")) {
         bannerStyle = "linear-gradient(135deg, #4f46e5, #06b6d4)";
         logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><path d="m10 8-2 2 2 2M14 8l2 2-2 2"/></svg>`;
+        imgUrl = "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=400&q=80";
     } else if (lowerName.includes("java")) {
         bannerStyle = "linear-gradient(135deg, #10b981, #059669)";
         logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>`;
+        imgUrl = "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=400&q=80";
     } else if (lowerName.includes("react")) {
         bannerStyle = "linear-gradient(135deg, #3b82f6, #1d4ed8)";
         logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(30 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(90 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(150 12 12)"/><circle cx="12" cy="12" r="2"/></svg>`;
+        imgUrl = "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=400&q=80";
     } else if (lowerName.includes("aws") || lowerName.includes("cloud")) {
         bannerStyle = "linear-gradient(135deg, #f59e0b, #d97706)";
         logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.002 18.003A6 6 0 0 1 5 6h.008a7 7 0 0 1 13.984 0h.008a6 6 0 0 1-.002 12.003h-14z"/></svg>`;
+        imgUrl = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80";
     } else if (lowerName.includes("ai") || lowerName.includes("intelligence") || lowerName.includes("learning")) {
         bannerStyle = "linear-gradient(135deg, #8b5cf6, #ec4899)";
         logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/><circle cx="12" cy="12" r="4"/></svg>`;
+        imgUrl = "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=400&q=80";
     } else if (lowerName.includes("devops") || lowerName.includes("kubernetes")) {
         bannerStyle = "linear-gradient(135deg, #6366f1, #14b8a6)";
         logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12a5 5 0 0 0-5-5H7a5 5 0 0 0 0 10h10a5 5 0 0 0 5-5zM2 12a5 5 0 0 0 5 5h10a5 5 0 0 0 0-10H7a5 5 0 0 0-5 5z"/></svg>`;
+        imgUrl = "https://images.unsplash.com/photo-1618401471353-b98aedd07871?auto=format&fit=crop&w=400&q=80";
     } else if (lowerName.includes("design") || lowerName.includes("ux")) {
         bannerStyle = "linear-gradient(135deg, #f43f5e, #fb7185)";
         logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/><path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"/></svg>`;
+        imgUrl = "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=400&q=80";
     }
 
     return `
         <div class="glass-container glass-card course-card">
-            <!-- Card Banner -->
-            <div class="card-banner" style="background: ${bannerStyle}">
+            <!-- Card Banner with image and dark overlay -->
+            <div class="card-banner" style="background-image: linear-gradient(rgba(15, 23, 42, 0.45), rgba(15, 23, 42, 0.45)), url('${imgUrl}'); background-size: cover; background-position: center;">
                 <span class="course-badge ${levelClass}">${c.level}</span>
                 <div class="tech-logo-container">
                     ${logoSvg}
@@ -1120,7 +1128,7 @@ function initBackgroundAnimation() {
     let height = canvas.height = window.innerHeight;
 
     const particles = [];
-    const particleCount = 45;
+    const particleCount = 65;
 
     class Particle {
         constructor() {
@@ -1128,8 +1136,8 @@ function initBackgroundAnimation() {
             this.y = Math.random() * height;
             this.vx = (Math.random() - 0.5) * 0.4;
             this.vy = (Math.random() - 0.5) * 0.4;
-            this.radius = Math.random() * 2 + 1;
-            this.color = Math.random() > 0.5 ? "rgba(37, 99, 235, 0.12)" : "rgba(0, 210, 255, 0.12)";
+            this.radius = Math.random() * 3 + 1.5;
+            this.color = Math.random() > 0.5 ? "rgba(37, 99, 235, 0.28)" : "rgba(0, 210, 255, 0.28)";
         }
         update() {
             this.x += this.vx;
@@ -1160,7 +1168,7 @@ function initBackgroundAnimation() {
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(37, 99, 235, ${0.04 * (1 - dist / 120)})`;
+                    ctx.strokeStyle = `rgba(37, 99, 235, ${0.09 * (1 - dist / 120)})`;
                     ctx.stroke();
                 }
             }

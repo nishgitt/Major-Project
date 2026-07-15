@@ -3,7 +3,7 @@
 :root {
     --bg-dark: #f8fafc; /* Very light slate background */
     --bg-card: #ffffff; /* Solid white cards */
-    --border-glass: #e2e8f0; /* Light gray borders */
+    --border-glass: #94a3b8; /* Darker, more visible gray borders */
     --primary: #2563eb; /* Royal blue brand color */
     --primary-neon: #3b82f6;
     --primary-glow: rgba(37, 99, 235, 0.08);
@@ -75,14 +75,14 @@ body {
 /* Glassmorphism utility classes redefined for clean light cards */
 .glass-container {
     background: var(--bg-card);
-    border: 1px solid var(--border-glass);
+    border: 1.5px solid var(--border-glass);
     border-radius: 16px;
     box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
 }
 
 .glass-card {
     background: var(--bg-card);
-    border: 1px solid var(--border-glass);
+    border: 1.5px solid var(--border-glass);
     border-radius: 12px;
     transition: var(--transition);
 }
