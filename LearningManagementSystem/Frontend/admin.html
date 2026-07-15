@@ -12,19 +12,27 @@
 
     <header>
         <nav class="navbar">
-            <a href="index.html" class="logo">Aether<span>Academy</span></a>
+            <a href="index.html" class="logo">
+                <div class="logo-icon-box">
+                    <svg class="logo-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2.5 3 6 3s6-1 6-3v-5"/></svg>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-main">EduLearn</span>
+                    <span class="logo-sub">LMS</span>
+                </div>
+            </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="courses.html">Courses</a></li>
-                <li><a href="enrollments.html" class="student-only">My Enrollments</a></li>
-                <li><a href="assignments.html" class="student-only">Assignments</a></li>
+                <li><a href="admin.html" class="active admin-only">Instructors</a></li>
+                <li><a href="index.html#about-section">About Us</a></li>
+                <li><a href="index.html#footer-section">Contact</a></li>
                 <li><a href="dashboard.html" class="student-only">Dashboard</a></li>
-                <li><a href="admin.html" class="active admin-only">Instructor Panel</a></li>
-                <li id="auth-buttons">
-                    <a href="login.html" class="btn-secondary" id="nav-login-btn">Login</a>
-                    <a href="register.html" class="btn-primary" id="nav-register-btn">Register</a>
-                </li>
             </ul>
+            <div id="auth-buttons" class="nav-actions">
+                <a href="login.html" class="btn-secondary" id="nav-login-btn">Login</a>
+                <a href="register.html" class="btn-primary" id="nav-register-btn">Register</a>
+            </div>
         </nav>
     </header>
 
