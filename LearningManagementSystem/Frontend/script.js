@@ -3,6 +3,7 @@ const API_URL = "http://127.0.0.1:8000";
 // Global Session Status Check
 document.addEventListener("DOMContentLoaded", () => {
     initSession();
+    initBackgroundAnimation();
     
     // Page specific initialization
     const path = window.location.pathname;
@@ -105,20 +106,52 @@ function createCourseCard(c) {
     if (c.level === "Intermediate") levelClass = "badge-intermediate";
     if (c.level === "Advanced") levelClass = "badge-advanced";
     
+    // Dynamic banner backgrounds and logos matching the mockup
+    let bannerStyle = "linear-gradient(135deg, #8b5cf6, #ec4899)";
+    let logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`;
+    
+    const lowerName = c.course_name.toLowerCase();
+    if (lowerName.includes("python") || lowerName.includes("fsd")) {
+        bannerStyle = "linear-gradient(135deg, #4f46e5, #06b6d4)";
+        logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><path d="m10 8-2 2 2 2M14 8l2 2-2 2"/></svg>`;
+    } else if (lowerName.includes("java")) {
+        bannerStyle = "linear-gradient(135deg, #10b981, #059669)";
+        logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>`;
+    } else if (lowerName.includes("react")) {
+        bannerStyle = "linear-gradient(135deg, #3b82f6, #1d4ed8)";
+        logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(30 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(90 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(150 12 12)"/><circle cx="12" cy="12" r="2"/></svg>`;
+    } else if (lowerName.includes("aws") || lowerName.includes("cloud")) {
+        bannerStyle = "linear-gradient(135deg, #f59e0b, #d97706)";
+        logoSvg = `<svg class="tech-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.002 18.003A6 6 0 0 1 5 6h.008a7 7 0 0 1 13.984 0h.008a6 6 0 0 1-.002 12.003h-14z"/></svg>`;
+    }
+
     return `
         <div class="glass-container glass-card course-card">
-            <div class="course-header">
+            <!-- Card Banner -->
+            <div class="card-banner" style="background: ${bannerStyle}">
                 <span class="course-badge ${levelClass}">${c.level}</span>
-                <span class="course-level">${c.category}</span>
+                <div class="tech-logo-container">
+                    ${logoSvg}
+                </div>
             </div>
-            <h3 class="course-title">${c.course_name}</h3>
-            <ul class="course-info-list">
-                <li>👥 Instructor: ${c.instructor_name}</li>
-                <li>⏱️ Duration: ${c.duration}</li>
-            </ul>
-            <div class="course-footer">
-                <span class="course-price">${c.price > 0 ? '₹' + c.price : 'Free'}</span>
-                <button class="btn-accent" style="padding: 0.5rem 1.2rem; font-size: 0.9rem;" onclick="handleCourseEnrollment('${c.course_name}')">${enrollBtnText}</button>
+            
+            <div class="card-body">
+                <h3 class="course-title">${c.course_name}</h3>
+                
+                <div class="instructor-row">
+                    <div class="instructor-avatar">${c.instructor_name.charAt(0)}</div>
+                    <span class="instructor-name">${c.instructor_name}</span>
+                </div>
+                
+                <div class="course-meta-row">
+                    <span class="meta-item">📅 ${c.duration}</span>
+                    <span class="meta-item">📝 32 Lessons</span>
+                </div>
+                
+                <div class="course-footer">
+                    <span class="course-price">${c.price > 0 ? '₹' + Number(c.price).toLocaleString() : 'Free'}</span>
+                    <button class="btn-primary" style="padding: 0.5rem 1.2rem; font-size: 0.85rem; border-radius:30px;" onclick="handleCourseEnrollment('${c.course_name}')">${enrollBtnText}</button>
+                </div>
             </div>
         </div>
     `;
@@ -1044,4 +1077,84 @@ async function handleCrudDelete(id) {
     } catch (err) {
         alert("API connection failed.");
     }
+}
+
+// Background Canvas Particle Animation
+function initBackgroundAnimation() {
+    const canvas = document.createElement("canvas");
+    canvas.id = "bg-canvas";
+    canvas.style.position = "fixed";
+    canvas.style.top = "0";
+    canvas.style.left = "0";
+    canvas.style.width = "100%";
+    canvas.style.height = "100%";
+    canvas.style.zIndex = "-10";
+    canvas.style.pointerEvents = "none";
+    document.body.appendChild(canvas);
+
+    const ctx = canvas.getContext("2d");
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    const particles = [];
+    const particleCount = 45;
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * width;
+            this.y = Math.random() * height;
+            this.vx = (Math.random() - 0.5) * 0.4;
+            this.vy = (Math.random() - 0.5) * 0.4;
+            this.radius = Math.random() * 2 + 1;
+            this.color = Math.random() > 0.5 ? "rgba(0, 210, 255, 0.3)" : "rgba(138, 43, 226, 0.3)";
+        }
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            if (this.x < 0 || this.x > width) this.vx *= -1;
+            if (this.y < 0 || this.y > height) this.vy *= -1;
+        }
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+        }
+    }
+
+    for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, width, height);
+        
+        // Draw lines
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dist = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
+                if (dist < 120) {
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${0.04 * (1 - dist / 120)})`;
+                    ctx.stroke();
+                }
+            }
+        }
+
+        particles.forEach(p => {
+            p.update();
+            p.draw();
+        });
+
+        requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    });
+
+    animate();
 }
