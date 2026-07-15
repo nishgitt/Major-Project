@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Employer dashboard to post jobs, review received candidate applications, update status, and schedule interviews.">
+    <title>Employer Workspace - CareerZap</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <!-- Nav injected by script.js -->
+        </div>
+    </header>
+
+    <main>
+        <div class="dashboard-grid">
+            <!-- Left panel: company profile summary -->
+            <aside class="profile-card">
+                <div class="profile-avatar" id="card-avatar">E</div>
+                <h2 id="card-companyname">Company Name</h2>
+                <div class="role-badge" id="card-industry">Employer / Corporate</div>
+                
+                <ul class="profile-details-list">
+                    <li>
+                        <span class="label">HR Partner Representative</span>
+                        <span class="value" id="card-hrname">HR Representative</span>
+                    </li>
+                </ul>
+                
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-glass); border-radius: 12px; padding: 1rem; display: flex; justify-content: space-around;">
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color:#fff;" id="stat-total-jobs">0</div>
+                        <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Active Jobs</div>
+                    </div>
+                    <div style="width: 1px; background: var(--border-glass);"></div>
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color:#fff;" id="stat-received-applications">0</div>
+                        <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Applications</div>
+                    </div>
+                    <div style="width: 1px; background: var(--border-glass);"></div>
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color:#fff;" id="stat-selected-candidates">0</div>
+                        <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Hired</div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Right panel: Job posting, active listings, applicants -->
+            <section class="dashboard-content-area">
+                <!-- Post a Job Form Section -->
+                <div class="dashboard-section">
+                    <h3>Post a New Job Vacancy</h3>
+                    <form id="employer-add-job-form">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="job-title">Job Title</label>
+                                <input type="text" id="job-title" placeholder="Python Full Stack Developer" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="job-company-name">Company Name</label>
+                                <input type="text" id="job-company-name" required>
+                            </div>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 120px 120px; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="job-location">Work Location</label>
+                                <input type="text" id="job-location" placeholder="Bangalore or 'Remote'" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="job-type">Job Type</label>
+                                <select id="job-type" required>
+                                    <option value="Full Time">Full Time</option>
+                                    <option value="Part Time">Part Time</option>
+                                    <option value="Internship">Internship</option>
+                                    <option value="Remote">Remote</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="job-experience">Min Exp (Yrs)</label>
+                                <input type="number" id="job-experience" min="0" value="0" required>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 180px; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="job-salary">Annual Salary (₹)</label>
+                                <input type="number" id="job-salary" placeholder="800000" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="job-deadline">Application Close Date</label>
+                                <input type="date" id="job-deadline" required>
+                            </div>
+                        </div>
+
+                        <div style="text-align: right; margin-top: 1rem;">
+                            <button type="submit" class="btn btn-primary">Publish Job Opening</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Manage Job Postings List -->
+                <div class="dashboard-section">
+                    <h3>Active Job Postings</h3>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Job Title</th>
+                                    <th>Location</th>
+                                    <th>Type</th>
+                                    <th>Salary</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="employer-jobs-list">
+                                <!-- Injected by script.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Received Candidate Applications list -->
+                <div class="dashboard-section">
+                    <h3>Received Candidate Applications</h3>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Candidate Name</th>
+                                    <th>Job Title</th>
+                                    <th>Applied Date</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="employer-received-applications-list">
+                                <!-- Injected by script.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 CareerZap Job Portal. Developed with Django REST APIs & SQLite. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

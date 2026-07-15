@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Connect with top employers and find your dream career on CareerZap. Apply to remote, internship, and full-time jobs.">
+    <title>CareerZap - Premium Full Stack Job Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <!-- Nav injected by script.js -->
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Find Your Next <span>Dream Job</span> Instantly</h1>
+        <p>Explore thousands of job postings from leading software enterprises, consulting agencies, and product startups worldwide.</p>
+        
+        <form id="home-search-form" class="search-container">
+            <div class="search-field">
+                <input type="text" id="search-keyword" placeholder="Job Title, Skills, or Company...">
+            </div>
+            <div class="search-divider"></div>
+            <div class="search-field">
+                <input type="text" id="search-location" placeholder="City or 'Remote'...">
+            </div>
+            <button type="submit" class="btn btn-primary">Find Jobs</button>
+        </form>
+    </section>
+
+    <main>
+        <div class="section-title">
+            <h2>Featured <span>Companies</span></h2>
+        </div>
+        <div class="company-grid">
+            <div class="company-card" data-company="Infosys">
+                <div class="company-logo-placeholder">I</div>
+                <h3>Infosys</h3>
+                <p>Global leader in next-generation digital services and consulting.</p>
+                <div class="meta">
+                    <span>📍 Bangalore</span>
+                    <span>🏢 IT Consulting</span>
+                </div>
+            </div>
+            <div class="company-card" data-company="Google">
+                <div class="company-logo-placeholder" style="background: linear-gradient(135deg, #ea4335, #4285f4);">G</div>
+                <h3>Google</h3>
+                <p>Build software, scale cloud computing infrastructure, and organize details.</p>
+                <div class="meta">
+                    <span>📍 Mountain View / Remote</span>
+                    <span>🏢 Internet Tech</span>
+                </div>
+            </div>
+            <div class="company-card" data-company="TCS">
+                <div class="company-logo-placeholder">T</div>
+                <h3>TCS</h3>
+                <p>Enabling enterprises to transform business through tech solutions.</p>
+                <div class="meta">
+                    <span>📍 Mumbai</span>
+                    <span>🏢 IT Consulting</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <h2>Latest <span>Job Vacancies</span></h2>
+            <a href="jobs.html" class="btn btn-secondary">See All Jobs</a>
+        </div>
+        <div id="latest-jobs-grid" class="job-grid">
+            <!-- Dynamically populated by script.js -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 CareerZap Job Portal. Developed with Django REST APIs & SQLite. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign in to your CareerZap account to apply for jobs, update profile status, or post vacancy listings.">
+    <title>Login - CareerZap Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <!-- Nav injected by script.js -->
+        </div>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <div class="form-header">
+                <h2>Welcome Back</h2>
+                <p>Access your Job Portal account</p>
+            </div>
+            
+            <div class="tab-group">
+                <button type="button" class="tab-btn active" data-role="candidate">Candidate</button>
+                <button type="button" class="tab-btn" data-role="employer">Employer</button>
+                <button type="button" class="tab-btn" data-role="admin">Admin</button>
+            </div>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" placeholder="example@domain.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Sign In</button>
+            </form>
+            
+            <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);">
+                Don't have an account? <a href="register.html" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600;">Register here</a>
+            </p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 CareerZap Job Portal. Developed with Django REST APIs & SQLite. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

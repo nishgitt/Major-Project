@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View and update your candidate profile, track applications status, and manage upcoming interviews in CareerZap dashboard.">
+    <title>Candidate Dashboard - CareerZap</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <!-- Nav injected by script.js -->
+        </div>
+    </header>
+
+    <main>
+        <div class="dashboard-grid">
+            <!-- Profile Column -->
+            <aside class="profile-card">
+                <div class="profile-avatar" id="card-avatar">C</div>
+                <h2 id="card-fullname">Candidate Name</h2>
+                <div class="role-badge">Job Seeker</div>
+                
+                <ul class="profile-details-list">
+                    <li>
+                        <span class="label">Email Address</span>
+                        <span class="value" id="card-email">candidate@domain.com</span>
+                    </li>
+                    <li>
+                        <span class="label">Contact Phone</span>
+                        <span class="value" id="card-phone">9876543210</span>
+                    </li>
+                </ul>
+                
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-glass); border-radius: 12px; padding: 1rem; display: flex; justify-content: space-around;">
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color:#fff;" id="stat-total-applications">0</div>
+                        <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Applied</div>
+                    </div>
+                    <div style="width: 1px; background: var(--border-glass);"></div>
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color:#fff;" id="stat-upcoming-interviews">0</div>
+                        <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Interviews</div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Dashboard Content -->
+            <section class="dashboard-content-area">
+                <!-- Profile Edit Form Section -->
+                <div class="dashboard-section">
+                    <h3>Update Profile details</h3>
+                    <form id="candidate-profile-form">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="profile-fullname">Full Name</label>
+                                <input type="text" id="profile-fullname" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-email">Email Address</label>
+                                <input type="email" id="profile-email" required>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="profile-phone">Contact Phone</label>
+                                <input type="text" id="profile-phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-qualification">Highest Qualification</label>
+                                <input type="text" id="profile-qualification" required>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 120px; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="profile-skills">Technical Skills (comma separated)</label>
+                                <input type="text" id="profile-skills" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-experience">Exp (Yrs)</label>
+                                <input type="number" id="profile-experience" min="0" required>
+                            </div>
+                        </div>
+                        <div style="text-align: right; margin-top: 1rem;">
+                            <button type="submit" class="btn btn-primary">Save Profile changes</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Summary section -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <!-- Recent Applications -->
+                    <div class="dashboard-section" style="padding: 1.5rem;">
+                        <h3>Recent Submissions</h3>
+                        <div id="candidate-brief-applications">
+                            <!-- Injected by script.js -->
+                        </div>
+                    </div>
+                    
+                    <!-- Scheduled Interviews -->
+                    <div class="dashboard-section" style="padding: 1.5rem;">
+                        <h3>Upcoming Slot Details</h3>
+                        <div id="candidate-brief-interviews">
+                            <!-- Injected by script.js -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 CareerZap Job Portal. Developed with Django REST APIs & SQLite. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

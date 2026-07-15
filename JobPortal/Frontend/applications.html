@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View and track your submitted job applications, upload resume drafts, and check hiring updates.">
+    <title>Track Applications - CareerZap</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <!-- Nav injected by script.js -->
+        </div>
+    </header>
+
+    <main>
+        <div class="section-title">
+            <h2>Track Your <span>Job Applications</span></h2>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 350px; gap: 2rem; align-items: start;">
+            <!-- Applications Table Column -->
+            <section class="dashboard-section" style="padding: 1.5rem;">
+                <h3 style="font-size: 1.15rem; margin-bottom: 1.25rem;">Active Submissions</h3>
+                <div id="my-applications-list">
+                    <!-- Dynamically populated by script.js -->
+                </div>
+            </section>
+
+            <!-- Resume Upload Column -->
+            <aside class="dashboard-section" style="padding: 1.5rem;">
+                <h3 style="font-size: 1.15rem; margin-bottom: 1rem;">Manage Resume Portfolio</h3>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                    Upload your latest CV. When applying, this document name will be attached to your job profile.
+                </p>
+                
+                <form id="resume-upload-form" style="border: 2px dashed var(--border-glass); border-radius: 12px; padding: 2rem 1.5rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+                    <div style="font-size: 2.5rem;">📂</div>
+                    <div style="font-size: 0.9rem; font-weight: 600; color: #fff;">Select PDF Resume File</div>
+                    <input type="file" id="resume-file-input" accept=".pdf" style="display: none;" onchange="handleResumeFileSelection()">
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('resume-file-input').click()">Browse Files</button>
+                    <div id="selected-resume-name" style="font-size: 0.8rem; color: var(--accent-cyan); font-weight: 500;">No file selected</div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; display: none;" id="resume-submit-btn">Upload CV</button>
+                </form>
+            </aside>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 CareerZap Job Portal. Developed with Django REST APIs & SQLite. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Specific Resume Upload Helper UI triggers
+        function handleResumeFileSelection() {
+            const input = document.getElementById('resume-file-input');
+            const label = document.getElementById('selected-resume-name');
+            const submitBtn = document.getElementById('resume-submit-btn');
+            
+            if (input.files && input.files.length > 0) {
+                const name = input.files[0].name;
+                label.innerText = `📄 ${name}`;
+                submitBtn.style.display = 'block';
+            }
+        }
+        
+        // Handle upload submit
+        document.getElementById('resume-upload-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const input = document.getElementById('resume-file-input');
+            if (input.files && input.files.length > 0) {
+                const name = input.files[0].name;
+                
+                // Update candidate session resume properties
+                if (currentUser && userRole === 'candidate') {
+                    currentUser.resume = name;
+                    setCurrentUser(currentUser, 'candidate');
+                    showToast(`Resume uploaded successfully! Linked to candidate: ${name}`, 'success');
+                }
+                
+                document.getElementById('resume-submit-btn').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
