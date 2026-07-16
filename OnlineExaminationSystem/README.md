@@ -125,3 +125,38 @@ The test suite runs standard Django Client requests to assert status codes and o
 python Backend/test_apis.py
 ```
 This tests all 20 API pathways automatically.
+
+---
+
+## Documentation Gallery
+
+### Frontend Interface Screenshots
+
+#### 1. Home Landing Portal
+![Home Landing Portal](screenshots/homepage.png)
+
+#### 2. Student Registration Form
+![Student Registration Form](screenshots/register.png)
+
+#### 3. Authentication Gateway
+![Authentication Gateway](screenshots/login.png)
+
+#### 4. Student Portal Dashboard
+![Student Portal Dashboard](screenshots/student_dashboard.png)
+
+#### 5. Interactive Exam Session
+![Interactive Exam Session](screenshots/exam_session.png)
+
+#### 6. Admin Student Registry CRUD
+![Admin Student Registry](screenshots/admin_students.png)
+
+#### 7. Admin Scoreboard compiled results
+![Admin Scoreboard](screenshots/admin_results.png)
+
+### Database and API Verification
+
+#### 8. SQLite Database Table structures & row entries
+![SQLite Database Browser](screenshots/database_structure.png)
+
+#### 9. Postman REST API endpoint validation tests
+![Postman API Verification](screenshots/postman_test.png)
