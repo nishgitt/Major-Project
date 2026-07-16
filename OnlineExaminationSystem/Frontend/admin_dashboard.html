@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Central administration dashboard to manage students, exams, questions, and view performance logs.">
+    <title>Admin Dashboard | Examly</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span>🎓 Examly</span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="exams.html">Exams</a></li>
+                    <li><a href="#" class="active">Admin Console</a></li>
+                    <li id="authNavItem"><button class="btn-secondary" onclick="handleLogout()">Logout</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="dashboard-layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="user-profile-summary">
+                    <div class="avatar" style="background: linear-gradient(135deg, var(--secondary), var(--primary));">AD</div>
+                    <div class="profile-name">System Administrator</div>
+                    <div class="profile-role" style="color: var(--warning);">Admin Portal</div>
+                </div>
+                <ul class="sidebar-menu">
+                    <li><button class="sidebar-btn active" id="btnTabStudents" onclick="switchAdminTab('students', this)">Students</button></li>
+                    <li><button class="sidebar-btn" id="btnTabExams" onclick="switchAdminTab('exams', this)">Examinations</button></li>
+                    <li><button class="sidebar-btn" id="btnTabQuestions" onclick="switchAdminTab('questions', this)">Questions</button></li>
+                    <li><button class="sidebar-btn" id="btnTabSubmissions" onclick="switchAdminTab('submissions', this)">Submissions</button></li>
+                    <li><button class="sidebar-btn" id="btnTabResults" onclick="switchAdminTab('results', this)">Results</button></li>
+                </ul>
+            </aside>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                
+                <!-- Tab: Students -->
+                <div id="adminTabStudents" class="tab-pane">
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3>Manage Students</h3>
+                            <button class="btn-primary" onclick="openAddModal('student')">+ Add Student</button>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Full Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>College</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminStudentsTableBody">
+                                    <!-- Dynamic rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab: Examinations -->
+                <div id="adminTabExams" class="tab-pane" style="display: none;">
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3>Manage Examinations</h3>
+                            <button class="btn-primary" onclick="openAddModal('exam')">+ Add Exam</button>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Exam Title</th>
+                                        <th>Subject</th>
+                                        <th>Duration (Min)</th>
+                                        <th>Total Marks</th>
+                                        <th>Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminExamsTableBody">
+                                    <!-- Dynamic rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab: Questions -->
+                <div id="adminTabQuestions" class="tab-pane" style="display: none;">
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3>Manage Question Bank</h3>
+                            <button class="btn-primary" onclick="openAddModal('question')">+ Add Question</button>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Exam Title</th>
+                                        <th>Question</th>
+                                        <th>Correct Ans</th>
+                                        <th>Marks</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminQuestionsTableBody">
+                                    <!-- Dynamic rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab: Submissions -->
+                <div id="adminTabSubmissions" class="tab-pane" style="display: none;">
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3>Exam Submissions</h3>
+                            <button class="btn-primary" onclick="openAddModal('submission')">+ Add Submission</button>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Student Name</th>
+                                        <th>Exam Title</th>
+                                        <th>Answers</th>
+                                        <th>Score</th>
+                                        <th>Submitted At</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminSubmissionsTableBody">
+                                    <!-- Dynamic rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab: Results -->
+                <div id="adminTabResults" class="tab-pane" style="display: none;">
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3>Finalized Exam Results</h3>
+                            <button class="btn-primary" onclick="openAddModal('result')">+ Add Result</button>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Student Name</th>
+                                        <th>Exam Title</th>
+                                        <th>Total Marks</th>
+                                        <th>Obtained Marks</th>
+                                        <th>Percentage</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminResultsTableBody">
+                                    <!-- Dynamic rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Generic Modal for CRUD -->
+    <div class="modal" id="crudModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeCrudModal()">&times;</span>
+            <h3 class="modal-title" id="modalTitle">Add Entity</h3>
+            
+            <form id="crudForm" onsubmit="handleCrudSubmit(event)">
+                <input type="hidden" id="entityType">
+                <input type="hidden" id="editEntityId">
+
+                <!-- Dynamic inputs based on active mode -->
+                <div id="modalFormFields">
+                    <!-- Form controls will be drawn dynamically via script.js -->
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeCrudModal()">Cancel</button>
+                    <button type="submit" class="btn-primary" id="btnModalSubmit">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Examly Online Examination Portal. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            initializeAdminDashboard();
+        });
+
+        function switchAdminTab(tabName, btn) {
+            document.querySelectorAll('.tab-pane').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            
+            if (tabName === 'students') document.getElementById('adminTabStudents').style.display = 'block';
+            if (tabName === 'exams') document.getElementById('adminTabExams').style.display = 'block';
+            if (tabName === 'questions') document.getElementById('adminTabQuestions').style.display = 'block';
+            if (tabName === 'submissions') document.getElementById('adminTabSubmissions').style.display = 'block';
+            if (tabName === 'results') document.getElementById('adminTabResults').style.display = 'block';
+            
+            document.querySelectorAll('.sidebar-btn').forEach(b => {
+                b.classList.remove('active');
+            });
+            btn.classList.add('active');
+        }
+    </script>
+</body>
+</html>

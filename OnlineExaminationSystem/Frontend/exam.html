@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="In-progress examination session. Please do not close or reload the browser.">
+    <title>Active Examination Session | Examly</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="background-image: none;">
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <span id="examSessionTitle">🎓 Exam: Loading...</span>
+            </div>
+            <div style="font-weight: 600; color: var(--secondary);" id="examDurationLabel">
+                Duration: 0 Mins
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="exam-layout">
+            <!-- Left Panel: Main Question Screen -->
+            <div class="exam-panel" id="examMainPanel">
+                <div class="exam-meta-bar">
+                    <h2 id="currentQuestionTitle">Question 1 of 5</h2>
+                    <div id="currentQuestionMarks" style="background: rgba(6, 182, 212, 0.1); color: var(--secondary); padding: 0.3rem 0.8rem; border-radius: 12px; font-weight: 600; font-size: 0.9rem;">
+                        Marks: 20
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <p class="question-text" id="questionText">Loading question...</p>
+                    
+                    <div class="options-container" id="optionsContainer">
+                        <label class="option-wrapper" id="optWrapA" onclick="selectAnswer('A')">
+                            <input type="radio" name="examOption" id="optA" value="A">
+                            <div class="option-indicator"></div>
+                            <span class="option-text" id="lblOptA">Option A text</span>
+                        </label>
+                        <label class="option-wrapper" id="optWrapB" onclick="selectAnswer('B')">
+                            <input type="radio" name="examOption" id="optB" value="B">
+                            <div class="option-indicator"></div>
+                            <span class="option-text" id="lblOptB">Option B text</span>
+                        </label>
+                        <label class="option-wrapper" id="optWrapC" onclick="selectAnswer('C')">
+                            <input type="radio" name="examOption" id="optC" value="C">
+                            <div class="option-indicator"></div>
+                            <span class="option-text" id="lblOptC">Option C text</span>
+                        </label>
+                        <label class="option-wrapper" id="optWrapD" onclick="selectAnswer('D')">
+                            <input type="radio" name="examOption" id="optD" value="D">
+                            <div class="option-indicator"></div>
+                            <span class="option-text" id="lblOptD">Option D text</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="exam-nav">
+                    <button class="btn-secondary" id="btnPrevQuestion" onclick="goToPrevQuestion()">Previous</button>
+                    <button class="btn-primary" id="btnNextQuestion" onclick="goToNextQuestion()">Next</button>
+                    <button class="btn-primary" id="btnSubmitExam" style="display: none; background: linear-gradient(135deg, var(--success), #047857); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);" onclick="confirmSubmitExam()">Submit Exam</button>
+                </div>
+            </div>
+
+            <!-- Right Panel: Time & Question Palette -->
+            <div class="exam-info-sidebar">
+                <!-- Countdown Timer Card -->
+                <div class="timer-box" id="timerBox">
+                    <h3>Time Remaining</h3>
+                    <div class="timer-circle">
+                        <svg>
+                            <circle class="bg" cx="75" cy="75" r="65"></circle>
+                            <circle class="progress" id="timerProgressRing" cx="75" cy="75" r="65"></circle>
+                        </svg>
+                        <div class="timer-display" id="timerDisplay">00:00</div>
+                    </div>
+                </div>
+
+                <!-- Palette Navigator Card -->
+                <div class="question-palette-box">
+                    <h3>Question Palette</h3>
+                    <div class="palette-grid" id="paletteGrid">
+                        <!-- Populated dynamically -->
+                    </div>
+                    <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.85rem; color: var(--text-muted);">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 12px; height: 12px; background: var(--primary); border-radius: 2px;"></div> Current
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 12px; height: 12px; background: var(--success-glow); border: 1px solid var(--success); border-radius: 2px;"></div> Answered
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 12px; height: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 2px;"></div> Not Visited
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Start running exam session triggers immediately
+        window.addEventListener('DOMContentLoaded', () => {
+            initializeExamSession();
+        });
+    </script>
+</body>
+</html>

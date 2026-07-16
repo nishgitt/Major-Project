@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Access your Student assessment dashboard or Admin console.">
+    <title>Login | Online Examination System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span>🎓 Examly</span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="exams.html">Exams</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="form-container" id="loginCard">
+            <div class="form-header">
+                <h2>Welcome Back</h2>
+                <p>Login to access your personalized portal</p>
+            </div>
+
+            <!-- Role Selector Toggle -->
+            <div class="role-toggle" id="loginRoleToggle">
+                <button type="button" class="role-btn active" id="btnStudentRole" onclick="setRole('student')">Student</button>
+                <button type="button" class="role-btn" id="btnAdminRole" onclick="setRole('admin')">Administrator</button>
+            </div>
+
+            <form id="loginForm" onsubmit="handleLoginSubmit(event)">
+                <div class="form-group" id="emailGroup">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" placeholder="Enter student email" required>
+                </div>
+                
+                <div class="form-group" id="usernameGroup" style="display: none;">
+                    <label for="loginUsername">Admin Username</label>
+                    <input type="text" id="loginUsername" placeholder="Enter admin username">
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="btn-primary" id="btnLoginSubmit">Sign In</button>
+            </form>
+
+            <div class="form-footer" id="loginFooterRegister">
+                Don't have a student account? <a href="register.html">Register here</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Examly Online Examination Portal. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Setup initial role based on URL parameter or default
+        window.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const role = params.get('role');
+            if (role === 'admin') {
+                setRole('admin');
+            } else {
+                setRole('student');
+            }
+        });
+
+        let currentRole = 'student';
+
+        function setRole(role) {
+            currentRole = role;
+            const studentBtn = document.getElementById('btnStudentRole');
+            const adminBtn = document.getElementById('btnAdminRole');
+            const emailGroup = document.getElementById('emailGroup');
+            const usernameGroup = document.getElementById('usernameGroup');
+            const loginEmail = document.getElementById('loginEmail');
+            const loginUsername = document.getElementById('loginUsername');
+            const loginFooter = document.getElementById('loginFooterRegister');
+
+            if (role === 'student') {
+                studentBtn.classList.add('active');
+                adminBtn.classList.remove('active');
+                emailGroup.style.display = 'flex';
+                usernameGroup.style.display = 'none';
+                loginEmail.required = true;
+                loginUsername.required = false;
+                loginFooter.style.display = 'block';
+            } else {
+                studentBtn.classList.remove('active');
+                adminBtn.classList.add('active');
+                emailGroup.style.display = 'none';
+                usernameGroup.style.display = 'flex';
+                loginEmail.required = false;
+                loginUsername.required = true;
+                loginFooter.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

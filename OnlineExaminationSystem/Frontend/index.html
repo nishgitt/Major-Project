@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Secure, scalable, and instant Online Examination System. Create tests, manage questions, and generate score reports.">
+    <title>Online Examination System | Streamlined Educational Assessments</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo" id="logoLink">
+                <span>🎓 Examly</span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="exams.html">Exams</a></li>
+                    <li><a href="student_dashboard.html" id="navStudentDash">Student Portal</a></li>
+                    <li><a href="admin_dashboard.html" id="navAdminDash">Admin Console</a></li>
+                    <li id="authNavItem">
+                        <a href="login.html" class="btn-primary" style="color: white; padding: 0.5rem 1.2rem;">Login</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main>
+        <section class="hero" id="homeHero">
+            <h1>Conduct Secure Exams <span>Anytime, Anywhere</span></h1>
+            <p>Empower your educational institution or company to design tests, randomize questions, enforce strict countdown timers, and generate comprehensive instant reports.</p>
+            <div class="cta-buttons">
+                <a href="register.html" class="btn-primary">Get Started as Student</a>
+                <a href="login.html?role=admin" class="btn-secondary">Admin Console</a>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section style="margin-bottom: 4rem;">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon primary">📝</div>
+                    <div class="stat-details">
+                        <h4>Online Exams</h4>
+                        <span id="statExamsCount">3+</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon secondary">❓</div>
+                    <div class="stat-details">
+                        <h4>Question Bank</h4>
+                        <span id="statQuestionsCount">9+</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon success">🧑‍🎓</div>
+                    <div class="stat-details">
+                        <h4>Registered Students</h4>
+                        <span id="statStudentsCount">2+</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon warning">🏆</div>
+                    <div class="stat-details">
+                        <h4>Submissions</h4>
+                        <span id="statSubmissionsCount">1+</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Examinations -->
+        <section>
+            <h2 class="section-title">Featured Examinations</h2>
+            <div class="exams-grid" id="featuredExamsGrid">
+                <!-- Dynamically populated via script.js -->
+                <div class="exam-card">
+                    <div class="exam-badge">Python</div>
+                    <h3>Python Programming Test</h3>
+                    <div class="exam-meta">
+                        <div class="exam-meta-item">⏱️ <span>60 Minutes</span></div>
+                        <div class="exam-meta-item">💯 <span>100 Total Marks</span></div>
+                        <div class="exam-meta-item">📅 <span>Date: 2026-08-15</span></div>
+                    </div>
+                    <a href="login.html" class="btn-primary">Login to Attempt</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="feature-card" style="margin: 4rem 0; text-align: center;" id="aboutPortal">
+            <h2 class="section-title" style="margin-bottom: 1.5rem;">About Examination Portal</h2>
+            <p style="color: var(--text-muted); max-width: 800px; margin: 0 auto; line-height: 1.8; font-size: 1.1rem;">
+                Examly is a cutting-edge web assessment solution designed to deliver secure, cheat-resistant, and high-fidelity testing environments. Built with function-based REST APIs, clean SQLite databases, and responsive clients, the system supports robust shuffling algorithms, active timing restrictions, and automated final grades.
+            </p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="max-width">
+            <p>&copy; 2026 Examly Online Examination Portal. All Rights Reserved.</p>
+            <p>Developed for the Python-FSD Major Project. <a href="admin_dashboard.html">Admin Panel Access</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

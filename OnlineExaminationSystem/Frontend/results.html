@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View your final score, percentage, status, and download the report as PDF.">
+    <title>Exam Results | Examly</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Include jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span>🎓 Examly</span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="exams.html">Exams</a></li>
+                    <li><a href="student_dashboard.html">Student Portal</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="result-card-container">
+            <!-- Header/Score Card -->
+            <div class="result-header-card" id="resultHeaderCard">
+                <div class="result-badge-large pass" id="resultStatusBadge">
+                    80%
+                    <span id="resultStatusText">Pass</span>
+                </div>
+                
+                <h2 id="resultExamTitle">Python Programming Test</h2>
+                <p style="color: var(--text-muted); margin-top: 0.5rem;" id="resultStudentMeta">Student: Rahul Sharma</p>
+                
+                <div class="result-grid-info">
+                    <div class="result-info-item">
+                        <h4>Obtained Marks</h4>
+                        <p id="resultObtainedMarks">80</p>
+                    </div>
+                    <div class="result-info-item">
+                        <h4>Total Marks</h4>
+                        <p id="resultTotalMarks">100</p>
+                    </div>
+                    <div class="result-info-item">
+                        <h4>Percentage</h4>
+                        <p id="resultPercentage">80%</p>
+                    </div>
+                </div>
+
+                <div class="cta-buttons" style="margin-top: 2rem;">
+                    <button class="btn-primary" onclick="downloadResultPDF()">Download Result as PDF</button>
+                    <a href="student_dashboard.html" class="btn-secondary">Go to Dashboard</a>
+                </div>
+            </div>
+
+            <!-- Review Question Sheet -->
+            <div class="review-answers-section" id="reviewAnswersSection">
+                <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.8rem;">
+                    Question Review Sheet
+                </h3>
+                
+                <div id="reviewQuestionsContainer">
+                    <!-- Loaded dynamically via script.js -->
+                    <p style="color: var(--text-muted);">Loading answers sheet...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Examly Online Examination Portal. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            loadResultsPage();
+        });
+    </script>
+</body>
+</html>

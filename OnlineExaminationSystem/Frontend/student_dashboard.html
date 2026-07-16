@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View registered exams, check results history, and review progress.">
+    <title>Student Portal | Examly</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span>🎓 Examly</span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="exams.html">Exams</a></li>
+                    <li><a href="#" class="active">Student Portal</a></li>
+                    <li id="authNavItem"><button class="btn-secondary" onclick="handleLogout()">Logout</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="dashboard-layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="user-profile-summary">
+                    <div class="avatar" id="studentAvatar">RS</div>
+                    <div class="profile-name" id="studentNameLabel">Rahul Sharma</div>
+                    <div class="profile-role">Student</div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;" id="studentCollegeLabel">ABC Engineering College</p>
+                </div>
+                <ul class="sidebar-menu">
+                    <li><button class="sidebar-btn active" onclick="switchStudentTab('overview', this)">Overview</button></li>
+                    <li><button class="sidebar-btn" onclick="switchStudentTab('history', this)">Completed Exams</button></li>
+                    <li><button class="sidebar-btn" onclick="switchStudentTab('leaderboard', this)">Leaderboard</button></li>
+                </ul>
+            </aside>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Tab: Overview -->
+                <div id="studentTabOverview" class="tab-pane">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon primary">📝</div>
+                            <div class="stat-details">
+                                <h4>Available Exams</h4>
+                                <span id="studentStatPending">0</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon success">🏆</div>
+                            <div class="stat-details">
+                                <h4>Completed Exams</h4>
+                                <span id="studentStatCompleted">0</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon warning">📊</div>
+                            <div class="stat-details">
+                                <h4>Average Score</h4>
+                                <span id="studentStatGPA">0%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pending Exams to Take -->
+                    <div class="dashboard-section" style="margin-top: 2rem;">
+                        <div class="section-header">
+                            <h3>Available Examinations</h3>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Exam Title</th>
+                                        <th>Subject</th>
+                                        <th>Duration</th>
+                                        <th>Total Marks</th>
+                                        <th>Exam Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="studentPendingExamsTable">
+                                    <!-- Populated dynamically -->
+                                    <tr>
+                                        <td colspan="6" style="text-align: center; color: var(--text-muted);">No exams available to take.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab: Completed / History -->
+                <div id="studentTabHistory" class="tab-pane" style="display: none;">
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3>Examination Performance History</h3>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Exam Title</th>
+                                        <th>Total Marks</th>
+                                        <th>Obtained Marks</th>
+                                        <th>Percentage</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="studentCompletedExamsTable">
+                                    <!-- Populated dynamically -->
+                                    <tr>
+                                        <td colspan="6" style="text-align: center; color: var(--text-muted);">You have not attempted any exams yet.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab: Leaderboard -->
+                <div id="studentTabLeaderboard" class="tab-pane" style="display: none;">
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3>Global Performance Leaderboard</h3>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Student Name</th>
+                                        <th>Exam Title</th>
+                                        <th>Percentage</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="studentLeaderboardTable">
+                                    <!-- Populated dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Examly Online Examination Portal. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            initializeStudentDashboard();
+        });
+
+        function switchStudentTab(tabName, btn) {
+            // Hide all tab panes
+            document.querySelectorAll('.tab-pane').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            
+            // Show target tab pane
+            if (tabName === 'overview') document.getElementById('studentTabOverview').style.display = 'block';
+            if (tabName === 'history') document.getElementById('studentTabHistory').style.display = 'block';
+            if (tabName === 'leaderboard') document.getElementById('studentTabLeaderboard').style.display = 'block';
+            
+            // Toggle active button style
+            document.querySelectorAll('.sidebar-btn').forEach(b => {
+                b.classList.remove('active');
+            });
+            btn.classList.add('active');
+        }
+    </script>
+</body>
+</html>
