@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Packages - Island Booking System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Premium Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <i class="fa-solid fa-umbrella-beach"></i>
+                    <span>ISLANDIA</span>
+                </div>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html">Home</a></li>
+                <li class="nav-item"><a href="islands.html">Islands</a></li>
+                <li class="nav-item"><a href="packages.html" class="active">Packages</a></li>
+            </ul>
+            <div class="auth-buttons" id="auth-nav-wrapper"></div>
+        </div>
+    </header>
+
+    <main>
+        <div class="section-header">
+            <div>
+                <h2>Vacation Packages</h2>
+                <p>Browse resorts, duration plans, and curated services for your getaway</p>
+            </div>
+            <!-- Sub-search inside listing -->
+            <div style="max-width: 320px; width: 100%;">
+                <input type="text" id="package-filter" class="form-input" placeholder="Filter by island name..." oninput="filterPackages()">
+            </div>
+        </div>
+
+        <div class="grid-packages" id="packages-list-container">
+            <div style="grid-column: 1/-1; text-align: center; padding: 3rem;">
+                <i class="fa-solid fa-circle-notch fa-spin fa-2x"></i>
+                <p style="margin-top: 1rem;">Retrieving packages...</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Island Booking System (IBS) Inc. Developed for premium tourism packages. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let allPackages = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const islandParam = getQueryParam('island');
+            if (islandParam) {
+                document.getElementById('package-filter').value = islandParam;
+            }
+            loadPackages();
+        });
+
+        async function loadPackages() {
+            try {
+                allPackages = await apiFetch('/packages/');
+                filterPackages();
+            } catch (err) {
+                console.error("Failed to load packages:", err);
+                // Fallback mock package
+                allPackages = [
+                    {
+                        package_id: 301,
+                        island_name: "Maldives",
+                        resort_name: "Sunset Paradise Resort",
+                        package_name: "Luxury Honeymoon Package",
+                        duration: "5 Days / 4 Nights",
+                        price: 150000,
+                        included_services: "Accommodation, Breakfast, Airport Pickup, Island Tour"
+                    }
+                ];
+                filterPackages();
+            }
+        }
+
+        function filterPackages() {
+            const filterVal = document.getElementById('package-filter').value.toLowerCase();
+            const container = document.getElementById('packages-list-container');
+
+            const filtered = allPackages.filter(pkg => {
+                return pkg.island_name.toLowerCase().includes(filterVal) ||
+                       pkg.package_name.toLowerCase().includes(filterVal) ||
+                       pkg.resort_name.toLowerCase().includes(filterVal);
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 4rem; color: var(--text-secondary);">
+                        <i class="fa-regular fa-face-frown fa-3x" style="margin-bottom: 1rem;"></i>
+                        <p>No package offers match your filters.</p>
+                    </div>`;
+                return;
+            }
+
+            container.innerHTML = filtered.map(pkg => {
+                // Split service items into nice badges
+                const servicesHtml = pkg.included_services
+                    .split(',')
+                    .map(s => s.trim())
+                    .filter(s => s.length > 0)
+                    .map(s => `<span class="service-item included"><i class="fa-solid fa-circle-check"></i> ${s}</span>`)
+                    .join('');
+
+                return `
+                    <div class="island-card" style="min-height: 480px;">
+                        <div class="card-img-wrapper" style="height: 180px;">
+                            <img src="${getPackageImage(pkg.island_name)}" alt="${pkg.package_name}" class="card-img" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&auto=format&fit=crop';">
+                            <span class="badge-overlay"><i class="fa-regular fa-clock"></i> ${pkg.duration}</span>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">${pkg.package_name}</h3>
+                            <div class="card-meta">
+                                <span class="meta-item"><i class="fa-solid fa-location-dot"></i> <b>${pkg.island_name}</b></span>
+                                <span class="meta-item"><i class="fa-solid fa-hotel"></i> ${pkg.resort_name}</span>
+                            </div>
+                            
+                            <div style="margin: 0.5rem 0 1.5rem;">
+                                <h4 style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-secondary); margin-bottom: 0.5rem;">Services Included:</h4>
+                                <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+                                    ${servicesHtml}
+                                </div>
+                            </div>
+                            
+                            <div class="card-footer" style="padding-top: 1rem; border-top: 1px solid var(--card-border);">
+                                <div class="price-tag">₹${pkg.price.toLocaleString()}<span>/pkg</span></div>
+                                <a href="booking.html?package_id=${pkg.package_id}" class="btn btn-primary">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Registration - Island Booking System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Premium Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <i class="fa-solid fa-umbrella-beach"></i>
+                    <span>ISLANDIA</span>
+                </div>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html">Home</a></li>
+                <li class="nav-item"><a href="islands.html">Islands</a></li>
+                <li class="nav-item"><a href="packages.html">Packages</a></li>
+            </ul>
+            <div class="auth-buttons" id="auth-nav-wrapper"></div>
+        </div>
+    </header>
+
+    <main>
+        <div class="form-card">
+            <h2 class="form-title">Create Account</h2>
+            <form id="register-form" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label class="form-label" for="full-name">Full Name</label>
+                    <input type="text" id="full-name" class="form-input" placeholder="Rahul Sharma" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address</label>
+                    <input type="email" id="email" class="form-input" placeholder="rahul@gmail.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="phone">Phone Number</label>
+                    <input type="tel" id="phone" class="form-input" placeholder="9876543210" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="nationality">Nationality</label>
+                    <input type="text" id="nationality" class="form-input" placeholder="Indian" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input type="password" id="password" class="form-input" placeholder="••••••••" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem; padding: 0.8rem;">
+                    Sign Up <i class="fa-solid fa-user-plus"></i>
+                </button>
+            </form>
+            <div class="form-footer-text">
+                Already have an account? <a href="login.html">Sign In</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Island Booking System (IBS) Inc. Developed for premium tourism packages. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        async function handleRegister(e) {
+            e.preventDefault();
+            
+            const full_name = document.getElementById('full-name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const nationality = document.getElementById('nationality').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                // Post request to backend /customers/add/
+                const res = await apiFetch('/customers/add/', {
+                    method: 'POST',
+                    body: { full_name, email, phone, nationality, password }
+                });
+                
+                showToast("Account created successfully! Logging you in...", "success");
+                
+                // Login customer automatically by saving their details to localStorage
+                const customers = await apiFetch('/customers/');
+                const user = customers.find(c => c.email === email);
+                if (user) {
+                    setCurrentUser(user);
+                }
+                
+                setTimeout(() => {
+                    window.location.href = 'customer_dashboard.html';
+                }, 1500);
+            } catch (err) {
+                showToast(err.message || "Registration failed.", "error");
+            }
+        }
+    </script>
+</body>
+</html>

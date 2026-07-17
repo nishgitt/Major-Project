@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configure Booking - Island Booking System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Premium Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <i class="fa-solid fa-umbrella-beach"></i>
+                    <span>ISLANDIA</span>
+                </div>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html">Home</a></li>
+                <li class="nav-item"><a href="islands.html">Islands</a></li>
+                <li class="nav-item"><a href="packages.html">Packages</a></li>
+            </ul>
+            <div class="auth-buttons" id="auth-nav-wrapper"></div>
+        </div>
+    </header>
+
+    <main>
+        <h2 class="form-title" style="margin-top: 2rem;">Configure Vacation Booking</h2>
+        
+        <div id="booking-flow-container">
+            <!-- Dynamically populated package configuration forms -->
+            <div class="package-detail-container">
+                <!-- Left: Form inputs -->
+                <div class="detail-main">
+                    <h3 style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem;">
+                        <i class="fa-solid fa-plane-departure text-primary"></i> Booking Details
+                    </h3>
+                    
+                    <form id="booking-form" onsubmit="createBooking(event)">
+                        <div class="form-group">
+                            <label class="form-label" for="book-customer-name">Customer Name</label>
+                            <input type="text" id="book-customer-name" class="form-input" readonly required>
+                            <span style="font-size: 0.75rem; color: var(--text-secondary);">Logged-in profile session</span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="book-travel-date">Travel Date</label>
+                            <input type="date" id="book-travel-date" class="form-input" required min="2026-07-20">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="book-people">Number of Travelers</label>
+                            <input type="number" id="book-people" class="form-input" min="1" max="20" value="1" oninput="updateTotalAmount()" required>
+                        </div>
+                        
+                        <div style="margin-top: 2.5rem;">
+                            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.8rem; font-size: 1rem;">
+                                Confirm & Proceed to Payment <i class="fa-solid fa-credit-card"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Right: Package details & pricing overview -->
+                <div class="detail-sidebar" id="booking-summary-wrapper">
+                    <h3>Booking Summary</h3>
+                    
+                    <div style="margin: 1.5rem 0;" id="summary-package-info">
+                        <!-- Loaded dynamically -->
+                        <p style="color: var(--text-secondary);">Loading package info...</p>
+                    </div>
+                    
+                    <div class="booking-summary-box">
+                        <div class="summary-row">
+                            <span>Package Rate:</span>
+                            <span id="rate-display">₹0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Travelers:</span>
+                            <span id="people-count-display">1</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total Due:</span>
+                            <span id="total-amount-display">₹0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Island Booking System (IBS) Inc. Developed for premium tourism packages. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let selectedPackage = null;
+        let user = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            user = getCurrentUser();
+            if (!user) {
+                showToast("Please log in to configure bookings.", "error");
+                setTimeout(() => {
+                    window.location.href = `login.html?redirect=booking.html${window.location.search}`;
+                }, 1500);
+                return;
+            }
+            
+            // Populate user name in read-only field
+            document.getElementById('book-customer-name').value = user.full_name;
+            
+            loadBookingPackage();
+        });
+
+        async function loadBookingPackage() {
+            const packageId = getQueryParam('package_id');
+            if (!packageId) {
+                showToast("No package selected.", "error");
+                setTimeout(() => { window.location.href = 'packages.html'; }, 1000);
+                return;
+            }
+
+            try {
+                const packages = await apiFetch('/packages/');
+                selectedPackage = packages.find(p => p.package_id == packageId);
+                
+                if (!selectedPackage) {
+                    showToast("Package details not found.", "error");
+                    return;
+                }
+
+                // Render Summary Info
+                document.getElementById('summary-package-info').innerHTML = `
+                    <h4 style="font-size: 1.15rem; font-weight: 700; color: var(--primary); margin-bottom: 0.25rem;">${selectedPackage.package_name}</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary);"><i class="fa-solid fa-location-dot"></i> ${selectedPackage.island_name}</p>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem;"><i class="fa-solid fa-hotel"></i> ${selectedPackage.resort_name}</p>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem;"><i class="fa-regular fa-clock"></i> ${selectedPackage.duration}</p>
+                `;
+                
+                updateTotalAmount();
+            } catch (err) {
+                console.error("Failed to load package details for booking:", err);
+                // Fallback matching mock
+                selectedPackage = {
+                    package_id: 301,
+                    island_name: "Maldives",
+                    resort_name: "Sunset Paradise Resort",
+                    package_name: "Luxury Honeymoon Package",
+                    duration: "5 Days / 4 Nights",
+                    price: 150000,
+                    included_services: "Accommodation, Breakfast, Airport Pickup, Island Tour"
+                };
+                updateTotalAmount();
+            }
+        }
+
+        function updateTotalAmount() {
+            if (!selectedPackage) return;
+            const count = parseInt(document.getElementById('book-people').value) || 1;
+            const total = selectedPackage.price * count;
+            
+            document.getElementById('rate-display').textContent = `₹${selectedPackage.price.toLocaleString()}`;
+            document.getElementById('people-count-display').textContent = count;
+            document.getElementById('total-amount-display').textContent = `₹${total.toLocaleString()}`;
+        }
+
+        async function createBooking(e) {
+            e.preventDefault();
+            
+            if (!selectedPackage || !user) return;
+            
+            const travel_date = document.getElementById('book-travel-date').value;
+            const number_of_people = parseInt(document.getElementById('book-people').value) || 1;
+            const total_amount = selectedPackage.price * number_of_people;
+
+            try {
+                // Post to /bookings/add/
+                const res = await apiFetch('/bookings/add/', {
+                    method: 'POST',
+                    body: {
+                        customer_name: user.full_name,
+                        island_name: selectedPackage.island_name,
+                        package_name: selectedPackage.package_name,
+                        travel_date: travel_date,
+                        number_of_people: number_of_people,
+                        total_amount: total_amount,
+                        booking_status: 'Pending'
+                    }
+                });
+
+                showToast("Booking created successfully! Redirecting to checkout...", "success");
+                
+                setTimeout(() => {
+                    window.location.href = `payment.html?booking_id=${res.booking_id}`;
+                }, 1500);
+            } catch (err) {
+                showToast("Failed to initiate booking.", "error");
+            }
+        }
+    </script>
+</body>
+</html>

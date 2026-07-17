@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IslandEscape - Discover Your Paradise</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Premium Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo-link">
+                <div class="logo-wrapper">
+                    <div style="color: var(--primary); font-size: 2.2rem; display: flex; align-items: center;">
+                        <i class="fa-solid fa-umbrella-beach"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-title">Island<span>Escape</span></span>
+                        <span class="logo-sub">Book Your Paradise</span>
+                    </div>
+                </div>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="active">Home</a></li>
+                <li class="nav-item"><a href="islands.html">Destinations</a></li>
+                <li class="nav-item"><a href="islands.html">Islands</a></li>
+                <li class="nav-item"><a href="packages.html">Experiences</a></li>
+                <li class="nav-item nav-item-dropdown">
+                    <a href="#">Reviews & Contact <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 0.2rem;"></i></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item"><a href="#reviews"><i class="fa-solid fa-star"></i> People Reviews</a></li>
+                        <li class="dropdown-item"><a href="#contact"><i class="fa-solid fa-envelope"></i> Check Contact</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="auth-buttons" id="auth-nav-wrapper">
+                <!-- Populated dynamically by script.js -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Template Hero Banner -->
+    <section class="hero-wrapper">
+        <div class="hero-content">
+            <div class="hero-discover">Discover</div>
+            <h1 class="hero-title">Paradise Islands Just a Click Away</h1>
+            <p class="hero-subtitle">Explore breathtaking islands, crystal clear waters and unforgettable experiences.</p>
+            <a href="islands.html" class="btn btn-primary" style="padding: 0.8rem 2rem; font-size: 0.95rem;">
+                Explore Islands <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Floating Booking Bar -->
+    <div class="booking-bar">
+        <!-- Destination -->
+        <div class="booking-col">
+            <i class="fa-solid fa-location-dot"></i>
+            <div class="booking-info">
+                <span class="booking-label">Destination</span>
+                <select id="booking-destination-select" class="booking-select" onchange="syncDestinationInput()">
+                    <option value="">All Islands</option>
+                    <!-- Populated dynamically -->
+                </select>
+            </div>
+        </div>
+
+        <!-- Check In -->
+        <div class="booking-col">
+            <i class="fa-regular fa-calendar"></i>
+            <div class="booking-info">
+                <span class="booking-label">Check In</span>
+                <input type="date" id="booking-check-in" class="booking-input" min="2026-07-20" value="2026-07-20">
+            </div>
+        </div>
+
+        <!-- Check Out -->
+        <div class="booking-col">
+            <i class="fa-regular fa-calendar-check"></i>
+            <div class="booking-info">
+                <span class="booking-label">Check Out</span>
+                <input type="date" id="booking-check-out" class="booking-input" min="2026-07-21" value="2026-07-25">
+            </div>
+        </div>
+
+        <!-- Guests -->
+        <div class="booking-col">
+            <i class="fa-solid fa-user-group"></i>
+            <div class="booking-info">
+                <span class="booking-label">Guests</span>
+                <select id="booking-guests" class="booking-select">
+                    <option value="1">1 Guest</option>
+                    <option value="2" selected>2 Guests</option>
+                    <option value="3">3 Guests</option>
+                    <option value="4">4 Guests</option>
+                    <option value="5">5+ Guests</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Search button -->
+        <button class="btn btn-primary booking-btn" onclick="executeSearch()">
+            Search Islands <i class="fa-solid fa-magnifying-glass" style="margin-left: 0.25rem;"></i>
+        </button>
+    </div>
+
+    <!-- Features Badge Bar -->
+    <section class="features-container">
+        <div class="feature-badge-card">
+            <i class="fa-solid fa-tags"></i>
+            <div>
+                <h4 class="feature-badge-title">Best Island Deals</h4>
+                <p class="feature-badge-desc">Exclusive deals and amazing offers</p>
+            </div>
+        </div>
+        <div class="feature-badge-card">
+            <i class="fa-solid fa-shield-halved"></i>
+            <div>
+                <h4 class="feature-badge-title">Safe & Secure</h4>
+                <p class="feature-badge-desc">Secure booking and 24/7 support</p>
+            </div>
+        </div>
+        <div class="feature-badge-card">
+            <i class="fa-solid fa-heart"></i>
+            <div>
+                <h4 class="feature-badge-title">Handpicked Islands</h4>
+                <p class="feature-badge-desc">Curated islands for the perfect getaway</p>
+            </div>
+        </div>
+        <div class="feature-badge-card">
+            <i class="fa-solid fa-headset"></i>
+            <div>
+                <h4 class="feature-badge-title">Customer Support</h4>
+                <p class="feature-badge-desc">We are here to help you anytime</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats / Numbers Section -->
+    <section class="stats-section" id="stats">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" data-target="50" data-suffix="K+">0</div>
+                <div class="stat-label">Happy Customers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-target="250" data-suffix="+">0</div>
+                <div class="stat-label">Luxury Islands</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-target="98" data-suffix="%">0</div>
+                <div class="stat-label">Positive Reviews</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-target="10" data-suffix="+">0</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <!-- Featured Islands Section -->
+        <div class="section-header">
+            <div>
+                <h2>Featured Islands</h2>
+                <p>Curated tropical destinations matching your ideal escape</p>
+            </div>
+            <a href="islands.html" class="btn btn-secondary">View All <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="grid-islands" id="featured-islands-container">
+            <!-- Dynamic island cards loaded here -->
+            <div class="loading-placeholder" style="text-align: center; grid-column: 1/-1; padding: 3rem; color: var(--text-muted);">
+                <i class="fa-solid fa-circle-notch fa-spin fa-2x"></i>
+                <p style="margin-top: 1rem;">Unlocking tropical destinations...</p>
+            </div>
+        </div>
+
+        <!-- Popular Packages Section -->
+        <div class="section-header" style="margin-top: 4rem;">
+            <div>
+                <h2>Popular Vacation Packages</h2>
+                <p>Complete luxury itineraries configured for standard travel</p>
+            </div>
+            <a href="packages.html" class="btn btn-secondary">View All <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="grid-packages" id="popular-packages-container">
+            <!-- Dynamic package cards loaded here -->
+            <div class="loading-placeholder" style="text-align: center; grid-column: 1/-1; padding: 3rem; color: var(--text-muted);">
+                <i class="fa-solid fa-circle-notch fa-spin fa-2x"></i>
+                <p style="margin-top: 1rem;">Retrieving packages...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- People Reviews Section -->
+    <section class="reviews-section" id="reviews">
+        <div class="section-header" style="margin-top: 2rem; margin-bottom: 2rem;">
+            <div>
+                <h2>Customer Testimonials</h2>
+                <p>Read experiences shared by travelers who booked their paradise with us</p>
+            </div>
+        </div>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-rating">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <p class="review-text">"Booking our Maldives honeymoon through IslandEscape was incredibly smooth. The price matched the service details perfectly. Highly recommend their package customizer!"</p>
+                <div class="review-author">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&fit=crop" class="review-author-avatar" alt="Reviewer">
+                    <div class="review-author-info">
+                        <h4>Rahul Sharma</h4>
+                        <p>Traveler from India</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-rating">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <p class="review-text">"The overwater bungalows in Bora Bora were breathtaking. Booking was finalized in seconds and the payment invoice automatically reflected on my traveler workspace."</p>
+                <div class="review-author">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&fit=crop" class="review-author-avatar" alt="Reviewer">
+                    <div class="review-author-info">
+                        <h4>Sarah Jenkins</h4>
+                        <p>Traveler from USA</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review-card">
+                <div class="review-rating">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                </div>
+                <p class="review-text">"Excellent user dashboard support. We encountered a minor question about airport pickups in Bali, and customer support cleared it up instantly. Incredible design!"</p>
+                <div class="review-author">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&fit=crop" class="review-author-avatar" alt="Reviewer">
+                    <div class="review-author-info">
+                        <h4>Akira Tanaka</h4>
+                        <p>Traveler from Japan</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Get In Touch</h3>
+                <p>Have questions about travel documentation, customizable resort tariffs, or group discounts? Drop us a line and our island experts will reach out within 24 hours.</p>
+                <div class="contact-details">
+                    <div class="contact-detail-item">
+                        <div class="contact-detail-icon"><i class="fa-solid fa-phone"></i></div>
+                        <div class="contact-detail-text">
+                            <h5>Phone Support</h5>
+                            <p>+91 98765 43210</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail-item">
+                        <div class="contact-detail-icon"><i class="fa-solid fa-envelope"></i></div>
+                        <div class="contact-detail-text">
+                            <h5>Email Address</h5>
+                            <p>support@islandescape.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form-container">
+                <form class="contact-form" onsubmit="event.preventDefault(); showToast('Message sent! Our support team will call you.', 'success'); this.reset();">
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-input" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-input" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Message</label>
+                        <textarea class="form-input" rows="4" placeholder="How can we help you plan your getaway?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="padding: 0.8rem; font-size: 0.95rem; width: 100%;">
+                        Submit Inquiry
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Island Booking System (IBS) Inc. Developed for premium tourism packages. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadFeaturedData();
+        });
+
+        async function loadFeaturedData() {
+            try {
+                // Fetch Islands and Packages from local API
+                const islands = await apiFetch('/islands/');
+                const packages = await apiFetch('/packages/');
+                
+                populateDestinationDropdown(islands);
+                renderFeaturedIslands(islands.slice(0, 3));
+                renderPopularPackages(packages.slice(0, 3));
+            } catch (err) {
+                console.error("Failed to load featured data:", err);
+                setupFallbackData();
+            }
+        }
+
+        function populateDestinationDropdown(islands) {
+            const select = document.getElementById('booking-destination-select');
+            islands.forEach(island => {
+                const opt = document.createElement('option');
+                opt.value = island.island_name;
+                opt.textContent = island.island_name;
+                select.appendChild(opt);
+            });
+        }
+
+        function renderFeaturedIslands(islands) {
+            const container = document.getElementById('featured-islands-container');
+            if (islands.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column:1/-1; text-align:center; padding: 2rem; color: var(--text-muted);">
+                        <p>No islands added yet. Log in as Admin to seed database!</p>
+                    </div>`;
+                return;
+            }
+            
+            container.innerHTML = islands.map(island => `
+                <div class="island-card">
+                    <div class="card-img-wrapper">
+                        <img src="${island.image_url.startsWith('http') ? island.image_url : 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&auto=format&fit=crop'}" alt="${island.island_name}" class="card-img" onerror="this.src='https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&auto=format&fit=crop'">
+                        <span class="badge-overlay">${island.climate}</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">${island.island_name}</h3>
+                        <div class="card-meta">
+                            <span class="meta-item"><i class="fa-solid fa-earth-americas"></i> ${island.country}</span>
+                            <span class="meta-item"><i class="fa-solid fa-calendar-days"></i> ${island.best_season}</span>
+                        </div>
+                        <p class="card-desc">${island.description}</p>
+                        <div class="card-footer">
+                            <a href="packages.html?island=${encodeURIComponent(island.island_name)}" class="btn btn-outline" style="width: 100%;">Explore Packages</a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderPopularPackages(packages) {
+            const container = document.getElementById('popular-packages-container');
+            if (packages.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column:1/-1; text-align:center; padding: 2rem; color: var(--text-muted);">
+                        <p>No travel packages configured yet.</p>
+                    </div>`;
+                return;
+            }
+
+            container.innerHTML = packages.map(pkg => `
+                <div class="island-card">
+                    <div class="card-img-wrapper">
+                        <img src="${getPackageImage(pkg.island_name)}" alt="${pkg.package_name}" class="card-img" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&auto=format&fit=crop';">
+                        <span class="badge-overlay">${pkg.duration}</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">${pkg.package_name}</h3>
+                        <div class="card-meta">
+                            <span class="meta-item"><i class="fa-solid fa-hotel"></i> ${pkg.resort_name}</span>
+                            <span class="meta-item"><i class="fa-solid fa-location-dot"></i> ${pkg.island_name}</span>
+                        </div>
+                        <p class="card-desc">Services: ${pkg.included_services}</p>
+                        <div class="card-footer">
+                            <div class="price-tag">₹${pkg.price.toLocaleString()}<span>/pkg</span></div>
+                            <a href="booking.html?package_id=${pkg.package_id}" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function setupFallbackData() {
+            populateDestinationDropdown([
+                { island_name: "Maldives" },
+                { island_name: "Bora Bora" },
+                { island_name: "Santorini" }
+            ]);
+
+            renderFeaturedIslands([
+                {
+                    island_name: "Maldives",
+                    country: "Maldives",
+                    description: "A tropical nation in the Indian Ocean composed of 26 ring-shaped atolls, which are made up of more than 1,000 coral islands.",
+                    climate: "Tropical",
+                    best_season: "November to April",
+                    image_url: "https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&auto=format&fit=crop"
+                },
+                {
+                    island_name: "Bora Bora",
+                    country: "French Polynesia",
+                    description: "Bora Bora is a small South Pacific island northwest of Tahiti in French Polynesia, surrounded by sand-fringed islets and a turquoise lagoon.",
+                    climate: "Tropical Marine",
+                    best_season: "May to October",
+                    image_url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&auto=format&fit=crop"
+                },
+                {
+                    island_name: "Santorini",
+                    country: "Greece",
+                    description: "Santorini is one of the Cyclades islands in the Aegean Sea. It was devastated by a volcanic eruption in the 16th century BC, shaping its rugged landscape.",
+                    climate: "Mediterranean",
+                    best_season: "April to October",
+                    image_url: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&auto=format&fit=crop"
+                }
+            ]);
+
+            renderPopularPackages([
+                {
+                    package_id: 301,
+                    island_name: "Maldives",
+                    resort_name: "Sunset Paradise Resort",
+                    package_name: "Luxury Honeymoon Package",
+                    duration: "5 Days / 4 Nights",
+                    price: 150000,
+                    included_services: "Accommodation, Breakfast, Airport Pickup, Island Tour"
+                }
+            ]);
+        }
+
+        // Animate numbers when scrolling
+        document.addEventListener('DOMContentLoaded', () => {
+            const statsSection = document.getElementById('stats');
+            const statNumbers = document.querySelectorAll('.stat-number');
+            
+            let animated = false;
+            
+            const animateCounter = () => {
+                statNumbers.forEach(num => {
+                    const target = parseInt(num.getAttribute('data-target'));
+                    const suffix = num.getAttribute('data-suffix') || '';
+                    let count = 0;
+                    const duration = 1500; // 1.5 seconds
+                    const increment = target / (duration / 16); // ~60fps
+                    
+                    const updateCount = () => {
+                        count += increment;
+                        if (count < target) {
+                            num.textContent = Math.floor(count) + suffix;
+                            requestAnimationFrame(updateCount);
+                        } else {
+                            num.textContent = target + suffix;
+                        }
+                    };
+                    updateCount();
+                });
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !animated) {
+                        animateCounter();
+                        animated = true;
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            if (statsSection) {
+                observer.observe(statsSection);
+            }
+        });
+
+        function executeSearch() {
+            const dest = document.getElementById('booking-destination-select').value;
+            window.location.href = `islands.html?search=${encodeURIComponent(dest)}`;
+        }
+    </script>
+</body>
+</html>

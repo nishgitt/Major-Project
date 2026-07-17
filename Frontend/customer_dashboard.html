@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard - Island Booking System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Premium Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <i class="fa-solid fa-umbrella-beach"></i>
+                    <span>ISLANDIA</span>
+                </div>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html">Home</a></li>
+                <li class="nav-item"><a href="islands.html">Islands</a></li>
+                <li class="nav-item"><a href="packages.html">Packages</a></li>
+            </ul>
+            <div class="auth-buttons" id="auth-nav-wrapper"></div>
+        </div>
+    </header>
+
+    <main>
+        <div class="section-header" style="margin-top: 1.5rem;">
+            <div>
+                <h2 id="dashboard-welcome">Traveler Workspace</h2>
+                <p>Track your upcoming vacations, review transaction invoices, and edit details</p>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Sidebar tabs -->
+            <div class="sidebar-menu">
+                <div class="sidebar-tab active" onclick="switchTab('tab-bookings', this)">
+                    <i class="fa-solid fa-map-location-dot"></i> My Bookings
+                </div>
+                <div class="sidebar-tab" onclick="switchTab('tab-payments', this)">
+                    <i class="fa-solid fa-receipt"></i> Payment History
+                </div>
+                <div class="sidebar-tab" onclick="switchTab('tab-profile', this)">
+                    <i class="fa-solid fa-user-gear"></i> Edit Profile
+                </div>
+            </div>
+
+            <!-- Content Panel -->
+            <div class="dashboard-content">
+                
+                <!-- Bookings section -->
+                <div id="tab-bookings" class="dashboard-section active">
+                    <h3 style="margin-bottom: 1rem;"><i class="fa-solid fa-plane"></i> Upcoming & Past Bookings</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Booking ID</th>
+                                    <th>Island</th>
+                                    <th>Package</th>
+                                    <th>Travel Date</th>
+                                    <th>Travelers</th>
+                                    <th>Total Price</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bookings-tbody">
+                                <tr>
+                                    <td colspan="8" style="text-align: center; color: var(--text-secondary);">Querying vacation ledger...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Payments section -->
+                <div id="tab-payments" class="dashboard-section">
+                    <h3 style="margin-bottom: 1rem;"><i class="fa-solid fa-receipt"></i> Payment Transactions</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Payment ID</th>
+                                    <th>Booking ID</th>
+                                    <th>Amount Paid</th>
+                                    <th>Method</th>
+                                    <th>Status</th>
+                                    <th>Transaction ID</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="payments-tbody">
+                                <tr>
+                                    <td colspan="7" style="text-align: center; color: var(--text-secondary);">Retrieving payments invoice history...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Profile edit section -->
+                <div id="tab-profile" class="dashboard-section">
+                    <h3 style="margin-bottom: 1rem;"><i class="fa-solid fa-user-gear"></i> Modify Profile Information</h3>
+                    <form id="profile-edit-form" onsubmit="saveProfile(event)" style="max-width: 450px;">
+                        <div class="form-group">
+                            <label class="form-label" for="prof-name">Full Name</label>
+                            <input type="text" id="prof-name" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="prof-email">Email Address</label>
+                            <input type="email" id="prof-email" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="prof-phone">Phone Number</label>
+                            <input type="tel" id="prof-phone" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="prof-nationality">Nationality</label>
+                            <input type="text" id="prof-nationality" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="prof-password">Change Password</label>
+                            <input type="password" id="prof-password" class="form-input" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="margin-top: 1rem; width: 100%;">Save Changes</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Island Booking System (IBS) Inc. Developed for premium tourism packages. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let user = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            user = getCurrentUser();
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            document.getElementById('dashboard-welcome').textContent = `Welcome, ${user.full_name}`;
+            
+            // Populate profile form fields
+            document.getElementById('prof-name').value = user.full_name;
+            document.getElementById('prof-email').value = user.email;
+            document.getElementById('prof-phone').value = user.phone;
+            document.getElementById('prof-nationality').value = user.nationality;
+            document.getElementById('prof-password').value = user.password;
+
+            loadCustomerLedger();
+        });
+
+        function switchTab(tabId, el) {
+            // Hide all dashboard sections
+            document.querySelectorAll('.dashboard-section').forEach(sec => sec.classList.remove('active'));
+            // Remove active style from tabs
+            document.querySelectorAll('.sidebar-tab').forEach(tab => tab.classList.remove('active'));
+            
+            // Show target section and highlight tab
+            document.getElementById(tabId).classList.add('active');
+            el.classList.add('active');
+        }
+
+        async function loadCustomerLedger() {
+            try {
+                // Fetch user specific bookings & payments
+                const allBookings = await apiFetch('/bookings/');
+                const allPayments = await apiFetch('/payments/');
+
+                // Filter by name
+                const myBookings = allBookings.filter(b => b.customer_name === user.full_name);
+                const myPayments = allPayments.filter(p => p.customer_name === user.full_name);
+
+                renderBookings(myBookings);
+                renderPayments(myPayments);
+            } catch (err) {
+                console.error("Failed to query dashboard ledger items:", err);
+                renderBookings([]);
+                renderPayments([]);
+            }
+        }
+
+        function renderBookings(bookings) {
+            const tbody = document.getElementById('bookings-tbody');
+            if (bookings.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--text-secondary);">No bookings found. Start exploring islands!</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = bookings.map(b => `
+                <tr>
+                    <td><b>#${b.booking_id}</b></td>
+                    <td>${b.island_name}</td>
+                    <td>${b.package_name}</td>
+                    <td>${b.travel_date}</td>
+                    <td>${b.number_of_people}</td>
+                    <td>₹${b.total_amount.toLocaleString()}</td>
+                    <td>
+                        <span class="status-badge status-${b.booking_status.toLowerCase()}">
+                            ${b.booking_status}
+                        </span>
+                    </td>
+                    <td>
+                        ${b.booking_status === 'Pending' ? `
+                            <a href="payment.html?booking_id=${b.booking_id}" class="btn btn-outline" style="padding:0.3rem 0.6rem; font-size:0.8rem;">Pay Due</a>
+                        ` : `
+                            <span style="font-size:0.8rem; color:var(--text-secondary);">Confirmed</span>
+                        `}
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderPayments(payments) {
+            const tbody = document.getElementById('payments-tbody');
+            if (payments.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-secondary);">No payment transactions logged.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = payments.map(p => `
+                <tr>
+                    <td>#${p.payment_id}</td>
+                    <td>#${p.booking_id}</td>
+                    <td>₹${p.amount.toLocaleString()}</td>
+                    <td>${p.payment_method}</td>
+                    <td>
+                        <span class="status-badge status-${p.payment_status.toLowerCase()}">
+                            ${p.payment_status}
+                        </span>
+                    </td>
+                    <td><code style="font-size:0.8rem; color:var(--primary);">${p.transaction_id}</code></td>
+                    <td>${p.payment_date}</td>
+                </tr>
+            `).join('');
+        }
+
+        async function saveProfile(e) {
+            e.preventDefault();
+
+            const full_name = document.getElementById('prof-name').value;
+            const email = document.getElementById('prof-email').value;
+            const phone = document.getElementById('prof-phone').value;
+            const nationality = document.getElementById('prof-nationality').value;
+            const password = document.getElementById('prof-password').value;
+
+            try {
+                // Call /customers/update/<id>/
+                await apiFetch(`/customers/update/${user.customer_id}/`, {
+                    method: 'PUT',
+                    body: { full_name, email, phone, nationality, password }
+                });
+
+                // Update session
+                const updatedUser = { ...user, full_name, email, phone, nationality, password };
+                setCurrentUser(updatedUser);
+                user = updatedUser;
+                document.getElementById('dashboard-welcome').textContent = `Welcome, ${user.full_name}`;
+                
+                showToast("Profile information updated!", "success");
+            } catch (err) {
+                showToast("Failed to update profile.", "error");
+            }
+        }
+    </script>
+</body>
+</html>

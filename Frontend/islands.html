@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Islands - Island Booking System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Premium Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <i class="fa-solid fa-umbrella-beach"></i>
+                    <span>ISLANDIA</span>
+                </div>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html">Home</a></li>
+                <li class="nav-item"><a href="islands.html" class="active">Islands</a></li>
+                <li class="nav-item"><a href="packages.html">Packages</a></li>
+            </ul>
+            <div class="auth-buttons" id="auth-nav-wrapper"></div>
+        </div>
+    </header>
+
+    <main>
+        <div class="section-header">
+            <div>
+                <h2>Explore Island Destinations</h2>
+                <p>Find the perfect climate and geography for your next holiday</p>
+            </div>
+            <!-- Sub-search inside listing -->
+            <div style="max-width: 320px; width: 100%;">
+                <input type="text" id="inner-search" class="form-input" placeholder="Filter islands..." oninput="filterIslands()">
+            </div>
+        </div>
+
+        <div class="grid-islands" id="islands-list-container">
+            <!-- Dynamically populated -->
+            <div style="grid-column: 1/-1; text-align: center; padding: 3rem;">
+                <i class="fa-solid fa-circle-notch fa-spin fa-2x"></i>
+                <p style="margin-top: 1rem;">Loading islands...</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Island Booking System (IBS) Inc. Developed for premium tourism packages. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let allIslands = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchQuery = getQueryParam('search');
+            if (searchQuery) {
+                document.getElementById('inner-search').value = searchQuery;
+            }
+            loadIslands();
+        });
+
+        async function loadIslands() {
+            try {
+                allIslands = await apiFetch('/islands/');
+                filterIslands();
+            } catch (err) {
+                console.error("Failed to load islands:", err);
+                // Fallback mock islands
+                allIslands = [
+                    {
+                        island_id: 201,
+                        island_name: "Maldives",
+                        country: "Maldives",
+                        description: "Beautiful tropical island destination.",
+                        climate: "Tropical",
+                        best_season: "November to April",
+                        image_url: "https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&auto=format&fit=crop"
+                    },
+                    {
+                        island_id: 202,
+                        island_name: "Bali",
+                        country: "Indonesia",
+                        description: "Famed for its forested volcanic mountains, iconic rice paddies, beaches, and coral reefs.",
+                        climate: "Warm Tropical",
+                        best_season: "April to October",
+                        image_url: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&auto=format&fit=crop"
+                    }
+                ];
+                filterIslands();
+            }
+        }
+
+        function filterIslands() {
+            const query = document.getElementById('inner-search').value.toLowerCase();
+            const container = document.getElementById('islands-list-container');
+            
+            const filtered = allIslands.filter(island => {
+                return island.island_name.toLowerCase().includes(query) ||
+                       island.country.toLowerCase().includes(query) ||
+                       island.climate.toLowerCase().includes(query);
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 4rem; color: var(--text-secondary);">
+                        <i class="fa-regular fa-face-frown fa-3x" style="margin-bottom: 1rem;"></i>
+                        <p>No island destinations match your search term.</p>
+                    </div>`;
+                return;
+            }
+
+            container.innerHTML = filtered.map(island => `
+                <div class="island-card">
+                    <div class="card-img-wrapper">
+                        <img src="${island.image_url.startsWith('http') ? island.image_url : 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&auto=format&fit=crop'}" alt="${island.island_name}" class="card-img" onerror="this.src='https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&auto=format&fit=crop'">
+                        <span class="badge-overlay">${island.climate}</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">${island.island_name}</h3>
+                        <div class="card-meta">
+                            <span class="meta-item"><i class="fa-solid fa-earth-americas"></i> ${island.country}</span>
+                            <span class="meta-item"><i class="fa-solid fa-calendar-days"></i> ${island.best_season}</span>
+                        </div>
+                        <p class="card-desc">${island.description}</p>
+                        <div class="card-footer">
+                            <a href="packages.html?island=${encodeURIComponent(island.island_name)}" class="btn btn-primary" style="width: 100%;">Explore Packages</a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html>

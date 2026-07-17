@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Island Booking System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Premium Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <i class="fa-solid fa-umbrella-beach"></i>
+                    <span>ISLANDIA</span>
+                </div>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html">Home</a></li>
+                <li class="nav-item"><a href="islands.html">Islands</a></li>
+                <li class="nav-item"><a href="packages.html">Packages</a></li>
+            </ul>
+            <div class="auth-buttons" id="auth-nav-wrapper"></div>
+        </div>
+    </header>
+
+    <main>
+        <div class="section-header" style="margin-top: 1.5rem;">
+            <div>
+                <h2>Control Panel & Management Console</h2>
+                <p>Add, update, or remove islands, package tariffs, customer databases, bookings, and payments</p>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Sidebar tabs -->
+            <div class="sidebar-menu">
+                <div class="sidebar-tab active" onclick="switchTab('tab-islands', this)">
+                    <i class="fa-solid fa-earth-asia"></i> Manage Islands
+                </div>
+                <div class="sidebar-tab" onclick="switchTab('tab-packages', this)">
+                    <i class="fa-solid fa-box-open"></i> Manage Packages
+                </div>
+                <div class="sidebar-tab" onclick="switchTab('tab-bookings', this)">
+                    <i class="fa-solid fa-receipt"></i> Manage Bookings
+                </div>
+                <div class="sidebar-tab" onclick="switchTab('tab-payments', this)">
+                    <i class="fa-solid fa-money-check-dollar"></i> Manage Payments
+                </div>
+                <div class="sidebar-tab" onclick="switchTab('tab-customers', this)">
+                    <i class="fa-solid fa-users-gear"></i> Manage Customers
+                </div>
+            </div>
+
+            <!-- Content Panel -->
+            <div class="dashboard-content">
+                
+                <!-- ISLANDS TAB -->
+                <div id="tab-islands" class="dashboard-section active">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3>Islands Catalog</h3>
+                        <button class="btn btn-primary btn-sm" onclick="openIslandModal()"><i class="fa-solid fa-plus"></i> Add Island</button>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Country</th>
+                                    <th>Climate</th>
+                                    <th>Best Season</th>
+                                    <th>Image</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-islands-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- PACKAGES TAB -->
+                <div id="tab-packages" class="dashboard-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3>Vacation Tariff Packages</h3>
+                        <button class="btn btn-primary btn-sm" onclick="openPackageModal()"><i class="fa-solid fa-plus"></i> Add Package</button>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Package Name</th>
+                                    <th>Island</th>
+                                    <th>Resort</th>
+                                    <th>Duration</th>
+                                    <th>Price</th>
+                                    <th>Services</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-packages-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- BOOKINGS TAB -->
+                <div id="tab-bookings" class="dashboard-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3>All Customer Bookings</h3>
+                        <button class="btn btn-primary btn-sm" onclick="openBookingModal()"><i class="fa-solid fa-plus"></i> Add Booking</button>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Customer Name</th>
+                                    <th>Island</th>
+                                    <th>Package</th>
+                                    <th>Travel Date</th>
+                                    <th>People</th>
+                                    <th>Total Amount</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-bookings-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- PAYMENTS TAB -->
+                <div id="tab-payments" class="dashboard-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3>Payments History</h3>
+                        <button class="btn btn-primary btn-sm" onclick="openPaymentModal()"><i class="fa-solid fa-plus"></i> Add Payment</button>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Booking ID</th>
+                                    <th>Customer</th>
+                                    <th>Amount</th>
+                                    <th>Method</th>
+                                    <th>Status</th>
+                                    <th>Transaction ID</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-payments-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- CUSTOMERS TAB -->
+                <div id="tab-customers" class="dashboard-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3>Customer Account Profiles</h3>
+                        <button class="btn btn-primary btn-sm" onclick="openCustomerModal()"><i class="fa-solid fa-plus"></i> Add Customer</button>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Full Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Nationality</th>
+                                    <th>Password</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-customers-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- ================= MODALS FOR CRUD OPERATIONS ================= -->
+
+    <!-- ISLAND MODAL -->
+    <div class="modal" id="island-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="island-modal-title">Configure Island</h3>
+                <button class="modal-close" onclick="closeModal('island-modal')">&times;</button>
+            </div>
+            <form id="island-form" onsubmit="saveIsland(event)">
+                <input type="hidden" id="island-form-id">
+                <div class="form-group">
+                    <label class="form-label">Island ID (Number, Optional)</label>
+                    <input type="number" id="form-island-id" class="form-input" placeholder="e.g. 201">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Island Name</label>
+                    <input type="text" id="form-island-name" class="form-input" required placeholder="Maldives">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Country</label>
+                    <input type="text" id="form-island-country" class="form-input" required placeholder="Maldives">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Climate</label>
+                    <input type="text" id="form-island-climate" class="form-input" placeholder="Tropical">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Best Season</label>
+                    <input type="text" id="form-island-season" class="form-input" placeholder="November to April">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Image URL / Filename</label>
+                    <input type="text" id="form-island-image" class="form-input" placeholder="maldives.jpg">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea id="form-island-desc" class="form-input" rows="3" placeholder="Beautiful tropical island destination."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Save Island</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- PACKAGE MODAL -->
+    <div class="modal" id="package-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="package-modal-title">Configure Package</h3>
+                <button class="modal-close" onclick="closeModal('package-modal')">&times;</button>
+            </div>
+            <form id="package-form" onsubmit="savePackage(event)">
+                <input type="hidden" id="package-form-id">
+                <div class="form-group">
+                    <label class="form-label">Package ID (Number, Optional)</label>
+                    <input type="number" id="form-package-id" class="form-input" placeholder="e.g. 301">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Island Name</label>
+                    <input type="text" id="form-package-island" class="form-input" required placeholder="Maldives">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Resort Name</label>
+                    <input type="text" id="form-package-resort" class="form-input" required placeholder="Sunset Paradise Resort">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Package Name</label>
+                    <input type="text" id="form-package-name" class="form-input" required placeholder="Luxury Honeymoon Package">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Duration</label>
+                    <input type="text" id="form-package-duration" class="form-input" required placeholder="5 Days / 4 Nights">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Price (INR)</label>
+                    <input type="number" id="form-package-price" class="form-input" required placeholder="150000">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Included Services (Comma separated)</label>
+                    <input type="text" id="form-package-services" class="form-input" placeholder="Accommodation, Breakfast, Airport Pickup, Island Tour">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Save Package</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- BOOKING MODAL -->
+    <div class="modal" id="booking-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="booking-modal-title">Configure Booking</h3>
+                <button class="modal-close" onclick="closeModal('booking-modal')">&times;</button>
+            </div>
+            <form id="booking-form" onsubmit="saveBooking(event)">
+                <input type="hidden" id="booking-form-id">
+                <div class="form-group">
+                    <label class="form-label">Booking ID (Number, Optional)</label>
+                    <input type="number" id="form-booking-id" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Customer Name</label>
+                    <input type="text" id="form-booking-customer" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Island Name</label>
+                    <input type="text" id="form-booking-island" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Package Name</label>
+                    <input type="text" id="form-booking-package" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Travel Date</label>
+                    <input type="date" id="form-booking-date" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Number of People</label>
+                    <input type="number" id="form-booking-people" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Total Amount (INR)</label>
+                    <input type="number" id="form-booking-amount" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Booking Status</label>
+                    <select id="form-booking-status" class="form-input" style="background:#0f172a;" required>
+                        <option value="Confirmed">Confirmed</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Save Booking</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- PAYMENT MODAL -->
+    <div class="modal" id="payment-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="payment-modal-title">Configure Payment</h3>
+                <button class="modal-close" onclick="closeModal('payment-modal')">&times;</button>
+            </div>
+            <form id="payment-form" onsubmit="savePayment(event)">
+                <input type="hidden" id="payment-form-id">
+                <div class="form-group">
+                    <label class="form-label">Payment ID (Number, Optional)</label>
+                    <input type="number" id="form-payment-id" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Booking ID</label>
+                    <input type="number" id="form-payment-booking" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Customer Name</label>
+                    <input type="text" id="form-payment-customer" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Amount Paid</label>
+                    <input type="number" id="form-payment-amount" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Payment Method</label>
+                    <select id="form-payment-method" class="form-input" style="background:#0f172a;" required>
+                        <option value="UPI">UPI</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="Debit Card">Debit Card</option>
+                        <option value="Net Banking">Net Banking</option>
+                        <option value="Wallet">Wallet</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Payment Status</label>
+                    <select id="form-payment-status" class="form-input" style="background:#0f172a;" required>
+                        <option value="Success">Success</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Failed">Failed</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Transaction ID</label>
+                    <input type="text" id="form-payment-txn" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Payment Date</label>
+                    <input type="date" id="form-payment-date" class="form-input" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Save Payment</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- CUSTOMER MODAL -->
+    <div class="modal" id="customer-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="customer-modal-title">Configure Customer</h3>
+                <button class="modal-close" onclick="closeModal('customer-modal')">&times;</button>
+            </div>
+            <form id="customer-form" onsubmit="saveCustomer(event)">
+                <input type="hidden" id="customer-form-id">
+                <div class="form-group">
+                    <label class="form-label">Customer ID (Number, Optional)</label>
+                    <input type="number" id="form-customer-id" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" id="form-customer-name" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" id="form-customer-email" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone</label>
+                    <input type="tel" id="form-customer-phone" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nationality</label>
+                    <input type="text" id="form-customer-nationality" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" id="form-customer-pass" class="form-input" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Save Customer</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Island Booking System (IBS) Inc. Developed for premium tourism packages. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!isAdminLoggedIn()) {
+                window.location.href = 'login.html';
+                return;
+            }
+            loadAllData();
+        });
+
+        function switchTab(tabId, el) {
+            document.querySelectorAll('.dashboard-section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.sidebar-tab').forEach(tab => tab.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            el.classList.add('active');
+        }
+
+        // Global Modal helpers
+        function openModal(id) { document.getElementById(id).classList.add('show'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+
+        async function loadAllData() {
+            try {
+                const islands = await apiFetch('/islands/');
+                const packages = await apiFetch('/packages/');
+                const bookings = await apiFetch('/bookings/');
+                const payments = await apiFetch('/payments/');
+                const customers = await apiFetch('/customers/');
+
+                renderIslands(islands);
+                renderPackages(packages);
+                renderBookings(bookings);
+                renderPayments(payments);
+                renderCustomers(customers);
+            } catch (err) {
+                console.error("Failed to load admin tables:", err);
+            }
+        }
+
+        // ISLANDS CRUD
+        function renderIslands(data) {
+            const tbody = document.getElementById('admin-islands-tbody');
+            tbody.innerHTML = data.map(item => `
+                <tr>
+                    <td>${item.island_id}</td>
+                    <td><b>${item.island_name}</b></td>
+                    <td>${item.country}</td>
+                    <td>${item.climate}</td>
+                    <td>${item.best_season}</td>
+                    <td><code>${item.image_url}</code></td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" onclick="editIsland(${JSON.stringify(item).replace(/"/g, '&quot;')})" style="padding:0.2rem 0.5rem; font-size:0.8rem;"><i class="fa-solid fa-edit"></i></button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteItem('/islands/delete/${item.island_id}/')" style="padding:0.2rem 0.5rem; font-size:0.8rem;"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function openIslandModal() {
+            document.getElementById('island-form').reset();
+            document.getElementById('island-form-id').value = '';
+            document.getElementById('island-modal-title').textContent = 'Add New Island';
+            document.getElementById('form-island-id').disabled = false;
+            openModal('island-modal');
+        }
+
+        function editIsland(item) {
+            document.getElementById('island-form-id').value = item.island_id;
+            document.getElementById('form-island-id').value = item.island_id;
+            document.getElementById('form-island-id').disabled = true;
+            document.getElementById('form-island-name').value = item.island_name;
+            document.getElementById('form-island-country').value = item.country;
+            document.getElementById('form-island-climate').value = item.climate;
+            document.getElementById('form-island-season').value = item.best_season;
+            document.getElementById('form-island-image').value = item.image_url;
+            document.getElementById('form-island-desc').value = item.description;
+            document.getElementById('island-modal-title').textContent = 'Edit Island Details';
+            openModal('island-modal');
+        }
+
+        async function saveIsland(e) {
+            e.preventDefault();
+            const editId = document.getElementById('island-form-id').value;
+            const island_id = document.getElementById('form-island-id').value;
+            const island_name = document.getElementById('form-island-name').value;
+            const country = document.getElementById('form-island-country').value;
+            const climate = document.getElementById('form-island-climate').value;
+            const best_season = document.getElementById('form-island-season').value;
+            const image_url = document.getElementById('form-island-image').value;
+            const description = document.getElementById('form-island-desc').value;
+
+            const payload = { island_name, country, climate, best_season, image_url, description };
+            
+            try {
+                if (editId) {
+                    await apiFetch(`/islands/update/${editId}/`, { method: 'PUT', body: payload });
+                    showToast("Island updated successfully!");
+                } else {
+                    if (island_id) payload.island_id = parseInt(island_id);
+                    await apiFetch('/islands/add/', { method: 'POST', body: payload });
+                    showToast("Island added successfully!");
+                }
+                closeModal('island-modal');
+                loadAllData();
+            } catch (err) {
+                showToast(err.message || "Failed to save island.", "error");
+            }
+        }
+
+        // PACKAGES CRUD
+        function renderPackages(data) {
+            const tbody = document.getElementById('admin-packages-tbody');
+            tbody.innerHTML = data.map(item => `
+                <tr>
+                    <td>${item.package_id}</td>
+                    <td><b>${item.package_name}</b></td>
+                    <td>${item.island_name}</td>
+                    <td>${item.resort_name}</td>
+                    <td>${item.duration}</td>
+                    <td>₹${item.price.toLocaleString()}</td>
+                    <td><span style="font-size:0.75rem; color:var(--text-secondary);">${item.included_services}</span></td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" onclick="editPackage(${JSON.stringify(item).replace(/"/g, '&quot;')})" style="padding:0.2rem 0.5rem; font-size:0.8rem;"><i class="fa-solid fa-edit"></i></button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteItem('/packages/delete/${item.package_id}/')" style="padding:0.2rem 0.5rem; font-size:0.8rem;"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function openPackageModal() {
+            document.getElementById('package-form').reset();
+            document.getElementById('package-form-id').value = '';
+            document.getElementById('package-modal-title').textContent = 'Add Vacation Package';
+            document.getElementById('form-package-id').disabled = false;
+            openModal('package-modal');
+        }
+
+        function editPackage(item) {
+            document.getElementById('package-form-id').value = item.package_id;
+            document.getElementById('form-package-id').value = item.package_id;
+            document.getElementById('form-package-id').disabled = true;
+            document.getElementById('form-package-island').value = item.island_name;
+            document.getElementById('form-package-resort').value = item.resort_name;
+            document.getElementById('form-package-name').value = item.package_name;
+            document.getElementById('form-package-duration').value = item.duration;
+            document.getElementById('form-package-price').value = item.price;
+            document.getElementById('form-package-services').value = item.included_services;
+            document.getElementById('package-modal-title').textContent = 'Edit Package Tariff';
+            openModal('package-modal');
+        }
+
+        async function savePackage(e) {
+            e.preventDefault();
+            const editId = document.getElementById('package-form-id').value;
+            const package_id = document.getElementById('form-package-id').value;
+            const island_name = document.getElementById('form-package-island').value;
+            const resort_name = document.getElementById('form-package-resort').value;
+            const package_name = document.getElementById('form-package-name').value;
+            const duration = document.getElementById('form-package-duration').value;
+            const price = parseFloat(document.getElementById('form-package-price').value);
+            const included_services = document.getElementById('form-package-services').value;
+
+            const payload = { island_name, resort_name, package_name, duration, price, included_services };
+
+            try {
+                if (editId) {
+                    await apiFetch(`/packages/update/${editId}/`, { method: 'PUT', body: payload });
+                    showToast("Package updated successfully!");
+                } else {
+                    if (package_id) payload.package_id = parseInt(package_id);
+                    await apiFetch('/packages/add/', { method: 'POST', body: payload });
+                    showToast("Package added successfully!");
+                }
+                closeModal('package-modal');
+                loadAllData();
+            } catch (err) {
+                showToast("Failed to save package details.", "error");
+            }
+        }
+
+        // BOOKINGS CRUD
+        function renderBookings(data) {
+            const tbody = document.getElementById('admin-bookings-tbody');
+            tbody.innerHTML = data.map(item => `
+                <tr>
+                    <td>${item.booking_id}</td>
+                    <td>${item.customer_name}</td>
+                    <td>${item.island_name}</td>
+                    <td>${item.package_name}</td>
+                    <td>${item.travel_date}</td>
+                    <td>${item.number_of_people}</td>
+                    <td>₹${item.total_amount.toLocaleString()}</td>
+                    <td><span class="status-badge status-${item.booking_status.toLowerCase()}">${item.booking_status}</span></td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" onclick="editBooking(${JSON.stringify(item).replace(/"/g, '&quot;')})" style="padding:0.2rem 0.5rem; font-size:0.8rem;"><i class="fa-solid fa-edit"></i></button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteItem('/bookings/delete/${item.booking_id}/')" style="padding:0.2rem 0.5rem; font-size:0.8rem;"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function openBookingModal() {
+            document.getElementById('booking-form').reset();
+            document.getElementById('booking-form-id').value = '';
+            document.getElementById('booking-modal-title').textContent = 'Add Booking Entry';
+            document.getElementById('form-booking-id').disabled = false;
+            openModal('booking-modal');
+        }
+
+        function editBooking(item) {
+            document.getElementById('booking-form-id').value = item.booking_id;
+            document.getElementById('form-booking-id').value = item.booking_id;
+            document.getElementById('form-booking-id').disabled = true;
+            document.getElementById('form-booking-customer').value = item.customer_name;
+            document.getElementById('form-booking-island').value = item.island_name;
+            document.getElementById('form-booking-package').value = item.package_name;
+            document.getElementById('form-booking-date').value = item.travel_date;
+            document.getElementById('form-booking-people').value = item.number_of_people;
+            document.getElementById('form-booking-amount').value = item.total_amount;
+            document.getElementById('form-booking-status').value = item.booking_status;
+            document.getElementById('booking-modal-title').textContent = 'Edit Booking State';
+            openModal('booking-modal');
+        }
+
+        async function saveBooking(e) {
+            e.preventDefault();
+            const editId = document.getElementById('booking-form-id').value;
+            const booking_id = document.getElementById('form-booking-id').value;
+            const customer_name = document.getElementById('form-booking-customer').value;
+            const island_name = document.getElementById('form-booking-island').value;
+            const package_name = document.getElementById('form-booking-package').value;
+            const travel_date = document.getElementById('form-booking-date').value;
+            const number_of_people = parseInt(document.getElementById('form-booking-people').value);
+            const total_amount = parseFloat(document.getElementById('form-booking-amount').value);
+            const booking_status = document.getElementById('form-booking-status').value;
+
+            const payload = { customer_name, island_name, package_name, travel_date, number_of_people, total_amount, booking_status };
+
+            try {
+                if (editId) {
+                    await apiFetch(`/bookings/update/${editId}/`, { method: 'PUT', body: payload });
+                    showToast("Booking updated!");
+                } else {
+                    if (booking_id) payload.booking_id = parseInt(booking_id);
+                    await apiFetch('/bookings/add/', { method: 'POST', body: payload });
+                    showToast("Booking added successfully!");
+                }
+                closeModal('booking-modal');
+                loadAllData();
+            } catch (err) {
+                showToast("Failed to save booking details.", "error");
+            }
+        }
+
+        // PAYMENTS CRUD
+        function renderPayments(data) {
+            const tbody = document.getElementById('admin-payments-tbody');
+            tbody.innerHTML = data.map(item => `
+                <tr>
+                    <td>${item.payment_id}</td>
+                    <td>#${item.booking_id}</td>
+                    <td>${item.customer_name}</td>
+                    <td>₹${item.amount.toLocaleString()}</td>
+                    <td>${item.payment_method}</td>
+                    <td><span class="status-badge status-${item.payment_status.toLowerCase()}">${item.payment_status}</span></td>
+                    <td><code>${item.transaction_id}</code></td>
+                    <td>${item.payment_date}</td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" onclick="editPayment(${JSON.stringify(item).replace(/"/g, '&quot;')})" style="padding:0.2rem 0.5rem; font-size:0.8rem;"><i class="fa-solid fa-edit"></i></button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteItem('/payments/delete/${item.payment_id}/')" style="padding:0.2rem 0.5rem; font-size:0.8rem;"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function openPaymentModal() {
+            document.getElementById('payment-form').reset();
+            document.getElementById('payment-form-id').value = '';
+            document.getElementById('payment-modal-title').textContent = 'Add Payment Transaction';
+            document.getElementById('form-payment-id').disabled = false;
+            openModal('payment-modal');
+        }
+
+        function editPayment(item) {
+            document.getElementById('payment-form-id').value = item.payment_id;
+            document.getElementById('form-payment-id').value = item.payment_id;
+            document.getElementById('form-payment-id').disabled = true;
+            document.getElementById('form-payment-booking').value = item.booking_id;
+            document.getElementById('form-payment-customer').value = item.customer_name;
+            document.getElementById('form-payment-amount').value = item.amount;
+            document.getElementById('form-payment-method').value = item.payment_method;
+            document.getElementById('form-payment-status').value = item.payment_status;
+            document.getElementById('form-payment-txn').value = item.transaction_id;
+            document.getElementById('form-payment-date').value = item.payment_date;
+            document.getElementById('payment-modal-title').textContent = 'Edit Payment Entry';
+            openModal('payment-modal');
+        }
+
+        async function savePayment(e) {
+            e.preventDefault();
+            const editId = document.getElementById('payment-form-id').value;
+            const payment_id = document.getElementById('form-payment-id').value;
+            const booking_id = parseInt(document.getElementById('form-payment-booking').value);
+            const customer_name = document.getElementById('form-payment-customer').value;
+            const amount = parseFloat(document.getElementById('form-payment-amount').value);
+            const payment_method = document.getElementById('form-payment-method').value;
+            const payment_status = document.getElementById('form-payment-status').value;
+            const transaction_id = document.getElementById('form-payment-txn').value;
+            const payment_date = document.getElementById('form-payment-date').value;
+
+            const payload = { booking_id, customer_name, amount, payment_method, payment_status, transaction_id, payment_date };
+
+            try {
+                if (editId) {
+                    await apiFetch(`/payments/update/${editId}/`, { method: 'PUT', body: payload });
+                    showToast("Payment modified successfully!");
+                } else {
+                    if (payment_id) payload.payment_id = parseInt(payment_id);
+                    await apiFetch('/payments/add/', { method: 'POST', body: payload });
+                    showToast("Payment logged!");
+                }
+                closeModal('payment-modal');
+                loadAllData();
+            } catch (err) {
+                showToast("Failed to save transaction details.", "error");
+            }
+        }
+
+        // CUSTOMERS CRUD
+        function renderCustomers(data) {
+            const tbody = document.getElementById('admin-customers-tbody');
+            tbody.innerHTML = data.map(item => `
+                <tr>
+                    <td>${item.customer_id}</td>
+                    <td><b>${item.full_name}</b></td>
+                    <td>${item.email}</td>
+                    <td>${item.phone}</td>
+                    <td>${item.nationality}</td>
+                    <td><code>${item.password}</code></td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" onclick="editCustomer(${JSON.stringify(item).replace(/"/g, '&quot;')})" style="padding:0.2rem 0.5rem; font-size:0.8rem;"><i class="fa-solid fa-edit"></i></button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteItem('/customers/delete/${item.customer_id}/')" style="padding:0.2rem 0.5rem; font-size:0.8rem;"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function openCustomerModal() {
+            document.getElementById('customer-form').reset();
+            document.getElementById('customer-form-id').value = '';
+            document.getElementById('customer-modal-title').textContent = 'Add New Customer Profile';
+            document.getElementById('form-customer-id').disabled = false;
+            openModal('customer-modal');
+        }
+
+        function editCustomer(item) {
+            document.getElementById('customer-form-id').value = item.customer_id;
+            document.getElementById('form-customer-id').value = item.customer_id;
+            document.getElementById('form-customer-id').disabled = true;
+            document.getElementById('form-customer-name').value = item.full_name;
+            document.getElementById('form-customer-email').value = item.email;
+            document.getElementById('form-customer-phone').value = item.phone;
+            document.getElementById('form-customer-nationality').value = item.nationality;
+            document.getElementById('form-customer-pass').value = item.password;
+            document.getElementById('customer-modal-title').textContent = 'Edit Customer Details';
+            openModal('customer-modal');
+        }
+
+        async function saveCustomer(e) {
+            e.preventDefault();
+            const editId = document.getElementById('customer-form-id').value;
+            const customer_id = document.getElementById('form-customer-id').value;
+            const full_name = document.getElementById('form-customer-name').value;
+            const email = document.getElementById('form-customer-email').value;
+            const phone = document.getElementById('form-customer-phone').value;
+            const nationality = document.getElementById('form-customer-nationality').value;
+            const password = document.getElementById('form-customer-pass').value;
+
+            const payload = { full_name, email, phone, nationality, password };
+
+            try {
+                if (editId) {
+                    await apiFetch(`/customers/update/${editId}/`, { method: 'PUT', body: payload });
+                    showToast("Customer database row updated!");
+                } else {
+                    if (customer_id) payload.customer_id = parseInt(customer_id);
+                    await apiFetch('/customers/add/', { method: 'POST', body: payload });
+                    showToast("Customer added successfully!");
+                }
+                closeModal('customer-modal');
+                loadAllData();
+            } catch (err) {
+                showToast(err.message || "Failed to save customer database row.", "error");
+            }
+        }
+
+        // Generic Delete API invoker
+        async function deleteItem(endpoint) {
+            if (!confirm("Are you sure you want to delete this item? This action is permanent!")) return;
+            try {
+                await apiFetch(endpoint, { method: 'DELETE' });
+                showToast("Item deleted successfully!");
+                loadAllData();
+            } catch (err) {
+                showToast(err.message || "Failed to delete item.", "error");
+            }
+        }
+    </script>
+</body>
+</html>

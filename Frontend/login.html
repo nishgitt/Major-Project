@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Login - Island Booking System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Premium Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <i class="fa-solid fa-umbrella-beach"></i>
+                    <span>ISLANDIA</span>
+                </div>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html">Home</a></li>
+                <li class="nav-item"><a href="islands.html">Islands</a></li>
+                <li class="nav-item"><a href="packages.html">Packages</a></li>
+            </ul>
+            <div class="auth-buttons" id="auth-nav-wrapper"></div>
+        </div>
+    </header>
+
+    <main>
+        <div class="form-card">
+            <h2 class="form-title">Welcome Back</h2>
+            <form id="login-form" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address</label>
+                    <input type="email" id="email" class="form-input" placeholder="rahul@gmail.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input type="password" id="password" class="form-input" placeholder="••••••••" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem; padding: 0.8rem;">
+                    Sign In <i class="fa-solid fa-sign-in-alt"></i>
+                </button>
+            </form>
+            <div class="form-footer-text">
+                Don't have an account? <a href="register.html">Sign Up</a>
+                <br><br>
+                <span style="color: var(--text-secondary); font-size: 0.8rem;">Admin Login: <b>admin@ibs.com</b> / <b>admin123</b></span>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Island Booking System (IBS) Inc. Developed for premium tourism packages. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        async function handleLogin(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Admin check bypass for testing
+            if (email === 'admin@ibs.com' && password === 'admin123') {
+                setAdminLoggedIn(true);
+                showToast("Logged in as Administrator", "success");
+                setTimeout(() => {
+                    window.location.href = 'admin_dashboard.html';
+                }, 1000);
+                return;
+            }
+
+            try {
+                // Fetch all customers from DB and match email & password
+                const customers = await apiFetch('/customers/');
+                const user = customers.find(c => c.email === email && c.password === password);
+                
+                if (user) {
+                    setCurrentUser(user);
+                    showToast(`Welcome back, ${user.full_name}!`, "success");
+                    setTimeout(() => {
+                        window.location.href = 'customer_dashboard.html';
+                    }, 1000);
+                } else {
+                    showToast("Invalid email or password.", "error");
+                }
+            } catch (err) {
+                showToast(err.message || "Failed to query database.", "error");
+            }
+        }
+    </script>
+</body>
+</html>

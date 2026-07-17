@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout - Island Booking System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Premium Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <i class="fa-solid fa-umbrella-beach"></i>
+                    <span>ISLANDIA</span>
+                </div>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html">Home</a></li>
+                <li class="nav-item"><a href="islands.html">Islands</a></li>
+                <li class="nav-item"><a href="packages.html">Packages</a></li>
+            </ul>
+            <div class="auth-buttons" id="auth-nav-wrapper"></div>
+        </div>
+    </header>
+
+    <main>
+        <div class="form-card" style="max-width: 500px; margin-top: 3rem;">
+            <h2 class="form-title"><i class="fa-solid fa-shield-halved text-primary"></i> Complete Checkout</h2>
+            
+            <div id="checkout-summary-box" style="margin-bottom: 2rem; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--card-border); padding: 1.25rem; border-radius: 8px;">
+                <h4 style="font-size: 0.85rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Booking Overview</h4>
+                <div id="checkout-booking-details" style="margin-top: 0.5rem; font-size: 0.95rem;">
+                    <p style="color: var(--text-secondary);">Loading booking parameters...</p>
+                </div>
+            </div>
+
+            <form id="payment-form" onsubmit="processPayment(event)">
+                <div class="form-group">
+                    <label class="form-label" for="pay-amount">Amount Payable</label>
+                    <input type="text" id="pay-amount" class="form-input" style="font-weight: 700; color: var(--secondary); font-size: 1.15rem;" readonly required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="pay-method">Select Payment Method</label>
+                    <select id="pay-method" class="form-input" style="background: #0f172a;" required>
+                        <option value="">-- Choose Option --</option>
+                        <option value="UPI">UPI (GPay, PhonePe)</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="Debit Card">Debit Card</option>
+                        <option value="Net Banking">Net Banking</option>
+                        <option value="Wallet">Digital Wallet</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="upi-details" style="display: none;">
+                    <label class="form-label" for="upi-id">Enter UPI ID</label>
+                    <input type="text" id="upi-id" class="form-input" placeholder="rahul@oksbi">
+                </div>
+
+                <div class="form-group" id="card-details" style="display: none;">
+                    <label class="form-label" for="card-num">Card Number</label>
+                    <input type="text" id="card-num" class="form-input" placeholder="4532 •••• •••• 9876">
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem; font-size: 1rem;">
+                        Confirm & Make Payment <i class="fa-solid fa-lock"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Island Booking System (IBS) Inc. Developed for premium tourism packages. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let currentBooking = null;
+        let user = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            user = getCurrentUser();
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            loadPaymentBooking();
+            
+            // Watch payment method change to show relevant fields
+            document.getElementById('pay-method').addEventListener('change', (e) => {
+                const method = e.target.value;
+                document.getElementById('upi-details').style.display = method === 'UPI' ? 'block' : 'none';
+                document.getElementById('card-details').style.display = (method === 'Credit Card' || method === 'Debit Card') ? 'block' : 'none';
+            });
+        });
+
+        async function loadPaymentBooking() {
+            const bookingId = getQueryParam('booking_id');
+            if (!bookingId) {
+                showToast("No active booking reference found.", "error");
+                setTimeout(() => { window.location.href = 'index.html'; }, 1000);
+                return;
+            }
+
+            try {
+                const bookings = await apiFetch('/bookings/');
+                currentBooking = bookings.find(b => b.booking_id == bookingId);
+
+                if (!currentBooking) {
+                    showToast("Booking reference not found in database.", "error");
+                    return;
+                }
+
+                // Render overview
+                document.getElementById('checkout-booking-details').innerHTML = `
+                    <div style="display:flex; justify-content:space-between; margin-bottom: 0.5rem;">
+                        <span>Destination:</span> <b>${currentBooking.island_name}</b>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom: 0.5rem;">
+                        <span>Package:</span> <span>${currentBooking.package_name}</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom: 0.5rem;">
+                        <span>Date:</span> <span>${currentBooking.travel_date}</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between;">
+                        <span>Travelers:</span> <span>${currentBooking.number_of_people}</span>
+                    </div>
+                `;
+
+                document.getElementById('pay-amount').value = `₹${currentBooking.total_amount.toLocaleString()}`;
+            } catch (err) {
+                console.error("Failed to query bookings:", err);
+                // Fallback mock
+                currentBooking = {
+                    booking_id: 401,
+                    customer_name: "Rahul Sharma",
+                    island_name: "Maldives",
+                    package_name: "Luxury Honeymoon Package",
+                    travel_date: "2026-12-20",
+                    number_of_people: 2,
+                    total_amount: 150000,
+                    booking_status: "Pending"
+                };
+                document.getElementById('pay-amount').value = `₹${currentBooking.total_amount.toLocaleString()}`;
+            }
+        }
+
+        async function processPayment(e) {
+            e.preventDefault();
+            
+            if (!currentBooking || !user) return;
+
+            const method = document.getElementById('pay-method').value;
+            const txnId = 'TXN' + Math.floor(100000000 + Math.random() * 900000000);
+            const today = new Date().toISOString().split('T')[0];
+
+            try {
+                // Post payment transaction to API
+                await apiFetch('/payments/add/', {
+                    method: 'POST',
+                    body: {
+                        booking_id: currentBooking.booking_id,
+                        customer_name: user.full_name,
+                        amount: currentBooking.total_amount,
+                        payment_method: method,
+                        payment_status: 'Success',
+                        transaction_id: txnId,
+                        payment_date: today
+                    }
+                });
+
+                // The backend automatically switches booking status to Confirmed.
+                showToast("Payment Successful! Your booking is Confirmed.", "success");
+                
+                setTimeout(() => {
+                    window.location.href = 'customer_dashboard.html';
+                }, 1500);
+            } catch (err) {
+                showToast("Transaction failed.", "error");
+            }
+        }
+    </script>
+</body>
+</html>
