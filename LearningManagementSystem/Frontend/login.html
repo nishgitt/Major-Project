@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - AetherAcademy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-glow-1"></div>
+    <div class="bg-glow-2"></div>
+
+    <header class="elearning-header">
+        <nav class="navbar elearning-navbar">
+            <div id="auth-buttons" class="nav-left-actions">
+                <a href="register.html" class="nav-signup-link">
+                    <svg class="nav-signup-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <span>Sign up</span>
+                </a>
+            </div>
+            <ul class="nav-links elearning-nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown-item">
+                    <a href="courses.html">E-books <span class="chevron-down">▼</span></a>
+                </li>
+                <li><a href="index.html#about-section">About Us</a></li>
+                <li><a href="index.html#footer-section">Contact</a></li>
+                <li><a href="dashboard.html" class="student-only">Dashboard</a></li>
+            </ul>
+            <div class="nav-search-container">
+                <div class="nav-search-box">
+                    <input type="text" id="nav-search-input" placeholder="Search courses..." onkeydown="if(event.key === 'Enter') triggerSearch()">
+                    <button class="nav-search-btn" onclick="triggerSearch()">Search</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="glass-container form-container" id="login-section">
+            <h2 class="form-title">Account Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="role-select">Portal Role</label>
+                    <select id="role-select" class="form-control" required>
+                        <option value="student">Student Portal</option>
+                        <option value="instructor">Instructor / Admin Portal</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" class="form-control" placeholder="enter email address" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
+                </div>
+                <div style="margin-top: 1rem; color: var(--danger); font-size: 0.9rem;" id="login-error-msg"></div>
+                <button type="submit" class="btn-primary form-submit-btn" id="login-submit-btn">Access Account</button>
+            </form>
+            <div class="form-redirect">
+                <p>New learner? <a href="register.html">Create a profile</a></p>
+            </div>
+            <div class="form-redirect" style="margin-top:1.5rem; font-size:0.85rem; border-top:1px solid var(--border-glass); padding-top:1.5rem;">
+                <p><strong>Demo Credentials:</strong></p>
+                <p style="margin-top: 0.3rem;">Student: <code>rahul@gmail.com</code> | <code>rahul123</code></p>
+                <p>Instructor: <code>trainer@gmail.com</code> | <code>any_password</code></p>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

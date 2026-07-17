@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - AetherAcademy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-glow-1"></div>
+    <div class="bg-glow-2"></div>
+
+    <header class="elearning-header">
+        <nav class="navbar elearning-navbar">
+            <div id="auth-buttons" class="nav-left-actions">
+                <a href="register.html" class="nav-signup-link">
+                    <svg class="nav-signup-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <span>Sign up</span>
+                </a>
+            </div>
+            <ul class="nav-links elearning-nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown-item">
+                    <a href="courses.html">E-books <span class="chevron-down">▼</span></a>
+                </li>
+                <li><a href="index.html#about-section">About Us</a></li>
+                <li><a href="index.html#footer-section">Contact</a></li>
+                <li><a href="dashboard.html" class="active student-only">Dashboard</a></li>
+            </ul>
+            <div class="nav-search-container">
+                <div class="nav-search-box">
+                    <input type="text" id="nav-search-input" placeholder="Search courses..." onkeydown="if(event.key === 'Enter') triggerSearch()">
+                    <button class="nav-search-btn" onclick="triggerSearch()">Search</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2 class="section-title">Student Dashboard</h2>
+
+        <div id="dashboard-unauthorized" class="glass-container" style="display:none; padding:3rem; text-align:center; max-width:600px; margin: 4rem auto;">
+            <h3>Authorization Required</h3>
+            <p style="color:var(--text-muted); margin: 1rem 0 2rem;">Please login to view your personalized learner statistics.</p>
+            <a href="login.html" class="btn-primary">Login Now</a>
+        </div>
+
+        <div class="dashboard-grid" id="dashboard-content" style="display:none;">
+            <!-- Left Side: Profile -->
+            <div class="glass-container profile-card">
+                <div class="avatar" id="student-avatar-letter">R</div>
+                <h3 class="profile-name" id="student-profile-name">Rahul Sharma</h3>
+                <p class="profile-role">Learner Member</p>
+                <div class="profile-meta">
+                    <p><strong>Email:</strong> <span id="student-email">rahul@gmail.com</span></p>
+                    <p><strong>Phone:</strong> <span id="student-phone">9876543210</span></p>
+                    <p><strong>Degree:</strong> <span id="student-qualification">B.Tech</span></p>
+                    <p style="margin-top: 2rem;"><button onclick="logout()" class="btn-secondary" style="width:100%;">Log Out</button></p>
+                </div>
+            </div>
+
+            <!-- Right Side: Stats & Course Completion -->
+            <div>
+                <!-- Stat Boxes -->
+                <div class="dashboard-stats">
+                    <div class="glass-container stat-box">
+                        <div class="stat-number" id="stat-total-courses">0</div>
+                        <div class="stat-label">Total Courses</div>
+                    </div>
+                    <div class="glass-container stat-box">
+                        <div class="stat-number" id="stat-active-courses">0</div>
+                        <div class="stat-label">Active Courses</div>
+                    </div>
+                    <div class="glass-container stat-box">
+                        <div class="stat-number" id="stat-completed-courses">0</div>
+                        <div class="stat-label">Completed Courses</div>
+                    </div>
+                    <div class="glass-container stat-box">
+                        <div class="stat-number" id="stat-assignments-done">0</div>
+                        <div class="stat-label">Assignments Submitted</div>
+                    </div>
+                </div>
+
+                <!-- Course Progress -->
+                <div class="glass-container progress-list-container">
+                    <div class="progress-header">
+                        <h3>Study Progress & Performance</h3>
+                    </div>
+                    <div id="student-progress-cards">
+                        <!-- Loaded by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Certificate Visual Modal -->
+    <div class="modal" id="certificate-modal">
+        <div class="glass-container modal-content" style="max-width: 750px;">
+            <button class="modal-close" onclick="closeCertificateModal()">&times;</button>
+            <div class="certificate-frame">
+                <p style="font-size:0.8rem; text-transform:uppercase; letter-spacing:2px; color:var(--secondary);">Certificate of Completion</p>
+                <h2 style="margin: 0.5rem 0;">AETHERACADEMY</h2>
+                <p style="font-size:1.1rem; color:var(--text-muted); font-style:italic;">This credential is proudly presented to</p>
+                <div class="certificate-name" id="cert-student-name">Rahul Sharma</div>
+                <p style="font-size:1.1rem; color:var(--text-muted);">for demonstrating excellence and completing the course requirements for</p>
+                <h3 style="font-size:1.6rem; color:var(--text-main); margin: 1rem 0;" id="cert-course-name">Python Full Stack</h3>
+                <div style="display:flex; justify-content:space-between; margin-top:2.5rem; border-top:1px solid var(--border-glass); padding-top:1.5rem; font-size:0.9rem; color:var(--text-muted);">
+                    <div>
+                        <p>Instructor Signature</p>
+                        <p style="font-family:'Courier New', monospace; font-size:1.2rem; color:#fff; margin-top:0.3rem;">S. Velmurugan</p>
+                    </div>
+                    <div>
+                        <p>Date Awarded</p>
+                        <p style="color:#fff; margin-top:0.3rem;" id="cert-date">2026-07-15</p>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align:center; margin-top:2rem;">
+                <button class="btn-primary" onclick="window.print()">Download / Print Certificate</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

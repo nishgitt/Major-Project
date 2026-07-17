@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join CareerZap. Create a candidate resume profile or employer account to hire talented engineering professionals.">
+    <title>Register Account - CareerZap</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <!-- Nav injected by script.js -->
+        </div>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <div class="form-header">
+                <h2>Create Account</h2>
+                <p>Register to start your search or hiring journey</p>
+            </div>
+            
+            <div class="tab-group">
+                <button type="button" class="tab-btn active" data-role="candidate">Candidate</button>
+                <button type="button" class="tab-btn" data-role="employer">Employer</button>
+            </div>
+
+            <form id="register-form">
+                <!-- Common Email, Phone, Password -->
+                <div class="form-group">
+                    <label for="reg-email">Email Address</label>
+                    <input type="email" id="reg-email" placeholder="example@domain.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reg-phone">Phone Number</label>
+                    <input type="text" id="reg-phone" placeholder="9876543210" required>
+                </div>
+
+                <!-- Candidate Specific Fields -->
+                <div id="candidate-register-fields">
+                    <div class="form-group">
+                        <label for="reg-fullname">Full Name</label>
+                        <input type="text" id="reg-fullname" placeholder="Rahul Sharma" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-qualification">Highest Qualification</label>
+                        <input type="text" id="reg-qualification" placeholder="B.Tech CSE" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-skills">Technical Skills (comma separated)</label>
+                        <input type="text" id="reg-skills" placeholder="Python, Django, SQL" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-experience">Years of Experience</label>
+                        <input type="number" id="reg-experience" placeholder="2" min="0" required>
+                    </div>
+                </div>
+
+                <!-- Employer Specific Fields (Hidden by default) -->
+                <div id="employer-register-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="reg-companyname">Company Name</label>
+                        <input type="text" id="reg-companyname" placeholder="Infosys Technologies">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-hrname">HR Contact Name</label>
+                        <input type="text" id="reg-hrname" placeholder="Priya Reddy">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-location">Company Location (City)</label>
+                        <input type="text" id="reg-location" placeholder="Bangalore">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-industry">Industry Sector</label>
+                        <input type="text" id="reg-industry" placeholder="Information Technology">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="reg-password">Password</label>
+                    <input type="password" id="reg-password" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Register Account</button>
+            </form>
+            
+            <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);">
+                Already have an account? <a href="login.html" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600;">Sign in here</a>
+            </p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 CareerZap Job Portal. Developed with Django REST APIs & SQLite. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

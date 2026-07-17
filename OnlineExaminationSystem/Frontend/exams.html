@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View and start available online exams in Python, Java, and other subjects.">
+    <title>Available Exams | Examly</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span>🎓 Examly</span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="exams.html" class="active">Exams</a></li>
+                    <li><a href="student_dashboard.html">Student Portal</a></li>
+                    <li><a href="admin_dashboard.html">Admin Console</a></li>
+                    <li id="authNavItem">
+                        <a href="login.html" class="btn-primary" style="color: white; padding: 0.5rem 1.2rem;">Login</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="section-title">
+            <h2>Available Examinations</h2>
+        </section>
+
+        <!-- Subjects Filter Bar -->
+        <div class="search-filter-bar" style="justify-content: center; max-width: 600px; margin: 0 auto 3rem;">
+            <select id="subjectFilter" onchange="filterExams()" style="max-width: 250px;">
+                <option value="all">All Subjects</option>
+                <option value="Python">Python</option>
+                <option value="Java">Java</option>
+                <option value="Web Dev">Web Development</option>
+            </select>
+            <input type="text" id="examSearchInput" onkeyup="filterExams()" placeholder="Search exam title..." style="max-width: 350px;">
+        </div>
+
+        <!-- Exams Grid -->
+        <div class="exams-grid" id="examsListGrid">
+            <!-- Dynamically populated via script.js -->
+            <div class="exam-card">
+                <div class="exam-badge">Loading...</div>
+                <h3>Fetching exam schedules</h3>
+                <p style="color: var(--text-muted);">Please wait while we connect to the database.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Examly Online Examination Portal. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            // Load and list exams initially
+            loadAvailableExamsPage();
+        });
+
+        function filterExams() {
+            const subject = document.getElementById('subjectFilter').value;
+            const query = document.getElementById('examSearchInput').value.toLowerCase();
+            
+            const cards = document.querySelectorAll('.exam-card');
+            cards.forEach(card => {
+                const title = card.querySelector('h3').innerText.toLowerCase();
+                const badge = card.querySelector('.exam-badge').innerText;
+                
+                const matchesSubject = (subject === 'all' || badge === subject);
+                const matchesSearch = title.includes(query);
+                
+                if (matchesSubject && matchesSearch) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

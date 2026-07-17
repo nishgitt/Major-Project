@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Enrollments - AetherAcademy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-glow-1"></div>
+    <div class="bg-glow-2"></div>
+
+    <header class="elearning-header">
+        <nav class="navbar elearning-navbar">
+            <div id="auth-buttons" class="nav-left-actions">
+                <a href="register.html" class="nav-signup-link">
+                    <svg class="nav-signup-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <span>Sign up</span>
+                </a>
+            </div>
+            <ul class="nav-links elearning-nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown-item">
+                    <a href="courses.html">E-books <span class="chevron-down">▼</span></a>
+                </li>
+                <li><a href="index.html#about-section">About Us</a></li>
+                <li><a href="index.html#footer-section">Contact</a></li>
+                <li><a href="dashboard.html" class="student-only">Dashboard</a></li>
+            </ul>
+            <div class="nav-search-container">
+                <div class="nav-search-box">
+                    <input type="text" id="nav-search-input" placeholder="Search courses..." onkeydown="if(event.key === 'Enter') triggerSearch()">
+                    <button class="nav-search-btn" onclick="triggerSearch()">Search</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2 class="section-title">My Enrolled Courses</h2>
+        
+        <div id="enrollments-unauthorized" class="glass-container" style="display:none; padding:3rem; text-align:center; max-width:600px; margin: 4rem auto;">
+            <h3>Authorization Required</h3>
+            <p style="color:var(--text-muted); margin: 1rem 0 2rem;">Please login as a student to view your course enrollments and study details.</p>
+            <a href="login.html" class="btn-primary">Login Now</a>
+        </div>
+
+        <div id="enrollments-list" style="display:none;">
+            <!-- Programmatically rendered by script.js -->
+        </div>
+
+        <div id="no-enrollments-msg" class="glass-container" style="display:none; padding:4rem; text-align:center; max-width:800px; margin: 0 auto;">
+            <h3>No Course Enrollments Found</h3>
+            <p style="color:var(--text-muted); margin: 1rem 0 2rem;">You are not enrolled in any classes yet. Browse our catalog and start your learning journey!</p>
+            <a href="courses.html" class="btn-primary">Browse Courses</a>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
