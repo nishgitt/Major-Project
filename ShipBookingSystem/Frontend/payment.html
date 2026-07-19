@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Booking Checkout - OceanWave</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- Dynamic Header Navigation Bar -->
+    <nav class="navbar" id="navbar-container"></nav>
+
+    <main class="form-page-container">
+        <div class="glass-form" style="max-width: 550px;">
+            <h1 class="form-title-h1">Secure Checkout</h1>
+            <p class="form-subtitle-p">Complete payment transactions to generate boarding tickets</p>
+            
+            <!-- Reservation Details Summary -->
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 1.2rem; border-radius: 12px; margin-bottom: 2rem;">
+                <div style="display:flex; justify-content:space-between; margin-bottom: 0.5rem;">
+                    <span style="color: var(--text-secondary);">Cruise Vessel:</span>
+                    <span id="pay-ship-name" style="font-weight: 600; text-align: right; max-width: 60%;">Loading...</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom: 0.5rem;">
+                    <span style="color: var(--text-secondary);">Reserved Cabin:</span>
+                    <span id="pay-cabin" style="font-weight: 600;">Loading...</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom: 0.5rem;">
+                    <span style="color: var(--text-secondary);">Itinerary route:</span>
+                    <span id="pay-route" style="font-weight: 600; font-size: 0.9rem;">Loading...</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom: 0.5rem;">
+                    <span style="color: var(--text-secondary);">Departure date:</span>
+                    <span id="pay-date" style="font-weight: 600;">Loading...</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 0.8rem; margin-top: 0.8rem;">
+                    <span style="font-weight: bold;">Total Fare:</span>
+                    <span id="pay-total-amount" style="font-weight: bold; color: var(--color-success); font-size: 1.25rem;">₹0</span>
+                </div>
+            </div>
+            
+            <!-- Payment Form -->
+            <form id="pay-form">
+                <div class="field-group">
+                    <label for="pay-method" class="field-label">Select Payment Gateway</label>
+                    <select id="pay-method" class="field-control" required>
+                        <option value="UPI">UPI (Google Pay / PhonePe / Paytm)</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="Debit Card">Debit Card</option>
+                        <option value="Net Banking">Net Banking</option>
+                        <option value="Wallet">Mobile Wallet</option>
+                    </select>
+                </div>
+                
+                <div style="padding: 1rem; background: rgba(0,245,255,0.05); border: 1px solid rgba(0,245,255,0.15); border-radius: 12px; margin-bottom: 1.5rem; font-size: 0.85rem; color: var(--color-secondary);">
+                    🔒 Secure maritime transaction portal. Demo transactions are set to auto-approve.
+                </div>
+                
+                <button type="submit" class="btn btn-luxury" style="width: 100%;">Process Voyage Payment</button>
+            </form>
+            
+            <!-- Boarding pass confirmation card with QR code (Initially Hidden) -->
+            <div id="boarding-pass-receipt" style="display: none; text-align: center; margin-top: 1rem;">
+                <div style="color: var(--color-success); font-size: 3rem; margin-bottom: 0.5rem;">✔️</div>
+                <h3 style="color: var(--color-success); margin-bottom: 0.5rem;">Boarding Pass Issued</h3>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">Payment processed successfully. Save the QR Code Boarding Pass below for check-in at the departure port.</p>
+                
+                <!-- QR Boarding Pass (Bonus) -->
+                <div class="boarding-pass-box">
+                    <img id="boarding-pass-qr" src="" alt="Boarding Pass QR Code">
+                </div>
+                
+                <div style="background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); padding: 1rem; border-radius: 12px; font-size: 0.85rem; text-align: left; margin: 1.5rem 0; display:flex; flex-direction:column; gap:0.3rem;">
+                    <p><span style="color: var(--text-secondary);">Transaction ID:</span> <span id="receipt-txn" style="font-family: monospace; font-weight: bold;">TXN123456</span></p>
+                    <p><span style="color: var(--text-secondary);">Departure status:</span> <span class="status-tag status-success" style="padding:0.1rem 0.4rem; font-size:0.7rem;"> cleared for boarding</span></p>
+                </div>
+                
+                <div style="display: flex; gap: 1rem;">
+                    <a href="booking_history.html" class="btn btn-primary" style="flex: 1;">My Voyage Trips</a>
+                    <a href="index.html" class="btn btn-secondary" style="flex: 1;">Back to Home</a>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.85rem;">
+        <p>&copy; 2026 OceanWave Inc.</p>
+    </footer>
+
+</body>
+</html>

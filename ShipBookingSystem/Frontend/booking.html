@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserve Cabin - OceanWave</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- Dynamic Header Navigation Bar -->
+    <nav class="navbar" id="navbar-container"></nav>
+
+    <main class="form-page-container" style="padding: 3rem 5%;">
+        <div class="glass-form" style="max-width: 700px; width: 100%;">
+            <h1 class="form-title-h1" style="text-align: left; margin-bottom: 0.2rem;">Reserve Voyage Cabin</h1>
+            <p style="color: var(--color-secondary); font-weight: 600; margin-bottom: 2rem; font-size: 1.25rem;" id="book-ship-name">Vessel Name</p>
+            
+            <!-- Trip itinerary read only metrics -->
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 1.2rem; border-radius: 12px; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.3rem;">
+                <p style="font-size:0.9rem; color:var(--text-secondary);">🗺️ Route: <strong id="book-route" style="color:white;">Ports</strong></p>
+                <p style="font-size:0.9rem; color:var(--text-secondary);">📅 Date: <strong id="book-date" style="color:white;">Date</strong></p>
+                <p style="font-size:0.9rem; color:var(--text-secondary);">💵 Base Voyage Fare: <strong id="book-fare-unit" style="color:var(--color-success);">₹0</strong></p>
+            </div>
+            
+            <!-- Cabin Class Selection Dropdown -->
+            <div class="field-group">
+                <label for="cabin-class-select" class="field-label">Cabin Category</label>
+                <select id="cabin-class-select" class="field-control">
+                    <option value="Economy">Economy (Comfort deck cabin - 1x fare)</option>
+                    <option value="Deluxe">Deluxe (Balcony state-room - 1.4x fare)</option>
+                    <option value="Suite">Suite (Multi-room suite - 2.0x fare)</option>
+                    <option value="Family Cabin">Family Cabin (Interconnected rooms - 1.8x fare)</option>
+                    <option value="VIP Cabin">VIP Cabin (Penthouse Jacuzzi suite - 3.0x fare)</option>
+                </select>
+            </div>
+            
+            <!-- Interactive Visual Deck Map Cabin Picker (Bonus) -->
+            <div style="margin-top: 2rem;">
+                <h4 style="margin-bottom: 0.5rem; color: var(--color-secondary);">Deck Seating Plan Selector</h4>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem;">Select your cabin block from the vessel deck plan below.</p>
+                
+                <div class="deck-plan-container">
+                    <div class="ship-hull">
+                        <div id="interactive-deck-plan">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Booking Totals Summary -->
+            <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 2rem;">
+                    <span style="font-size:1.2rem; font-weight:bold;">Total Amount Due:</span>
+                    <span id="total-fare-amount" style="font-size: 2rem; font-family: var(--font-heading); font-weight:800; color: var(--color-success);">₹0</span>
+                </div>
+                
+                <button id="confirm-booking-btn" class="btn btn-luxury" style="width: 100%;">Confirm Cabin Reservation</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.85rem;">
+        <p>&copy; 2026 OceanWave Inc.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration Control Center - OceanWave</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- Dynamic Header Navigation Bar -->
+    <nav class="navbar" id="navbar-container"></nav>
+
+    <!-- Header Title -->
+    <header style="padding: 3rem 5% 1rem; text-align: left;">
+        <h1 style="font-size: 2.5rem; font-family: var(--font-heading);">System Administration Panel</h1>
+        <p style="color: var(--text-secondary); margin-top: 0.2rem;">Global moderation, vessel logs, scheduling publishes, and bookings auditing.</p>
+    </header>
+
+    <main>
+        <!-- Tab Shortcuts -->
+        <section style="padding: 1rem 5%; display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="#section-passengers" class="btn btn-secondary" style="font-size: 0.9rem; padding: 0.5rem 1.2rem;">👤 Passengers</a>
+            <a href="#section-ships" class="btn btn-secondary" style="font-size: 0.9rem; padding: 0.5rem 1.2rem;">🚢 Vessels</a>
+            <a href="#section-schedules" class="btn btn-secondary" style="font-size: 0.9rem; padding: 0.5rem 1.2rem;">📅 Schedules</a>
+            <a href="#section-bookings" class="btn btn-secondary" style="font-size: 0.9rem; padding: 0.5rem 1.2rem;">🎫 Bookings</a>
+            <a href="#section-payments" class="btn btn-secondary" style="font-size: 0.9rem; padding: 0.5rem 1.2rem;">💳 Payments</a>
+        </section>
+
+        <!-- Administrative Create Panels Split -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; padding: 2rem 5%;">
+            
+            <!-- Add Ship Form -->
+            <section class="glass-form" style="max-width: 100%; width: 100%; padding: 2rem;">
+                <h3 style="color: var(--color-secondary); font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-glow); padding-bottom: 0.5rem;">Register New Vessel</h3>
+                
+                <form id="add-ship-form">
+                    <div class="field-group">
+                        <label for="ship-name" class="field-label">Vessel Title</label>
+                        <input type="text" id="ship-name" class="field-control" placeholder="Ocean Paradise" required>
+                    </div>
+                    
+                    <div class="field-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0;">
+                        <div class="field-group">
+                            <label for="ship-type" class="field-label">Vessel Type</label>
+                            <select id="ship-type" class="field-control" required>
+                                <option value="Cruise Ship">Cruise Ship</option>
+                                <option value="Ferry">Ferry</option>
+                                <option value="Cargo Passenger Ship">Cargo Passenger Ship</option>
+                                <option value="Luxury Yacht">Luxury Yacht</option>
+                                <option value="River Cruise">River Cruise</option>
+                            </select>
+                        </div>
+                        <div class="field-group">
+                            <label for="ship-capacity" class="field-label">Capacity (Passengers)</label>
+                            <input type="number" id="ship-capacity" class="field-control" placeholder="2000" min="10" required>
+                        </div>
+                    </div>
+                    
+                    <div class="field-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0;">
+                        <div class="field-group">
+                            <label for="ship-operator" class="field-label">Operator Line</label>
+                            <input type="text" id="ship-operator" class="field-control" placeholder="Royal Cruises" required>
+                        </div>
+                        <div class="field-group">
+                            <label for="ship-status" class="field-label">Operating Status</label>
+                            <select id="ship-status" class="field-control" required>
+                                <option value="Active">Active</option>
+                                <option value="Maintenance">Maintenance</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Register Vessel</button>
+                </form>
+            </section>
+
+            <!-- Add Schedule Form -->
+            <section class="glass-form" style="max-width: 100%; width: 100%; padding: 2rem;">
+                <h3 style="color: var(--color-secondary); font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-glow); padding-bottom: 0.5rem;">Publish Voyage Schedule</h3>
+                
+                <form id="add-schedule-form">
+                    <div class="field-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0;">
+                        <div class="field-group">
+                            <label for="sched-ship-select" class="field-label">Assign Ship</label>
+                            <select id="sched-ship-select" class="field-control" required>
+                                <option value="">Loading vessels...</option>
+                            </select>
+                        </div>
+                        <div class="field-group">
+                            <label for="sched-fare" class="field-label">Base Voyage Fare (₹)</label>
+                            <input type="number" id="sched-fare" class="field-control" placeholder="8500" min="0" required>
+                        </div>
+                    </div>
+                    
+                    <div class="field-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0;">
+                        <div class="field-group">
+                            <label for="sched-source" class="field-label">Departure Port</label>
+                            <input type="text" id="sched-source" class="field-control" placeholder="Chennai Port" required>
+                        </div>
+                        <div class="field-group">
+                            <label for="sched-dest" class="field-label">Destination Port</label>
+                            <input type="text" id="sched-dest" class="field-control" placeholder="Port Blair" required>
+                        </div>
+                    </div>
+                    
+                    <div class="field-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0;">
+                        <div class="field-group">
+                            <label for="sched-dep-date" class="field-label">Departure Date</label>
+                            <input type="date" id="sched-dep-date" class="field-control" required>
+                        </div>
+                        <div class="field-group">
+                            <label for="sched-dep-time" class="field-label">Departure Time</label>
+                            <input type="time" id="sched-dep-time" class="field-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="field-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0;">
+                        <div class="field-group">
+                            <label for="sched-arr-date" class="field-label">Arrival Date</label>
+                            <input type="date" id="sched-arr-date" class="field-control" required>
+                        </div>
+                        <div class="field-group">
+                            <label for="sched-arr-time" class="field-label">Arrival Time</label>
+                            <input type="time" id="sched-arr-time" class="field-control" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-secondary" style="width: 100%; margin-top: 1.25rem;">Publish Schedule</button>
+                </form>
+            </section>
+            
+        </div>
+
+        <!-- Passengers table list -->
+        <section id="section-passengers" class="table-wrapper">
+            <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--color-secondary);">👤 Registered Passenger Accounts</h2>
+            <table class="records-table">
+                <thead>
+                    <tr>
+                        <th>Passenger ID</th>
+                        <th>Full Name</th>
+                        <th>Email Address</th>
+                        <th>Phone</th>
+                        <th>Nationality</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-passengers-rows">
+                    <tr><td colspan="6" style="text-align:center;">Loading...</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Ships table list -->
+        <section id="section-ships" class="table-wrapper">
+            <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--color-secondary);">🚢 Marine Vessels Registry</h2>
+            <table class="records-table">
+                <thead>
+                    <tr>
+                        <th>Ship ID</th>
+                        <th>Vessel Name</th>
+                        <th>Type</th>
+                        <th>Capacity</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-ships-rows">
+                    <tr><td colspan="6" style="text-align:center;">Loading...</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Schedules table list -->
+        <section id="section-schedules" class="table-wrapper">
+            <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--color-secondary);">📅 Published Voyages Schedules</h2>
+            <table class="records-table">
+                <thead>
+                    <tr>
+                        <th>Schedule ID</th>
+                        <th>Ship Name</th>
+                        <th>Ports Route</th>
+                        <th>Departure Timing</th>
+                        <th>Base Fare</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-schedules-rows">
+                    <tr><td colspan="6" style="text-align:center;">Loading...</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Bookings table list -->
+        <section id="section-bookings" class="table-wrapper">
+            <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--color-secondary);">🎫 Cabin Bookings Audits</h2>
+            <table class="records-table">
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Passenger Name</th>
+                        <th>Ship Name</th>
+                        <th>Cabin Class</th>
+                        <th>Fare amount</th>
+                        <th>Booking Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-bookings-rows">
+                    <tr><td colspan="7" style="text-align:center;">Loading...</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Payments table list -->
+        <section id="section-payments" class="table-wrapper">
+            <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--color-secondary);">💳 Payment Ledger Invoices</h2>
+            <table class="records-table">
+                <thead>
+                    <tr>
+                        <th>Payment ID</th>
+                        <th>Booking ID</th>
+                        <th>Passenger Name</th>
+                        <th>Amount Paid</th>
+                        <th>Method</th>
+                        <th>Transaction ID</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-payments-rows">
+                    <tr><td colspan="8" style="text-align:center;">Loading...</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 3rem 0; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-secondary); margin-top: 4rem;">
+        <p>&copy; 2026 OceanWave Inc.</p>
+    </footer>
+
+</body>
+</html>

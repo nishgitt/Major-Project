@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Eventify</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- Dynamic Header Navigation Bar -->
+    <nav class="navbar" id="navbar-container"></nav>
+
+    <!-- Glassmorphic Register Form Card -->
+    <main class="form-container-page" style="padding: 3rem 5%;">
+        <div class="glass-form-card" style="max-width: 550px;">
+            <h1 class="form-title">Create Account</h1>
+            <p class="form-subtitle">Register to discover, schedule and book events</p>
+            
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="fullname" class="form-label">Full Name</label>
+                    <input type="text" id="fullname" class="form-control" placeholder="Rahul Sharma" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="rahul@gmail.com" required autocomplete="email">
+                </div>
+                
+                <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0;">
+                    <div class="form-group">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="9876543210" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city" class="form-label">City</label>
+                        <input type="text" id="city" class="form-control" placeholder="Hyderabad" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="••••••••" required autocomplete="new-password">
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Register Account</button>
+            </form>
+            
+            <div class="form-footer">
+                <p>Already have an account? <a href="login.html">Sign In</a></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.85rem;">
+        <p>&copy; 2026 Eventify Inc.</p>
+    </footer>
+
+</body>
+</html>

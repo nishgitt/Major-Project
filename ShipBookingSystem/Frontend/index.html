@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OceanWave - Cruise & Voyage Booking Portal</title>
+    <meta name="description" content="Search voyages, select luxury cabins, and secure cruise tickets online with OceanWave.">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- Dynamic Header Navigation Bar -->
+    <nav class="navbar" id="navbar-container"></nav>
+
+    <!-- Dynamic Weather and Voyage reminder banner (Bonus) -->
+    <div class="reminder-banner" id="weather-reminder-banner" style="display: none;"></div>
+
+    <!-- Hero Banner -->
+    <header class="hero">
+        <h1>Navigate the World's Oceans</h1>
+        <p>Book premium cabins, search routes, and secure your boarding passes across the finest cruise liners and ferry operators.</p>
+        <div class="cta-group">
+            <a href="ships.html" class="btn btn-luxury">Browse Voyages</a>
+            <a href="register.html" class="btn btn-secondary">Create Profile</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Search Voyage Journey Form -->
+        <section class="search-filter-section" style="margin-top: -3rem; position: relative; z-index: 10;">
+            <div class="search-filter-container">
+                <form id="search-voyage-form" style="display: flex; width: 100%; gap: 1.5rem; flex-wrap: wrap; align-items: flex-end;">
+                    <div class="filter-group" style="flex: 2;">
+                        <label for="source-port" class="field-label">Departure Port</label>
+                        <input type="text" id="source-port" class="field-control" placeholder="e.g. Chennai Port" required>
+                    </div>
+                    <div class="filter-group" style="flex: 2;">
+                        <label for="dest-port" class="field-label">Destination Port</label>
+                        <input type="text" id="dest-port" class="field-control" placeholder="e.g. Port Blair" required>
+                    </div>
+                    <div class="filter-group" style="flex: 1; min-width: 150px;">
+                        <button type="submit" class="btn btn-primary" style="width: 100%; height: 48px; border-radius: 12px;">Search Journeys</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Featured Cruises Section -->
+        <section>
+            <h2 class="section-title">
+                <span>Featured Voyages</span>
+                <a href="ships.html" style="font-size: 0.95rem; color: var(--color-secondary); text-decoration: none;">View All &rarr;</a>
+            </h2>
+            <div class="ship-grid" id="featured-cruises-grid">
+                <!-- Dynamically populated by script.js -->
+            </div>
+        </section>
+
+        <!-- Latest Cruise Offers Promotion -->
+        <section style="padding: 2rem 5% 5rem;">
+            <h2 style="font-family: var(--font-heading); font-size: 2rem; text-align: center; margin-bottom: 2rem;">Exclusive Travel Offers</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                <div style="background: var(--bg-card); border: 1px solid var(--border-glow); padding: 2rem; border-radius: 20px; text-align: center; position: relative;">
+                    <span style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--color-accent); color: #050A12; font-weight:bold; font-size:0.75rem; padding: 0.25rem 0.8rem; border-radius: 50px;">VIP ONLY</span>
+                    <h3 style="margin-bottom: 0.5rem; color: var(--color-secondary);">Suite Upgrade Offer</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">Book a Suite or VIP Cabin on any Ocean Paradise cruise and get complimentary Spa access &amp; butler service.</p>
+                    <a href="ships.html" style="color: var(--color-accent); font-size: 0.9rem; text-decoration:none; font-weight:bold;">Learn More &rarr;</a>
+                </div>
+                
+                <div style="background: var(--bg-card); border: 1px solid var(--border-glow); padding: 2rem; border-radius: 20px; text-align: center; position: relative;">
+                    <span style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--color-success); color: #050A12; font-weight:bold; font-size:0.75rem; padding: 0.25rem 0.8rem; border-radius: 50px;">PROMO</span>
+                    <h3 style="margin-bottom: 0.5rem; color: var(--color-secondary);">Early Bird discount</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">Secure tickets 30 days before departure to get flat 15% discount on base fares for all luxury yachts.</p>
+                    <a href="ships.html" style="color: var(--color-accent); font-size: 0.9rem; text-decoration:none; font-weight:bold;">Book Now &rarr;</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 3rem 0; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-secondary); margin-top: 4rem; font-size: 0.9rem;">
+        <p>&copy; 2026 OceanWave Maritime booking Inc. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-muted);">Powered by Django REST APIs & SQLite.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passenger Dashboard - OceanWave</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- Dynamic Header Navigation Bar -->
+    <nav class="navbar" id="navbar-container"></nav>
+
+    <!-- Dynamic Weather Reminder Banner (Bonus) -->
+    <div class="reminder-banner" id="weather-reminder-banner" style="display: none;"></div>
+
+    <!-- Title Header -->
+    <header style="padding: 3rem 5% 1rem; text-align: left;">
+        <h1 style="font-size: 2.5rem; font-family: var(--font-heading);">Passenger Dashboard</h1>
+        <p style="color: var(--text-secondary); margin-top: 0.2rem;">Track reserved cabin tickets, trip schedules, and transaction ledger details.</p>
+    </header>
+
+    <main>
+        <!-- Statistics Counter Cards -->
+        <section class="dashboard-metrics">
+            <div class="metric-card">
+                <span class="metric-label">Total Bookings</span>
+                <span class="metric-value" id="pass-total-bookings">0</span>
+            </div>
+            <div class="metric-card accent">
+                <span class="metric-label">Upcoming Voyages</span>
+                <span class="metric-value" id="pass-upcoming-trips">0</span>
+            </div>
+            <div class="metric-card success">
+                <span class="metric-label">Total Fare Spent</span>
+                <span class="metric-value" id="pass-total-spent">₹0</span>
+            </div>
+        </section>
+
+        <!-- Booking and Payment History logs -->
+        <section class="table-wrapper">
+            <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--color-secondary);">Trip Log &amp; Payment Ledger</h2>
+            
+            <table class="records-table">
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Vessel Name</th>
+                        <th>Journey Date</th>
+                        <th>Fare Paid</th>
+                        <th>Booking Status</th>
+                    </tr>
+                </thead>
+                <tbody id="pass-history-rows">
+                    <tr>
+                        <td colspan="5" style="text-align: center; color: var(--text-secondary);">Loading logs...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 3rem 0; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-secondary); margin-top: 4rem;">
+        <p>&copy; 2026 OceanWave Inc.</p>
+    </footer>
+
+</body>
+</html>

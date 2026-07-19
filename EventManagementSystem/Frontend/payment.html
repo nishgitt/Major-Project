@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout - Eventify</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- Dynamic Header Navigation Bar -->
+    <nav class="navbar" id="navbar-container"></nav>
+
+    <main class="form-container-page">
+        <div class="glass-form-card" style="max-width: 550px;">
+            <h1 class="form-title">Secure Payment</h1>
+            <p class="form-subtitle">Complete payment transaction to secure your tickets</p>
+            
+            <!-- Booking Details Panel -->
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 1.2rem; border-radius: 12px; margin-bottom: 2rem;">
+                <div style="display:flex; justify-content:space-between; margin-bottom: 0.5rem;">
+                    <span style="color: var(--text-secondary);">Event:</span>
+                    <span id="payment-event-name" style="font-weight: 600; text-align: right; max-width: 70%;">Loading...</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom: 0.5rem;">
+                    <span style="color: var(--text-secondary);">Tickets Booked:</span>
+                    <span id="payment-tickets-count" style="font-weight: 600;">0</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom: 0.5rem;">
+                    <span style="color: var(--text-secondary);">Status:</span>
+                    <span class="status-badge status-pending">Pending Payment</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 0.8rem; margin-top: 0.8rem;">
+                    <span style="font-weight: bold;">Amount Due:</span>
+                    <span id="payment-total-amount" style="font-weight: bold; color: var(--color-success); font-size: 1.25rem;">₹0</span>
+                </div>
+            </div>
+            
+            <!-- Payment Form -->
+            <form id="payment-form">
+                <div class="form-group">
+                    <label for="payment-method" class="form-label">Select Payment Method</label>
+                    <select id="payment-method" class="form-control" required>
+                        <option value="UPI">UPI (Google Pay / PhonePe / Paytm)</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="Debit Card">Debit Card</option>
+                        <option value="Net Banking">Net Banking</option>
+                        <option value="Wallet">Mobile Wallet</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" style="padding: 1rem; background: rgba(0,245,255,0.05); border: 1px solid rgba(0,245,255,0.15); border-radius: 12px; margin-bottom: 1.5rem; font-size: 0.85rem; color: var(--color-secondary);">
+                    🔒 Payments are simulated and secure. All payment attempts default to success for testing.
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Process Payment</button>
+            </form>
+            
+            <!-- Payment Receipt with QR Code Ticket (Initially Hidden) -->
+            <div id="payment-receipt-box" style="display: none; text-align: center; margin-top: 1rem;">
+                <div style="color: var(--color-success); font-size: 3rem; margin-bottom: 0.5rem;">✔️</div>
+                <h3 style="color: var(--color-success); margin-bottom: 0.5rem;">Booking Confirmed!</h3>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">A digital confirmation has been saved. Use the QR Code below at the venue entrance.</p>
+                
+                <!-- Ticket QR Code container (Bonus) -->
+                <div class="ticket-qr-box">
+                    <img id="ticket-qr-code" src="" alt="Digital Ticket QR Code">
+                </div>
+                
+                <div style="background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); padding: 1rem; border-radius: 12px; font-size: 0.85rem; text-align: left; margin: 1.5rem 0;">
+                    <p style="margin-bottom: 0.3rem;"><span style="color: var(--text-secondary);">Transaction ID:</span> <span id="receipt-txn" style="font-family: monospace; font-weight: bold;">TXN123456</span></p>
+                    <p><span style="color: var(--text-secondary);">Confirmation Date:</span> <span>2026-07-19</span></p>
+                </div>
+                
+                <div style="display: flex; gap: 1rem;">
+                    <a href="booking_history.html" class="btn btn-primary" style="flex: 1;">View My Bookings</a>
+                    <a href="index.html" class="btn btn-secondary" style="flex: 1;">Back to Home</a>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.85rem;">
+        <p>&copy; 2026 Eventify Inc.</p>
+    </footer>
+
+</body>
+</html>

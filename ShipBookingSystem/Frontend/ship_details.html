@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ship Voyage Details - OceanWave</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- Dynamic Header Navigation Bar -->
+    <nav class="navbar" id="navbar-container"></nav>
+
+    <!-- Details split layout -->
+    <main class="details-layout">
+        
+        <!-- Left: Voyage Meta & Descriptions -->
+        <article class="details-content">
+            <!-- Dynamically populated info -->
+            <div id="ship-details-content">
+                <p style="text-align: center; color: var(--text-secondary);">Loading vessel details...</p>
+            </div>
+            
+            <!-- Reviews & Ratings Block (Bonus) -->
+            <section class="reviews-box">
+                <h3 style="font-family: var(--font-heading); font-size: 1.6rem; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.5rem; color: var(--color-secondary);">Passenger Reviews &amp; Ratings</h3>
+                
+                <!-- Average metrics display -->
+                <div class="reviews-stat">
+                    <div>
+                        <div class="reviews-big-rating" id="avg-rating-value">0.0</div>
+                        <div style="font-size: 0.8rem; color: var(--text-secondary); text-align: center;">Rating</div>
+                    </div>
+                    <div>
+                        <div class="stars-list" id="avg-stars-list">☆☆☆☆☆</div>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.3rem;">Based on passenger feedback</p>
+                    </div>
+                </div>
+                
+                <!-- Review Form -->
+                <div class="review-form-block">
+                    <h4 style="margin-bottom: 0.8rem; font-weight:600;">Share Voyage Feedback</h4>
+                    <form id="ship-review-form">
+                        <div class="field-group" style="margin-bottom: 0.5rem;">
+                            <label class="field-label" style="margin-bottom: 0;">Rating</label>
+                            <div class="review-stars-selector" id="rating-selector">
+                                <span class="selected" style="color: var(--color-accent);">★</span>
+                                <span class="selected" style="color: var(--color-accent);">★</span>
+                                <span class="selected" style="color: var(--color-accent);">★</span>
+                                <span class="selected" style="color: var(--color-accent);">★</span>
+                                <span class="selected" style="color: var(--color-accent);">★</span>
+                            </div>
+                        </div>
+                        
+                        <div class="field-group">
+                            <label for="review-comment" class="field-label">Your Comment</label>
+                            <textarea id="review-comment" rows="3" class="field-control" placeholder="Describe your experience onboard..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-secondary" style="font-size: 0.9rem; padding: 0.5rem 1.5rem;">Submit Review</button>
+                    </form>
+                </div>
+                
+                <!-- Reviews Feed -->
+                <div class="reviews-feed" id="ship-reviews-list">
+                    <!-- Loaded dynamically -->
+                </div>
+            </section>
+        </article>
+        
+        <!-- Right: Ticket Checkout Summary Card -->
+        <aside class="details-sidebar" id="ship-details-sidebar">
+            <p style="text-align: center; color: var(--text-secondary);">Loading booking parameters...</p>
+        </aside>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 3rem 0; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-secondary); margin-top: 4rem;">
+        <p>&copy; 2026 OceanWave Inc.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passenger Sign In - OceanWave</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- Dynamic Header Navigation Bar -->
+    <nav class="navbar" id="navbar-container"></nav>
+
+    <!-- Glassmorphic Login Form Card -->
+    <main class="form-page-container">
+        <div class="glass-form">
+            <h1 class="form-title-h1">Passenger Sign In</h1>
+            <p class="form-subtitle-p">Access your voyages dashboard, boarding passes, and booking history</p>
+            
+            <form id="login-form">
+                <div class="field-group">
+                    <label for="email" class="field-label">Email Address</label>
+                    <input type="email" id="email" class="field-control" placeholder="rahul@gmail.com" required autocomplete="email">
+                </div>
+                
+                <div class="field-group">
+                    <label for="password" class="field-label">Password</label>
+                    <input type="password" id="password" class="field-control" placeholder="••••••••" required autocomplete="current-password">
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Sign In</button>
+            </form>
+            
+            <div class="form-footer" style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);">
+                <p>New passenger? <a href="register.html" style="color: var(--color-secondary); text-decoration: none;">Register profile</a></p>
+            </div>
+            
+            <div style="margin-top: 1.5rem; padding: 1rem; border: 1px solid var(--border-glow); border-radius: 12px; font-size: 0.8rem; background: rgba(0,0,0,0.3); color: var(--text-secondary);">
+                <p style="font-weight: bold; color: var(--color-accent); margin-bottom: 0.3rem;">Testing Credentials Hint:</p>
+                <p>👤 Passenger: rahul@gmail.com (pwd: rahul123)</p>
+                <p>👤 Administrator: admin@gmail.com (pwd: admin123)</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.85rem;">
+        <p>&copy; 2026 OceanWave Inc.</p>
+    </footer>
+
+</body>
+</html>
