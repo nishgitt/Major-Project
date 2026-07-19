@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment | Aura Salon & Spa</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="navbar">
+        <a href="index.html" class="nav-logo">
+            <i class="fa-solid fa-gem"></i> AURA
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="stylists.html">Stylists</a></li>
+            <li><a href="booking.html">Book Appointment</a></li>
+        </ul>
+    </header>
+
+    <!-- Payment Container -->
+    <div class="auth-wrapper" style="min-height: 80vh;">
+        <div class="auth-card" style="max-width: 600px;">
+            <div class="auth-header">
+                <h2>Secure Checkout</h2>
+                <p>Complete your payment to confirm your appointment booking</p>
+            </div>
+
+            <div id="paymentAlertMsg" class="badge danger" style="width: 100%; display: none; margin-bottom: 1.5rem; padding: 0.8rem; text-align: center;"></div>
+            <div id="paymentSuccessMsg" class="badge success" style="width: 100%; display: none; margin-bottom: 1.5rem; padding: 0.8rem; text-align: center;"></div>
+
+            <!-- Booking Overview -->
+            <div style="background-color: var(--bg-dark); border: 1px solid var(--border-color); border-radius: 4px; padding: 1.2rem; margin-bottom: 2rem;">
+                <h4 style="margin-bottom: 0.8rem; color: var(--primary);">Appointment Invoice</h4>
+                <div class="summary-row">
+                    <span>Service:</span>
+                    <strong id="invoiceService">-</strong>
+                </div>
+                <div class="summary-row">
+                    <span>Stylist:</span>
+                    <strong id="invoiceStylist">-</strong>
+                </div>
+                <div class="summary-row">
+                    <span>Date & Time:</span>
+                    <strong id="invoiceDateTime">-</strong>
+                </div>
+                <div class="summary-row total" style="margin-top: 0.8rem; padding-top: 0.8rem;">
+                    <span>Amount Due:</span>
+                    <span id="invoiceAmount" style="color: var(--primary);">₹0.00</span>
+                </div>
+            </div>
+
+            <!-- Select Payment Method -->
+            <h4 style="margin-bottom: 1rem;">Choose Payment Method</h4>
+            <div class="payment-methods" id="paymentMethodsGrid">
+                <div class="payment-method-card selected" data-method="UPI">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                    <span>UPI / Scan QR</span>
+                </div>
+                <div class="payment-method-card" data-method="Credit Card">
+                    <i class="fa-solid fa-credit-card"></i>
+                    <span>Credit Card</span>
+                </div>
+                <div class="payment-method-card" data-method="Debit Card">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Debit Card</span>
+                </div>
+                <div class="payment-method-card" data-method="Cash">
+                    <i class="fa-solid fa-money-bill-wave"></i>
+                    <span>Pay at Desk (Cash)</span>
+                </div>
+            </div>
+
+            <!-- UPI details panel -->
+            <div id="upiPanel" class="form-group" style="background-color: var(--bg-dark); padding: 1rem; border-radius: 4px; border: 1px solid var(--border-color); margin-bottom: 1.5rem; text-align: center;">
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.8rem;">Scan QR code or enter your VPA to pay</p>
+                <div style="background-color: #ffffff; width: 120px; height: 120px; margin: 0 auto 0.8rem; display: flex; align-items: center; justify-content: center; border-radius: 4px;">
+                    <!-- Simulated QR -->
+                    <i class="fa-solid fa-qrcode" style="font-size: 5rem; color: #000000;"></i>
+                </div>
+                <input type="text" id="upiVpa" class="form-control" style="text-align: center;" placeholder="e.g. username@upi">
+            </div>
+
+            <!-- Card details panel -->
+            <div id="cardPanel" class="form-group" style="display: none; background-color: var(--bg-dark); padding: 1.2rem; border-radius: 4px; border: 1px solid var(--border-color); margin-bottom: 1.5rem;">
+                <div class="form-group">
+                    <label>Card Number</label>
+                    <input type="text" class="form-control" placeholder="1234 5678 9876 5432">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Expiry Date</label>
+                        <input type="text" class="form-control" placeholder="MM/YY">
+                    </div>
+                    <div class="form-group">
+                        <label>CVV</label>
+                        <input type="password" class="form-control" placeholder="***">
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" id="payNowBtn" class="btn-primary" style="width: 100%;">
+                Confirm Payment & Book
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 Aura Salon & Spa. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Salon & Spa | Premium Wellness Experience</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="navbar">
+        <a href="index.html" class="nav-logo">
+            <i class="fa-solid fa-gem"></i> AURA
+        </a>
+        <button class="nav-toggle" id="navToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="stylists.html">Stylists</a></li>
+            <li><a href="booking.html">Book Appointment</a></li>
+            <li id="navDashboardLink" style="display: none;"><a href="customer_dashboard.html">Dashboard</a></li>
+            <li id="navAdminLink" style="display: none;"><a href="admin_dashboard.html">Admin Panel</a></li>
+            <li id="authLinkContainer">
+                <a href="login.html" class="nav-auth-btn">Login</a>
+            </li>
+        </ul>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-subtitle">Luxury Wellness Retreat</span>
+            <h1 class="hero-title">Rejuvenate Your Senses.<br>Restore Your Soul.</h1>
+            <p class="hero-desc">Experience world-class salon and spa treatments tailored to your unique desires. Indulge in the luxury of pure relaxation.</p>
+            <div class="hero-actions">
+                <a href="booking.html" class="btn-primary">Book Appointment</a>
+                <a href="services.html" class="btn-outline">Explore Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Services Section -->
+    <section class="section-padding">
+        <div class="section-header">
+            <span class="section-subtitle">Our Signature Treatments</span>
+            <h2 class="section-title">Featured Services</h2>
+        </div>
+        <div class="services-grid" id="featuredServicesGrid">
+            <!-- Dynamically populated via script.js -->
+        </div>
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="services.html" class="btn-outline">View All Services</a>
+        </div>
+    </section>
+
+    <!-- Popular Stylists Section -->
+    <section class="section-padding" style="background-color: var(--bg-surface);">
+        <div class="section-header">
+            <span class="section-subtitle">Meet Our Professionals</span>
+            <h2 class="section-title">Popular Stylists</h2>
+        </div>
+        <div class="stylists-grid" id="popularStylistsGrid">
+            <!-- Dynamically populated via script.js -->
+        </div>
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="stylists.html" class="btn-outline">View All Stylists</a>
+        </div>
+    </section>
+
+    <!-- Testimonials Section (Reviews) -->
+    <section class="section-padding">
+        <div class="section-header">
+            <span class="section-subtitle">What Our Guests Say</span>
+            <h2 class="section-title">Guest Testimonials</h2>
+        </div>
+        <div class="services-grid" id="testimonialsGrid">
+            <!-- Dynamically populated reviews via script.js -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4 style="font-family: var(--font-serif); letter-spacing: 1px;">AURA SALON & SPA</h4>
+                <p style="margin-top: 1rem; color: var(--text-muted);">Crafting exceptional relaxation experiences and modern styling services since 2018.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="stylists.html">Stylists</a></li>
+                    <li><a href="booking.html">Book Appointment</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Working Hours</h4>
+                <p>Monday - Friday: 9:00 AM - 8:00 PM</p>
+                <p style="margin-top: 0.5rem;">Saturday - Sunday: 10:00 AM - 6:00 PM</p>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p><i class="fa-solid fa-phone" style="color: var(--primary); margin-right: 0.5rem;"></i> +91 99887 76655</p>
+                <p style="margin-top: 0.5rem;"><i class="fa-solid fa-envelope" style="color: var(--primary); margin-right: 0.5rem;"></i> booking@aurasalon.com</p>
+                <p style="margin-top: 0.5rem;"><i class="fa-solid fa-location-dot" style="color: var(--primary); margin-right: 0.5rem;"></i> Jubilee Hills, Rd 36, Hyderabad</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Aura Salon & Spa. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

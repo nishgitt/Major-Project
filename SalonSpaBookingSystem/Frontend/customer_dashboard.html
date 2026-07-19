@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard | Aura Salon & Spa</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="navbar">
+        <a href="index.html" class="nav-logo">
+            <i class="fa-solid fa-gem"></i> AURA
+        </a>
+        <button class="nav-toggle" id="navToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="stylists.html">Stylists</a></li>
+            <li><a href="booking.html">Book Appointment</a></li>
+            <li><a href="customer_dashboard.html" class="active">Dashboard</a></li>
+            <li id="authLinkContainer">
+                <button class="nav-logout-btn" onclick="logout()">Logout</button>
+            </li>
+        </ul>
+    </header>
+
+    <!-- Dashboard Content Area -->
+    <section class="section-padding">
+        <div class="dashboard-layout">
+            <!-- Sidebar -->
+            <aside class="dashboard-sidebar">
+                <div class="sidebar-user">
+                    <div class="avatar" id="userAvatar">-</div>
+                    <h4 id="userFullName">-</h4>
+                    <p id="userRoleBadge">Guest Customer</p>
+                </div>
+                <ul class="sidebar-menu">
+                    <li class="active" data-tab="overview">
+                        <a href="#overview"><i class="fa-solid fa-house"></i> Overview</a>
+                    </li>
+                    <li data-tab="appointments">
+                        <a href="#appointments"><i class="fa-solid fa-calendar-check"></i> Bookings</a>
+                    </li>
+                    <li data-tab="payments">
+                        <a href="#payments"><i class="fa-solid fa-credit-card"></i> Payments</a>
+                    </li>
+                    <li data-tab="feedback">
+                        <a href="#feedback"><i class="fa-solid fa-star"></i> Submit Review</a>
+                    </li>
+                </ul>
+            </aside>
+
+            <!-- Main Panel -->
+            <main class="dashboard-content">
+                <!-- Appointment Reminders Section (Bonus Feature) -->
+                <div id="dashboardReminderContainer" style="display: none;">
+                    <!-- Dynamically populated if an appointment is within 24 hours -->
+                </div>
+
+                <!-- TAB: Overview -->
+                <div class="tab-pane active" id="tab-overview">
+                    <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
+                        <h2 class="section-title" style="font-size: 2rem;">Overview</h2>
+                    </div>
+
+                    <!-- Stats Cards -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-num" id="statUpcoming">0</div>
+                            <div class="stat-label">Upcoming Bookings</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-num" id="statCompleted">0</div>
+                            <div class="stat-label">Completed Services</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-num" id="statTotalSpent">₹0</div>
+                            <div class="stat-label">Total Spent</div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Bookings Table -->
+                    <div style="margin-top: 3rem;">
+                        <h3 style="margin-bottom: 1rem; font-family: var(--font-sans); font-size: 1.3rem;">Recent Upcoming Bookings</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Service</th>
+                                        <th>Stylist</th>
+                                        <th>Date & Time</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentBookingsTableBody">
+                                    <!-- Dynamic rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB: Appointments -->
+                <div class="tab-pane" id="tab-appointments" style="display: none;">
+                    <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
+                        <h2 class="section-title" style="font-size: 2rem;">My Bookings</h2>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Service</th>
+                                    <th>Stylist</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="allBookingsTableBody">
+                                <!-- Dynamic rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- TAB: Payments -->
+                <div class="tab-pane" id="tab-payments" style="display: none;">
+                    <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
+                        <h2 class="section-title" style="font-size: 2rem;">Payment History</h2>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Appt ID</th>
+                                    <th>Method</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="paymentHistoryTableBody">
+                                <!-- Dynamic rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- TAB: Feedback (Bonus Feature) -->
+                <div class="tab-pane" id="tab-feedback" style="display: none;">
+                    <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
+                        <h2 class="section-title" style="font-size: 2rem;">Submit Review</h2>
+                    </div>
+
+                    <div class="auth-card" style="margin: 0; max-width: 100%;">
+                        <div id="reviewAlertMsg" class="badge danger" style="width: 100%; display: none; margin-bottom: 1.5rem; padding: 0.8rem; text-align: center;"></div>
+                        <div id="reviewSuccessMsg" class="badge success" style="width: 100%; display: none; margin-bottom: 1.5rem; padding: 0.8rem; text-align: center;"></div>
+
+                        <form id="reviewSubmitForm">
+                            <div class="form-group">
+                                <label for="reviewTarget">Select Service or Stylist</label>
+                                <select id="reviewTarget" class="form-control" required>
+                                    <option value="" disabled selected>-- Choose Target --</option>
+                                    <!-- Dynamic categories -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Rating</label>
+                                <div style="display: flex; gap: 0.8rem; font-size: 1.8rem; color: var(--text-muted); cursor: pointer;" id="starRatingSelect">
+                                    <i class="fa-solid fa-star star" data-val="1"></i>
+                                    <i class="fa-solid fa-star star" data-val="2"></i>
+                                    <i class="fa-solid fa-star star" data-val="3"></i>
+                                    <i class="fa-solid fa-star star" data-val="4"></i>
+                                    <i class="fa-solid fa-star star" data-val="5"></i>
+                                </div>
+                                <input type="hidden" id="reviewRatingInput" value="5">
+                            </div>
+                            <div class="form-group">
+                                <label for="reviewComment">Review Comment</label>
+                                <textarea id="reviewComment" class="form-control" rows="4" placeholder="Share your experience..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary">Submit Review</button>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 Aura Salon & Spa. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

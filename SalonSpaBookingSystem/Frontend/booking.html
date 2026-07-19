@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment | Aura Salon & Spa</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="navbar">
+        <a href="index.html" class="nav-logo">
+            <i class="fa-solid fa-gem"></i> AURA
+        </a>
+        <button class="nav-toggle" id="navToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="stylists.html">Stylists</a></li>
+            <li><a href="booking.html" class="active">Book Appointment</a></li>
+            <li id="navDashboardLink" style="display: none;"><a href="customer_dashboard.html">Dashboard</a></li>
+            <li id="navAdminLink" style="display: none;"><a href="admin_dashboard.html">Admin Panel</a></li>
+            <li id="authLinkContainer">
+                <a href="login.html" class="nav-auth-btn">Login</a>
+            </li>
+        </ul>
+    </header>
+
+    <!-- Booking Content -->
+    <section class="section-padding">
+        <div class="section-header" style="margin-bottom: 3rem;">
+            <span class="section-subtitle">Reserve Your Slot</span>
+            <h2 class="section-title">Schedule Appointment</h2>
+        </div>
+
+        <div class="booking-container">
+            <!-- Left Side: Selection Panel -->
+            <div class="booking-panel">
+                <div id="bookingAlertMsg" class="badge danger" style="width: 100%; display: none; margin-bottom: 1.5rem; padding: 0.8rem; text-align: center;"></div>
+                
+                <form id="appointmentForm">
+                    <!-- Step 1: Select Service -->
+                    <div class="form-group">
+                        <label for="bookService">Select Service</label>
+                        <select id="bookService" class="form-control" required>
+                            <option value="" disabled selected>-- Choose Service --</option>
+                            <!-- Dynamically loaded -->
+                        </select>
+                    </div>
+
+                    <!-- Step 2: Select Stylist -->
+                    <div class="form-group">
+                        <label for="bookStylist">Select Stylist</label>
+                        <select id="bookStylist" class="form-control" required>
+                            <option value="" disabled selected>-- Choose Stylist --</option>
+                            <!-- Dynamically loaded -->
+                        </select>
+                        <small id="stylistStatusNote" style="color: var(--primary); display: none; margin-top: 0.3rem;"></small>
+                    </div>
+
+                    <!-- Step 3: Select Date -->
+                    <div class="form-group">
+                        <label for="bookDate">Select Appointment Date</label>
+                        <input type="date" id="bookDate" class="form-control" required min="2026-07-19">
+                    </div>
+
+                    <!-- Step 4: Time Slot Selector (Bonus: Availability Checker) -->
+                    <div class="form-group">
+                        <label>Select Time Slot</label>
+                        <div class="time-slots" id="bookingTimeSlotsContainer">
+                            <span class="time-slot" data-time="09:00">09:00 AM</span>
+                            <span class="time-slot" data-time="10:00">10:00 AM</span>
+                            <span class="time-slot" data-time="11:00">11:00 AM</span>
+                            <span class="time-slot" data-time="12:00">12:00 PM</span>
+                            <span class="time-slot" data-time="13:00">01:00 PM</span>
+                            <span class="time-slot" data-time="14:00">02:00 PM</span>
+                            <span class="time-slot" data-time="15:00">03:00 PM</span>
+                            <span class="time-slot" data-time="16:00">04:00 PM</span>
+                            <span class="time-slot" data-time="17:00">05:00 PM</span>
+                            <span class="time-slot" data-time="18:00">06:00 PM</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Right Side: Booking Summary -->
+            <div class="booking-summary-panel">
+                <h3>Booking Summary</h3>
+                <div class="summary-body">
+                    <div class="summary-row">
+                        <span>Service</span>
+                        <strong id="summaryService">-</strong>
+                    </div>
+                    <div class="summary-row">
+                        <span>Stylist</span>
+                        <strong id="summaryStylist">-</strong>
+                    </div>
+                    <div class="summary-row">
+                        <span>Date</span>
+                        <strong id="summaryDate">-</strong>
+                    </div>
+                    <div class="summary-row">
+                        <span>Time</span>
+                        <strong id="summaryTime">-</strong>
+                    </div>
+                    <div class="summary-row">
+                        <span>Duration</span>
+                        <strong id="summaryDuration">-</strong>
+                    </div>
+                    
+                    <div class="summary-row total">
+                        <span>Total Amount</span>
+                        <span id="summaryTotal">₹0.00</span>
+                    </div>
+
+                    <button type="button" id="confirmBookingBtn" class="btn-primary" style="width: 100%; margin-top: 1.5rem;" disabled>
+                        Proceed to Payment
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 Aura Salon & Spa. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

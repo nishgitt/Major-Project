@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Aura Salon & Spa</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="navbar">
+        <a href="index.html" class="nav-logo">
+            <i class="fa-solid fa-gem"></i> AURA <span style="font-size: 0.8rem; color: var(--primary); font-family: var(--font-sans); font-weight: 600;">ADMIN</span>
+        </a>
+        <button class="nav-toggle" id="navToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="stylists.html">Stylists</a></li>
+            <li><a href="booking.html">Book Appointment</a></li>
+            <li><a href="admin_dashboard.html" class="active">Admin Panel</a></li>
+            <li id="authLinkContainer">
+                <button class="nav-logout-btn" onclick="logout()">Logout</button>
+            </li>
+        </ul>
+    </header>
+
+    <!-- Admin workspace -->
+    <section class="section-padding">
+        <div class="dashboard-layout">
+            <!-- Sidebar -->
+            <aside class="dashboard-sidebar">
+                <div class="sidebar-user">
+                    <div class="avatar"><i class="fa-solid fa-user-shield"></i></div>
+                    <h4>Administrator</h4>
+                    <p>Aura Admin Control</p>
+                </div>
+                <ul class="sidebar-menu">
+                    <li class="active" data-tab="admin-services">
+                        <a href="#services"><i class="fa-solid fa-spa"></i> Services</a>
+                    </li>
+                    <li data-tab="admin-stylists">
+                        <a href="#stylists"><i class="fa-solid fa-scissors"></i> Stylists</a>
+                    </li>
+                    <li data-tab="admin-customers">
+                        <a href="#customers"><i class="fa-solid fa-users"></i> Customers</a>
+                    </li>
+                    <li data-tab="admin-appointments">
+                        <a href="#appointments"><i class="fa-solid fa-calendar-check"></i> Appointments</a>
+                    </li>
+                    <li data-tab="admin-payments">
+                        <a href="#payments"><i class="fa-solid fa-credit-card"></i> Payments</a>
+                    </li>
+                </ul>
+            </aside>
+
+            <!-- Main Panel -->
+            <main class="dashboard-content">
+                <div id="adminGlobalAlert" class="badge success" style="display: none; padding: 1rem; margin-bottom: 1.5rem; width: 100%; text-align: center;"></div>
+
+                <!-- TAB: Services -->
+                <div class="tab-pane active" id="tab-admin-services">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <h2 class="section-title" style="font-size: 2rem;">Services Manager</h2>
+                        <button class="btn-primary btn-small" onclick="openAddModal('service')"><i class="fa-solid fa-plus"></i> Add Service</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Service Name</th>
+                                    <th>Category</th>
+                                    <th>Duration (min)</th>
+                                    <th>Price (₹)</th>
+                                    <th>Description</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminServicesTableBody">
+                                <!-- Dynamic content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- TAB: Stylists -->
+                <div class="tab-pane" id="tab-admin-stylists" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <h2 class="section-title" style="font-size: 2rem;">Stylists Manager</h2>
+                        <button class="btn-primary btn-small" onclick="openAddModal('stylist')"><i class="fa-solid fa-plus"></i> Add Stylist</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Stylist Name</th>
+                                    <th>Specialization</th>
+                                    <th>Experience (yrs)</th>
+                                    <th>Phone</th>
+                                    <th>Availability</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminStylistsTableBody">
+                                <!-- Dynamic content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- TAB: Customers -->
+                <div class="tab-pane" id="tab-admin-customers" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <h2 class="section-title" style="font-size: 2rem;">Customers Manager</h2>
+                        <button class="btn-primary btn-small" onclick="openAddModal('customer')"><i class="fa-solid fa-plus"></i> Add Customer</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Full Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Gender</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminCustomersTableBody">
+                                <!-- Dynamic content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- TAB: Appointments -->
+                <div class="tab-pane" id="tab-admin-appointments" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <h2 class="section-title" style="font-size: 2rem;">Appointments Manager</h2>
+                        <button class="btn-primary btn-small" onclick="openAddModal('appointment')"><i class="fa-solid fa-plus"></i> Add Appointment</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Customer Name</th>
+                                    <th>Stylist Name</th>
+                                    <th>Service Name</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Amount (₹)</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminAppointmentsTableBody">
+                                <!-- Dynamic content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- TAB: Payments -->
+                <div class="tab-pane" id="tab-admin-payments" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <h2 class="section-title" style="font-size: 2rem;">Payments Manager</h2>
+                        <button class="btn-primary btn-small" onclick="openAddModal('payment')"><i class="fa-solid fa-plus"></i> Add Payment</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Customer Name</th>
+                                    <th>Appt ID</th>
+                                    <th>Amount (₹)</th>
+                                    <th>Method</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminPaymentsTableBody">
+                                <!-- Dynamic content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <!-- MODAL OVERLAY: ADMIN EDIT & CREATE -->
+    <div class="modal-overlay" id="adminModalOverlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Entity Form</h3>
+                <button class="modal-close" onclick="closeAdminModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="adminModalForm">
+                    <input type="hidden" id="modalAction" value="add">
+                    <input type="hidden" id="modalEntity" value="">
+                    <input type="hidden" id="modalId" value="">
+
+                    <!-- Sub-Forms populated dynamically via script.js -->
+                    <div id="dynamicFormFields"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-outline btn-small" onclick="closeAdminModal()">Cancel</button>
+                <button type="button" class="btn-primary btn-small" id="modalSubmitBtn" onclick="submitAdminForm()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 Aura Salon & Spa. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

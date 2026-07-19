@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | Aura Salon & Spa</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="navbar">
+        <a href="index.html" class="nav-logo">
+            <i class="fa-solid fa-gem"></i> AURA
+        </a>
+        <button class="nav-toggle" id="navToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html" class="active">Services</a></li>
+            <li><a href="stylists.html">Stylists</a></li>
+            <li><a href="booking.html">Book Appointment</a></li>
+            <li id="navDashboardLink" style="display: none;"><a href="customer_dashboard.html">Dashboard</a></li>
+            <li id="navAdminLink" style="display: none;"><a href="admin_dashboard.html">Admin Panel</a></li>
+            <li id="authLinkContainer">
+                <a href="login.html" class="nav-auth-btn">Login</a>
+            </li>
+        </ul>
+    </header>
+
+    <!-- Services Header -->
+    <section class="section-padding" style="padding-bottom: 2rem;">
+        <div class="section-header" style="margin-bottom: 2rem;">
+            <span class="section-subtitle">Indulge & Pamper</span>
+            <h2 class="section-title">Spa & Salon Services</h2>
+        </div>
+
+        <!-- Filters (Bonus Feature) -->
+        <div class="filter-controls">
+            <div class="search-bar">
+                <input type="text" id="serviceSearchInput" placeholder="Search services (e.g., Massage, Spa)...">
+            </div>
+            <div class="category-tags" id="categoryTagsContainer">
+                <span class="tag active" data-category="All">All Services</span>
+                <span class="tag" data-category="Hair Cut">Hair Cut</span>
+                <span class="tag" data-category="Hair Styling">Hair Styling</span>
+                <span class="tag" data-category="Hair Coloring">Hair Coloring</span>
+                <span class="tag" data-category="Facial">Facial</span>
+                <span class="tag" data-category="Spa">Spa</span>
+                <span class="tag" data-category="Massage">Massage</span>
+                <span class="tag" data-category="Manicure">Manicure</span>
+                <span class="tag" data-category="Pedicure">Pedicure</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Catalog Grid -->
+    <section class="section-padding" style="padding-top: 0;">
+        <div class="services-grid" id="servicesCatalogGrid">
+            <!-- Dynamically populated via script.js -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 Aura Salon & Spa. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
