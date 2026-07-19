@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Register | EliteHomes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="nav-brand">
+                <i class="fa-solid fa-hotel"></i> EliteHomes
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="properties.html">Properties</a></li>
+                <li><a href="bookings.html">Bookings</a></li>
+                <li><a href="inquiries.html">Inquiries</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="auth-container" style="max-width: 500px;">
+        <div class="auth-header">
+            <h2>Create Account</h2>
+            <p>Register as a customer to browse listings and book visits</p>
+        </div>
+        
+        <form id="register-form">
+            <div class="form-group">
+                <label for="reg-name">Full Name</label>
+                <input type="text" id="reg-name" required placeholder="e.g. Rahul Sharma">
+            </div>
+            
+            <div class="form-group">
+                <label for="reg-email">Email Address</label>
+                <input type="email" id="reg-email" required placeholder="e.g. rahul@gmail.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="reg-phone">Phone Number</label>
+                <input type="tel" id="reg-phone" required placeholder="e.g. 9876543210" pattern="[0-9]{10}">
+            </div>
+            
+            <div class="form-group">
+                <label for="reg-city">City</label>
+                <input type="text" id="reg-city" required placeholder="e.g. Hyderabad">
+            </div>
+            
+            <div class="form-group">
+                <label for="reg-password">Password</label>
+                <input type="password" id="reg-password" required placeholder="Create password">
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.8rem; margin-top: 1rem;">
+                Create Account <i class="fa-solid fa-user-plus"></i>
+            </button>
+        </form>
+        
+        <div class="auth-switch">
+            Already have an account? <a href="login.html">Sign in here</a>
+        </div>
+    </main>
+
+    <div class="toast-container" id="toast-container"></div>
+
+    <footer>
+        <p>&copy; 2026 EliteHomes Real Estate Portal. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

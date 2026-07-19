@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | EliteHomes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="nav-brand">
+                <i class="fa-solid fa-hotel"></i> EliteHomes
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="properties.html">Properties</a></li>
+                <li><a href="bookings.html">Bookings</a></li>
+                <li><a href="inquiries.html">Inquiries</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="auth-container">
+        <div class="auth-header">
+            <h2>Welcome Back</h2>
+            <p>Enter your credentials to manage your properties and bookings</p>
+        </div>
+        
+        <form id="login-form">
+            <div class="form-group">
+                <label for="login-email">Email or Username</label>
+                <input type="text" id="login-email" required placeholder="e.g. rahul@gmail.com or admin">
+            </div>
+            
+            <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" required placeholder="••••••••">
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.8rem; margin-top: 1rem;">
+                Sign In <i class="fa-solid fa-right-to-bracket"></i>
+            </button>
+        </form>
+        
+        <div class="auth-switch">
+            Don't have an account? <a href="register.html">Register here</a>
+        </div>
+    </main>
+
+    <div class="toast-container" id="toast-container"></div>
+
+    <footer>
+        <p>&copy; 2026 EliteHomes Real Estate Portal. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

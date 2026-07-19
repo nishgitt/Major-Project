@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard | EliteHomes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="nav-brand">
+                <i class="fa-solid fa-hotel"></i> EliteHomes
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="properties.html">Properties</a></li>
+                <li><a href="bookings.html">Bookings</a></li>
+                <li><a href="inquiries.html">Inquiries</a></li>
+                <li><a href="#" class="active" id="dash-nav-link">Dashboard</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <div id="user-menu" class="btn-outline btn">
+                    <span id="user-display-name">Customer</span>
+                    <i class="fa-solid fa-angle-down"></i>
+                    <div class="user-dropdown" id="user-dropdown" style="display: none;">
+                        <a href="#" id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="section">
+        <div style="margin-bottom: 2rem;">
+            <h1 id="welcome-message" style="font-size: 2.2rem; font-weight: 700;">Welcome, Customer!</h1>
+            <p style="color: var(--text-muted);" id="user-subtext">Manage your saved listings, visit bookings, and inquiries.</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Sidebar Navigation Tabs -->
+            <aside class="dashboard-sidebar">
+                <ul class="sidebar-nav">
+                    <li>
+                        <button class="active" data-tab="tab-saved">
+                            <i class="fa-solid fa-heart"></i> Saved Properties
+                        </button>
+                    </li>
+                    <li>
+                        <button data-tab="tab-bookings">
+                            <i class="fa-solid fa-calendar-days"></i> Visit Bookings
+                        </button>
+                    </li>
+                    <li>
+                        <button data-tab="tab-inquiries">
+                            <i class="fa-solid fa-clipboard-question"></i> Inquiry History
+                        </button>
+                    </li>
+                    <li>
+                        <button data-tab="tab-purchased">
+                            <i class="fa-solid fa-house-circle-check"></i> Purchased/Rented
+                        </button>
+                    </li>
+                    <li>
+                        <button data-tab="tab-profile">
+                            <i class="fa-solid fa-user-gear"></i> Update Profile
+                        </button>
+                    </li>
+                </ul>
+            </aside>
+
+            <!-- Dashboard Content Container -->
+            <section class="dashboard-content" id="dashboard-content-panel">
+                
+                <!-- Saved Properties Tab -->
+                <div class="dashboard-tab-content active" id="tab-saved">
+                    <div class="tab-header">
+                        <h3>Saved Properties</h3>
+                        <span class="badge badge-available" id="saved-count-badge">0 Saved</span>
+                    </div>
+                    <div class="card-grid" id="saved-properties-grid">
+                        <div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 3rem;">
+                            No properties saved yet. <a href="properties.html" style="color: var(--primary); font-weight: 600;">Browse listings</a> to add favorites.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visit Bookings Tab -->
+                <div class="dashboard-tab-content" id="tab-bookings">
+                    <div class="tab-header">
+                        <h3>Your Visit Bookings</h3>
+                        <a href="bookings.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-calendar-plus"></i> Schedule New</a>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Booking ID</th>
+                                    <th>Property</th>
+                                    <th>Agent Name</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bookings-table-body">
+                                <tr>
+                                    <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 2rem;">No bookings found.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Inquiry History Tab -->
+                <div class="dashboard-tab-content" id="tab-inquiries">
+                    <div class="tab-header">
+                        <h3>Your Property Inquiries</h3>
+                        <a href="inquiries.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Send Inquiry</a>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Inquiry ID</th>
+                                    <th>Property</th>
+                                    <th>Message</th>
+                                    <th>Date Sent</th>
+                                    <th>Response Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inquiries-table-body">
+                                <tr>
+                                    <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 2rem;">No inquiries found.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Purchased/Rented Properties Tab -->
+                <div class="dashboard-tab-content" id="tab-purchased">
+                    <div class="tab-header">
+                        <h3>Purchased / Rented Properties</h3>
+                    </div>
+                    <div class="card-grid" id="purchased-properties-grid">
+                        <div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 3rem;">
+                            No purchased or rented listings recorded.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Update Profile Tab -->
+                <div class="dashboard-tab-content" id="tab-profile">
+                    <div class="tab-header">
+                        <h3>Update Account Profile</h3>
+                    </div>
+                    <form id="profile-update-form" style="max-width: 500px;">
+                        <div class="form-group">
+                            <label for="prof-name">Full Name</label>
+                            <input type="text" id="prof-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="prof-email">Email Address</label>
+                            <input type="email" id="prof-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="prof-phone">Phone Number</label>
+                            <input type="tel" id="prof-phone" required pattern="[0-9]{10}">
+                        </div>
+                        <div class="form-group">
+                            <label for="prof-city">City</label>
+                            <input type="text" id="prof-city" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="prof-password">Change Password</label>
+                            <input type="password" id="prof-password" required placeholder="Enter new or current password">
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">
+                            Save Settings <i class="fa-solid fa-floppy-disk"></i>
+                        </button>
+                    </form>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <!-- Side Comparison Drawer (Bonus Feature) -->
+    <div class="comparison-drawer" id="comparison-drawer">
+        <div class="drawer-header">
+            <div>
+                <h4 style="font-size: 1.1rem; font-weight: 700;">Compare Properties</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">Compare key specs side-by-side (max 3 properties)</p>
+            </div>
+            <div style="display: flex; gap: 1rem;">
+                <button class="btn btn-primary btn-sm" id="compare-btn">Compare Now</button>
+                <button class="btn btn-outline btn-sm" id="compare-clear-btn">Clear All</button>
+            </div>
+        </div>
+        <div class="drawer-items" id="comparison-drawer-items"></div>
+    </div>
+
+    <!-- Comparison Modal -->
+    <div class="modal-overlay" id="compare-modal-overlay">
+        <div class="compare-modal">
+            <button class="modal-close" id="compare-modal-close"><i class="fa-solid fa-xmark"></i></button>
+            <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Property Comparison Matrix</h3>
+            <div id="compare-modal-content"></div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toast-container"></div>
+
+    <footer>
+        <p>&copy; 2026 EliteHomes Real Estate Portal. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

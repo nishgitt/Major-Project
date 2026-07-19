@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Control Panel | EliteHomes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Extra styles specific to admin forms layout */
+        .admin-modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1200; opacity: 0; pointer-events: none;
+            transition: opacity var(--transition-fast);
+        }
+        .admin-modal-overlay.open { opacity: 1; pointer-events: auto; }
+        .admin-modal {
+            background-color: var(--bg-surface);
+            border-radius: var(--radius-md);
+            width: 90%; max-width: 600px;
+            padding: 2.5rem; box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="nav-brand">
+                <i class="fa-solid fa-hotel"></i> EliteHomes Admin
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="properties.html">Properties</a></li>
+                <li><a href="#" class="active">Control Panel</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <div id="user-menu" class="btn-outline btn">
+                    <span>Administrator</span>
+                    <i class="fa-solid fa-angle-down"></i>
+                    <div class="user-dropdown" id="user-dropdown" style="display: none;">
+                        <a href="#" id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="section">
+        <div style="margin-bottom: 2rem;">
+            <h1 style="font-size: 2.2rem; font-weight: 700;">System Administrator Panel</h1>
+            <p style="color: var(--text-muted);">Manage real estate listings, client bookings, customer feedback, and agent directories.</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Sidebar Navigation Tabs -->
+            <aside class="dashboard-sidebar">
+                <ul class="sidebar-nav">
+                    <li>
+                        <button class="active" data-tab="admin-properties">
+                            <i class="fa-solid fa-house"></i> Properties
+                        </button>
+                    </li>
+                    <li>
+                        <button data-tab="admin-agents">
+                            <i class="fa-solid fa-user-tie"></i> Agents
+                        </button>
+                    </li>
+                    <li>
+                        <button data-tab="admin-bookings">
+                            <i class="fa-solid fa-calendar-check"></i> Bookings
+                        </button>
+                    </li>
+                    <li>
+                        <button data-tab="admin-inquiries">
+                            <i class="fa-solid fa-envelope-open-text"></i> Inquiries
+                        </button>
+                    </li>
+                    <li>
+                        <button data-tab="admin-customers">
+                            <i class="fa-solid fa-users"></i> Customers
+                        </button>
+                    </li>
+                </ul>
+            </aside>
+
+            <!-- Admin Action Panels -->
+            <section class="dashboard-content">
+                
+                <!-- PROPERTIES PANEL -->
+                <div class="dashboard-tab-content active" id="admin-properties">
+                    <div class="tab-header">
+                        <h3>Properties Management</h3>
+                        <button class="btn btn-primary btn-sm" id="admin-add-property-btn"><i class="fa-solid fa-plus"></i> Add Property</button>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Title</th>
+                                    <th>Type</th>
+                                    <th>Location</th>
+                                    <th>Price (₹)</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-properties-table-body">
+                                <!-- Dynamic properties rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- AGENTS PANEL -->
+                <div class="dashboard-tab-content" id="admin-agents">
+                    <div class="tab-header">
+                        <h3>Agents Directory</h3>
+                        <button class="btn btn-primary btn-sm" id="admin-add-agent-btn"><i class="fa-solid fa-plus"></i> Add Agent</button>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Agent Name</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Experience (Yrs)</th>
+                                    <th>Specialization</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-agents-table-body">
+                                <!-- Dynamic agents rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- BOOKINGS PANEL -->
+                <div class="dashboard-tab-content" id="admin-bookings">
+                    <div class="tab-header">
+                        <h3>Visit Bookings Log</h3>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Customer Name</th>
+                                    <th>Property</th>
+                                    <th>Agent Name</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-bookings-table-body">
+                                <!-- Dynamic bookings rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- INQUIRIES PANEL -->
+                <div class="dashboard-tab-content" id="admin-inquiries">
+                    <div class="tab-header">
+                        <h3>Customer Inquiries</h3>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Customer Name</th>
+                                    <th>Property</th>
+                                    <th>Message</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-inquiries-table-body">
+                                <!-- Dynamic inquiries rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- CUSTOMERS PANEL -->
+                <div class="dashboard-tab-content" id="admin-customers">
+                    <div class="tab-header">
+                        <h3>Customer Directory</h3>
+                        <button class="btn btn-primary btn-sm" id="admin-add-customer-btn"><i class="fa-solid fa-plus"></i> Add Customer</button>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Full Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>City</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-customers-table-body">
+                                <!-- Dynamic customer rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <!-- PROPERTY MODAL FORM -->
+    <div class="admin-modal-overlay" id="property-modal-overlay">
+        <div class="admin-modal">
+            <button class="modal-close" onclick="closeAdminModal('property-modal-overlay')"><i class="fa-solid fa-xmark"></i></button>
+            <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem;" id="property-modal-title">Create Property Listing</h3>
+            
+            <form id="admin-property-form">
+                <input type="hidden" id="form-property-id">
+                <div class="form-group">
+                    <label for="form-property-title">Property Title</label>
+                    <input type="text" id="form-property-title" required placeholder="Luxury 3BHK Apartment">
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="form-property-type">Type</label>
+                        <select id="form-property-type" required>
+                            <option value="Apartment">Apartment</option>
+                            <option value="Villa">Villa</option>
+                            <option value="Independent House">Independent House</option>
+                            <option value="Commercial">Commercial</option>
+                            <option value="Plot">Plot</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="form-property-status">Status</label>
+                        <select id="form-property-status" required>
+                            <option value="Available">Available</option>
+                            <option value="Sold">Sold</option>
+                            <option value="Rented">Rented</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="form-property-location">Location/City</label>
+                        <input type="text" id="form-property-location" required placeholder="Bangalore">
+                    </div>
+                    <div class="form-group">
+                        <label for="form-property-price">Price (₹)</label>
+                        <input type="number" id="form-property-price" required placeholder="8500000">
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="form-property-bedrooms">Bedrooms</label>
+                        <input type="number" id="form-property-bedrooms" required placeholder="3">
+                    </div>
+                    <div class="form-group">
+                        <label for="form-property-bathrooms">Bathrooms</label>
+                        <input type="number" id="form-property-bathrooms" required placeholder="2">
+                    </div>
+                    <div class="form-group">
+                        <label for="form-property-area">Area (SqFt)</label>
+                        <input type="number" id="form-property-area" required placeholder="1650">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="form-property-image">Image URL</label>
+                    <input type="text" id="form-property-image" required placeholder="https://unsplash.com/... or apartment.jpg">
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem; padding: 0.8rem;">
+                    Save Listing <i class="fa-solid fa-floppy-disk"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- AGENT MODAL FORM -->
+    <div class="admin-modal-overlay" id="agent-modal-overlay">
+        <div class="admin-modal">
+            <button class="modal-close" onclick="closeAdminModal('agent-modal-overlay')"><i class="fa-solid fa-xmark"></i></button>
+            <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem;" id="agent-modal-title">Add Property Agent</h3>
+            
+            <form id="admin-agent-form">
+                <input type="hidden" id="form-agent-id">
+                <div class="form-group">
+                    <label for="form-agent-name">Agent Name</label>
+                    <input type="text" id="form-agent-name" required placeholder="Anil Kumar">
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="form-agent-phone">Phone Number</label>
+                        <input type="tel" id="form-agent-phone" required placeholder="9876541230" pattern="[0-9]{10}">
+                    </div>
+                    <div class="form-group">
+                        <label for="form-agent-experience">Experience (Years)</label>
+                        <input type="number" id="form-agent-experience" required placeholder="8">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="form-agent-email">Email Address</label>
+                    <input type="email" id="form-agent-email" required placeholder="anil@realestate.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="form-agent-specialization">Specialization</label>
+                    <input type="text" id="form-agent-specialization" required placeholder="Residential Properties">
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem; padding: 0.8rem;">
+                    Save Agent Info <i class="fa-solid fa-floppy-disk"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- CUSTOMER MODAL FORM -->
+    <div class="admin-modal-overlay" id="customer-modal-overlay">
+        <div class="admin-modal">
+            <button class="modal-close" onclick="closeAdminModal('customer-modal-overlay')"><i class="fa-solid fa-xmark"></i></button>
+            <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem;" id="customer-modal-title">Create Customer Profile</h3>
+            
+            <form id="admin-customer-form">
+                <input type="hidden" id="form-customer-id">
+                <div class="form-group">
+                    <label for="form-customer-name">Full Name</label>
+                    <input type="text" id="form-customer-name" required placeholder="Rahul Sharma">
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="form-customer-email">Email Address</label>
+                        <input type="email" id="form-customer-email" required placeholder="rahul@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="form-customer-phone">Phone Number</label>
+                        <input type="tel" id="form-customer-phone" required placeholder="9876543210" pattern="[0-9]{10}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="form-customer-city">City</label>
+                    <input type="text" id="form-customer-city" required placeholder="Hyderabad">
+                </div>
+
+                <div class="form-group" id="customer-password-group">
+                    <label for="form-customer-password">Password</label>
+                    <input type="password" id="form-customer-password" placeholder="rahul123">
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem; padding: 0.8rem;">
+                    Save Customer Account <i class="fa-solid fa-floppy-disk"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- BOOKING UPDATE MODAL -->
+    <div class="admin-modal-overlay" id="booking-modal-overlay">
+        <div class="admin-modal" style="max-width: 450px;">
+            <button class="modal-close" onclick="closeAdminModal('booking-modal-overlay')"><i class="fa-solid fa-xmark"></i></button>
+            <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 1.5rem;">Update Booking Status</h3>
+            
+            <form id="admin-booking-update-form">
+                <input type="hidden" id="form-booking-id">
+                <div class="form-group">
+                    <label for="form-booking-status">Booking Status</label>
+                    <select id="form-booking-status" required>
+                        <option value="Scheduled">Scheduled</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem;">Save Status</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- INQUIRY UPDATE MODAL -->
+    <div class="admin-modal-overlay" id="inquiry-modal-overlay">
+        <div class="admin-modal" style="max-width: 450px;">
+            <button class="modal-close" onclick="closeAdminModal('inquiry-modal-overlay')"><i class="fa-solid fa-xmark"></i></button>
+            <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 1.5rem;">Update Inquiry Status</h3>
+            
+            <form id="admin-inquiry-update-form">
+                <input type="hidden" id="form-inquiry-id">
+                <div class="form-group">
+                    <label for="form-inquiry-status">Response Status</label>
+                    <select id="form-inquiry-status" required>
+                        <option value="Pending">Pending</option>
+                        <option value="Responded">Responded</option>
+                        <option value="Closed">Closed</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem;">Save Status</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toast-container"></div>
+
+    <footer>
+        <p>&copy; 2026 EliteHomes Real Estate Portal. All rights reserved. Admin Console.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

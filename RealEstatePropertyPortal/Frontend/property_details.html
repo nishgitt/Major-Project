@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Details | EliteHomes</title>
+    <!-- Leaflet CSS for Maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="nav-brand">
+                <i class="fa-solid fa-hotel"></i> EliteHomes
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="properties.html" class="active">Properties</a></li>
+                <li><a href="bookings.html" id="nav-bookings-link">Bookings</a></li>
+                <li><a href="inquiries.html" id="nav-inquiries-link">Inquiries</a></li>
+                <li id="nav-dashboard-li" style="display: none;"><a href="#" id="nav-dashboard-link">Dashboard</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <div id="auth-buttons">
+                    <a href="login.html" class="btn btn-outline">Login</a>
+                    <a href="register.html" class="btn btn-primary">Register</a>
+                </div>
+                <div id="user-menu" style="display: none;" class="btn-outline btn">
+                    <span id="user-display-name">Guest</span>
+                    <i class="fa-solid fa-angle-down"></i>
+                    <div class="user-dropdown" id="user-dropdown" style="display: none;">
+                        <a href="#" id="user-dashboard-btn"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                        <hr>
+                        <a href="#" id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="section">
+        <div id="details-container">
+            <!-- Dynamic detailed content goes here -->
+            <div style="text-align: center; padding: 5rem; color: var(--text-muted);">
+                <i class="fa-solid fa-spin fa-circle-notch fa-3x"></i>
+                <p style="margin-top: 1rem;">Loading property details...</p>
+            </div>
+        </div>
+    </main>
+
+    <div class="toast-container" id="toast-container"></div>
+
+    <footer>
+        <p>&copy; 2026 EliteHomes Real Estate Portal. All rights reserved.</p>
+    </footer>
+
+    <!-- Leaflet JS for Maps -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="script.js"></script>
+</body>
+</html>
