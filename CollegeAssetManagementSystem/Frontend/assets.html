@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manage college assets, hardware devices and system details.">
+    <title>Asset Management - EduAsset</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <!-- Injected by script.js -->
+        </div>
+    </header>
+
+    <main>
+        <div class="section-title">
+            <h2>Asset <span>Management</span></h2>
+            <button id="btn-add-asset" class="btn btn-primary">+ Add New Asset</button>
+        </div>
+
+        <div class="table-controls">
+            <div class="search-box">
+                <input type="text" id="asset-search" class="form-control" placeholder="Search by name, serial, category...">
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Asset Name</th>
+                        <th>Category</th>
+                        <th>Brand & Model</th>
+                        <th>Serial Number</th>
+                        <th>Purchase Price</th>
+                        <th>Warranty Expiry</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="assets-table-body">
+                    <!-- Loaded dynamically by script.js -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Modal Form -->
+    <div id="asset-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Add Asset</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="asset-form">
+                <input type="hidden" id="edit-asset-id">
+                
+                <div class="form-group">
+                    <label for="asset_name">Asset Name *</label>
+                    <input type="text" id="asset_name" class="form-control" required placeholder="e.g. Dell Latitude Laptop">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="asset_category">Category *</label>
+                        <select id="asset_category" class="form-control" required>
+                            <!-- Options loaded dynamically -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="asset_serial">Serial Number *</label>
+                        <input type="text" id="asset_serial" class="form-control" required placeholder="e.g. SN-XYZ-123">
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="asset_brand">Brand</label>
+                        <input type="text" id="asset_brand" class="form-control" placeholder="e.g. Dell">
+                    </div>
+                    <div class="form-group">
+                        <label for="asset_model">Model</label>
+                        <input type="text" id="asset_model" class="form-control" placeholder="e.g. Latitude 5420">
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="asset_purchase_date">Purchase Date *</label>
+                        <input type="date" id="asset_purchase_date" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="asset_price">Purchase Price (₹) *</label>
+                        <input type="number" step="0.01" id="asset_price" class="form-control" required placeholder="e.g. 65000">
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="asset_warranty">Warranty Expiry Date *</label>
+                        <input type="date" id="asset_warranty" class="form-control" required>
+                    </div>
+                    <div class="form-group" id="asset-status-group" style="display: none;">
+                        <label for="asset_status">Status *</label>
+                        <select id="asset_status" class="form-control">
+                            <option value="Available">Available</option>
+                            <option value="In Use">In Use</option>
+                            <option value="Under Maintenance">Under Maintenance</option>
+                            <option value="Damaged">Damaged</option>
+                            <option value="Scrap">Scrap</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="asset_bill">Upload Purchase Bill (Invoice / Receipt)</label>
+                    <input type="file" id="asset_bill" class="form-control" accept="image/*,application/pdf">
+                    <div id="current-bill-doc-link" style="display:none; font-size:0.85rem; margin-top:0.5rem; color:var(--accent-blue);"></div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 <span>EduAsset</span>. College Asset Management System. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

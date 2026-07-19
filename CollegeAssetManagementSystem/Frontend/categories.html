@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manage asset categories inside College Asset Management System.">
+    <title>Category Management - EduAsset</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <!-- Injected by script.js -->
+        </div>
+    </header>
+
+    <main>
+        <div class="section-title">
+            <h2>Category <span>Management</span></h2>
+            <button id="btn-add-category" class="btn btn-primary">+ Add New Category</button>
+        </div>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Category Name</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="categories-table-body">
+                    <!-- Loaded dynamically by script.js -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Modal Form -->
+    <div id="category-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Add Category</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="category-form">
+                <input type="hidden" id="edit-category-id">
+                
+                <div class="form-group">
+                    <label for="category_name">Category Name *</label>
+                    <input type="text" id="category_name" class="form-control" required placeholder="e.g. Computer, Router, Bus Battery">
+                </div>
+
+                <div class="form-group">
+                    <label for="category_desc">Description</label>
+                    <textarea id="category_desc" class="form-control" rows="4" placeholder="Brief details about hardware class"></textarea>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 <span>EduAsset</span>. College Asset Management System. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
