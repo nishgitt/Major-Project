@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Administration Panel - Eventify</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- Dynamic Header Navigation Bar -->
+    <nav class="navbar" id="navbar-container"></nav>
+
+    <!-- Header Title -->
+    <header style="padding: 3rem 5% 1rem; text-align: left;">
+        <h1 style="font-size: 2.5rem; font-family: var(--font-heading);">System Administration Panel</h1>
+        <p style="color: var(--text-secondary); margin-top: 0.2rem;">Complete CRUD access and moderation control across all application records.</p>
+    </header>
+
+    <main>
+        
+        <!-- Tab Selectors for Admin Categories -->
+        <section style="padding: 1rem 5%; display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="#section-users" class="btn btn-secondary" style="font-size: 0.9rem; padding: 0.5rem 1.2rem;">👥 Manage Users</a>
+            <a href="#section-events" class="btn btn-secondary" style="font-size: 0.9rem; padding: 0.5rem 1.2rem;">📅 Manage Events</a>
+            <a href="#section-venues" class="btn btn-secondary" style="font-size: 0.9rem; padding: 0.5rem 1.2rem;">📍 Manage Venues</a>
+            <a href="#section-bookings" class="btn btn-secondary" style="font-size: 0.9rem; padding: 0.5rem 1.2rem;">🎫 Manage Bookings</a>
+            <a href="#section-payments" class="btn btn-secondary" style="font-size: 0.9rem; padding: 0.5rem 1.2rem;">💳 Manage Payments</a>
+        </section>
+
+        <!-- 1. Manage Users -->
+        <section id="section-users" class="dashboard-table-container">
+            <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--color-secondary);">👥 Registered Users</h2>
+            <table class="dashboard-table">
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Full Name</th>
+                        <th>Email Address</th>
+                        <th>Phone</th>
+                        <th>City</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-users-rows">
+                    <tr><td colspan="6" style="text-align:center;">Loading users...</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 2. Manage Events -->
+        <section id="section-events" class="dashboard-table-container">
+            <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--color-secondary);">📅 Published Events</h2>
+            <table class="dashboard-table">
+                <thead>
+                    <tr>
+                        <th>Event ID</th>
+                        <th>Event Name</th>
+                        <th>Category</th>
+                        <th>Venue</th>
+                        <th>Tickets / Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-events-rows">
+                    <tr><td colspan="6" style="text-align:center;">Loading events...</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 3. Manage Venues -->
+        <section id="section-venues" class="dashboard-table-container">
+            <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--color-secondary);">📍 Venue Registries</h2>
+            <table class="dashboard-table">
+                <thead>
+                    <tr>
+                        <th>Venue ID</th>
+                        <th>Venue Name</th>
+                        <th>Location</th>
+                        <th>Capacity</th>
+                        <th>Contact Person</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-venues-rows">
+                    <tr><td colspan="6" style="text-align:center;">Loading venues...</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 4. Manage Bookings -->
+        <section id="section-bookings" class="dashboard-table-container">
+            <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--color-secondary);">🎫 Booking Transactions</h2>
+            <table class="dashboard-table">
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Attendee Name</th>
+                        <th>Event Name</th>
+                        <th>Tickets</th>
+                        <th>Total Amount</th>
+                        <th>Booking Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-bookings-rows">
+                    <tr><td colspan="7" style="text-align:center;">Loading bookings...</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 5. Manage Payments -->
+        <section id="section-payments" class="dashboard-table-container">
+            <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--color-secondary);">💳 Payment Ledger Logs</h2>
+            <table class="dashboard-table">
+                <thead>
+                    <tr>
+                        <th>Payment ID</th>
+                        <th>Booking ID</th>
+                        <th>User Name</th>
+                        <th>Amount</th>
+                        <th>Method</th>
+                        <th>Transaction ID</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-payments-rows">
+                    <tr><td colspan="8" style="text-align:center;">Loading ledger logs...</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 3rem 0; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-secondary); margin-top: 4rem;">
+        <p>&copy; 2026 Eventify Inc.</p>
+    </footer>
+
+</body>
+</html>

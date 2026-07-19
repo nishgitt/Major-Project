@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Eventify</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- Dynamic Header Navigation Bar -->
+    <nav class="navbar" id="navbar-container"></nav>
+
+    <!-- Glassmorphic Login Form Card -->
+    <main class="form-container-page">
+        <div class="glass-form-card">
+            <h1 class="form-title">Login to Account</h1>
+            <p class="form-subtitle">Access your ticket booking dashboard and history</p>
+            
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="example@gmail.com" required autocomplete="email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="••••••••" required autocomplete="current-password">
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Sign In</button>
+            </form>
+            
+            <div class="form-footer">
+                <p>Don't have an account? <a href="register.html">Register here</a></p>
+            </div>
+            
+            <div style="margin-top: 1.5rem; padding: 1rem; border: 1px solid var(--border-glow); border-radius: 12px; font-size: 0.8rem; background: rgba(0,0,0,0.3); color: var(--text-secondary);">
+                <p style="font-weight: bold; color: var(--color-secondary); margin-bottom: 0.3rem;">Sample Testing Credentials:</p>
+                <p>👤 User: rahul@gmail.com (pwd: rahul123)</p>
+                <p>👤 Organizer: organizer@gmail.com (pwd: org123)</p>
+                <p>👤 Admin: admin@gmail.com (pwd: admin123)</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.85rem;">
+        <p>&copy; 2026 Eventify Inc.</p>
+    </footer>
+
+</body>
+</html>

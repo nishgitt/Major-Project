@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Events - Eventify</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- Dynamic Header Navigation Bar -->
+    <nav class="navbar" id="navbar-container"></nav>
+
+    <!-- Header Search and Filters -->
+    <main style="padding-top: 3rem;">
+        <h1 style="text-align: center; margin-bottom: 2rem; font-family: var(--font-heading); font-size: 2.8rem;">Discover Events</h1>
+        
+        <section class="search-filter-section">
+            <div class="search-filter-container">
+                <!-- Search bar -->
+                <div class="search-input-group">
+                    <input type="text" id="event-search" placeholder="Search by event name, venue, or organizer...">
+                </div>
+                
+                <!-- Category Filter -->
+                <div class="filter-group">
+                    <select id="category-filter" class="filter-select">
+                        <option value="">All Categories</option>
+                        <option value="Music Concert">Music Concert</option>
+                        <option value="Workshop">Workshop</option>
+                        <option value="Conference">Conference</option>
+                        <option value="Seminar">Seminar</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Cultural Event">Cultural Event</option>
+                        <option value="Comedy Show">Comedy Show</option>
+                    </select>
+                </div>
+                
+                <!-- City Filter -->
+                <div class="filter-group">
+                    <select id="city-filter" class="filter-select">
+                        <option value="">All Cities</option>
+                        <option value="Bangalore">Bangalore</option>
+                        <option value="Hyderabad">Hyderabad</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Pune">Pune</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Events Grid -->
+        <section>
+            <div class="event-grid" id="events-grid">
+                <!-- Dynamic cards populated here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 3rem 0; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-secondary); margin-top: 4rem;">
+        <p>&copy; 2026 Eventify Inc.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details - Eventify</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- Dynamic Header Navigation Bar -->
+    <nav class="navbar" id="navbar-container"></nav>
+
+    <!-- Main Content Area -->
+    <main class="event-details-layout">
+        
+        <!-- Left: Event Information -->
+        <article class="details-content-card">
+            <!-- Dynamically populated container -->
+            <div id="event-detail-container">
+                <p style="text-align: center; color: var(--text-secondary);">Loading event details...</p>
+            </div>
+            
+            <!-- Reviews and Ratings Module (Bonus) -->
+            <section class="reviews-container">
+                <h3 style="font-family: var(--font-heading); font-size: 1.6rem; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.5rem; color: var(--color-secondary);">Reviews & Ratings</h3>
+                
+                <!-- Average Rating Box -->
+                <div class="average-rating-box">
+                    <div>
+                        <div class="rating-big" id="avg-rating-value">0.0</div>
+                        <div style="font-size: 0.8rem; color: var(--text-secondary); text-align: center;">Average</div>
+                    </div>
+                    <div>
+                        <div class="stars-container" id="avg-stars-list">☆☆☆☆☆</div>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.3rem;">Based on attendee reviews</p>
+                    </div>
+                </div>
+                
+                <!-- Write a Review Form -->
+                <div class="review-form">
+                    <h4 style="margin-bottom: 0.8rem; font-weight: 600;">Share Your Experience</h4>
+                    <form id="add-review-form">
+                        <div class="form-group" style="margin-bottom: 0.5rem;">
+                            <label class="form-label" style="margin-bottom: 0;">Rating</label>
+                            <div class="star-rating-select" id="star-select">
+                                <span class="selected" style="color: var(--color-warning);">★</span>
+                                <span class="selected" style="color: var(--color-warning);">★</span>
+                                <span class="selected" style="color: var(--color-warning);">★</span>
+                                <span class="selected" style="color: var(--color-warning);">★</span>
+                                <span class="selected" style="color: var(--color-warning);">★</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="review-comment" class="form-label">Your Review</label>
+                            <textarea id="review-comment" rows="3" class="form-control" placeholder="Write your feedback here..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-secondary" style="font-size: 0.9rem; padding: 0.5rem 1.5rem;">Submit Review</button>
+                    </form>
+                </div>
+                
+                <!-- Reviews List -->
+                <div class="review-list-items" id="reviews-list">
+                    <!-- Dynamically populated reviews -->
+                </div>
+            </section>
+        </article>
+        
+        <!-- Right Sidebar: Book Tickets Action -->
+        <aside class="details-sidebar-card" id="details-sidebar-card">
+            <p style="text-align: center; color: var(--text-secondary);">Loading ticket options...</p>
+        </aside>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 3rem 0; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-secondary); margin-top: 4rem;">
+        <p>&copy; 2026 Eventify Inc.</p>
+    </footer>
+
+</body>
+</html>
